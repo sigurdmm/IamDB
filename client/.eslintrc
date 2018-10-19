@@ -1,0 +1,41 @@
+{
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "jest": true
+  },
+  "plugins": [
+    "react"
+  ],
+  "rules": {
+    "react/jsx-uses-vars": [
+      2
+    ],
+    "import/extensions": [
+      0
+    ],
+    "import/no-unresolved": "off",
+    "no-console": [
+      "warn",
+      {
+        "allow": [
+          "warn",
+          "error",
+          "info"
+        ]
+      }
+    ],
+    "react/react-in-jsx-scope": [
+      0
+    ]
+  },
+  "extends": [
+    "airbnb-base",
+    "plugin:react/recommended"
+  ],
+  "settings": {
+    "react": {
+      "version": "16.4"
+    }
+  }
+}

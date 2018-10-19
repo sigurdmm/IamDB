@@ -1,0 +1,27 @@
+version: '3.4'
+
+services:
+  app:
+    image: it2810-20/media-server-dev
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.dev
+      target: development
+    volumes:
+    - .:/srv/app
+    command: ./docker/run_dev.sh
+    ports:
+    - "3000:3000"
+    environment:
+    - NODE_ENV=development
+    - PORT=3000
+  mongo:
+    image: mongo:3.2.21-jessie
+    environment:
+    - MONGO_DATA_DIR=/data/db
+    - MONGO_LOG_DIR=/dev/null
+    volumes:
+    - ./data/db:/data/db
+    ports:
+    - "27017:27017"
+    command: mongod --smallfiles --logpath=/dev/null # --quiet

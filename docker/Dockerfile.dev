@@ -1,0 +1,12 @@
+FROM node:9.11.1 as development
+
+# Port used to serve the process
+ENV PORT=3000
+# Defines the mode the process will use (development, staging, production)
+ENV NODE_ENV="development"
+
+ENV DIR="/srv/app"
+
+WORKDIR $DIR
+
+EXPOSE $PORT
