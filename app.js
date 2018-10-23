@@ -27,7 +27,7 @@ app.use('/static', express.static(path.join(__dirname, 'client/build/static')));
  * */
 
 // Api handler
-app.use('/api/v1/', require('./routes/api.js'));
+app.use('/graphql', require('./routes/api.js'));
 
 app.all('/*', (req, res, next) => {
   res.sendFile(path.join(__dirname, 'client/build/index.html'));
