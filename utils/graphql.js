@@ -1,4 +1,3 @@
-
 const { buildSchema } = require('graphql');
 
 const schema = buildSchema(`
@@ -31,6 +30,7 @@ const allMedia = [
 const getMedia = ({ id }) => allMedia.find(m => m.id === id);
 
 const createMedia = (args) => {
+  // eslint-disable-next-line no-console
   console.log(args);
 };
 

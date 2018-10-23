@@ -29,7 +29,7 @@ app.use('/static', express.static(path.join(__dirname, 'client/build/static')));
 // Api handler
 app.use('/graphql', require('./routes/api.js'));
 
-app.all('/*', (req, res, next) => {
+app.all('/*', (req, res) => {
   res.sendFile(path.join(__dirname, 'client/build/index.html'));
 });
 
@@ -40,6 +40,7 @@ app.use((req, res, next) => next(createError(404)));
  * Catches all errors, and builds an appropriate
  * response
  * */
+// eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
   // set locals, only providing error in development
   const data = {};

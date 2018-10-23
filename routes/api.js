@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const createError = require('http-errors');
+// const createError = require('http-errors');
 
 const expressGraphql = require('express-graphql');
 const { schema, rootValue } = require('../utils/graphql');

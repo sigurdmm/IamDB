@@ -1,0 +1,5 @@
+{
+  "hooks": {
+    "pre-commit": "./ci/run_lint.sh"
+  }
+}
