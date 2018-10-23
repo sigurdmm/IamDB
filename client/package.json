@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "TZ=Europe/Amsterdam jest --config jest.config.js",
+    "test:watch": "TZ=Europe/Amsterdam jest --watch -c jest.config.js",
+    "test:coverage": "TZ=Europe/Amsterdam jest --config jest.config.js --coverage",
     "watch": "webpack-cli --config webpack.config.js --mode development --watch",
     "watch:server": "nodemon server/index.js",
     "build": "webpack-cli --config webpack.config.js --mode development",

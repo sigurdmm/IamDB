@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from './components/Header';
+import Routes from './Routes';
 
 const App = () => <div>
   <Header title="Hello world">
@@ -8,7 +9,7 @@ const App = () => <div>
     </nav>
   </Header>
   <main>
-    <h1>Hello world</h1>
+    <Routes/>
   </main>
   <footer>
     Copyright 2018
