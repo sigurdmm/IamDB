@@ -2,29 +2,22 @@
 
 exports[`<App/> should load properly 1`] = `
 <div>
-  <header
-    class="header"
+  <Header
+    title="Hello world"
   >
-    <h1
-      class="header__title"
-    >
-      Hello world
-    </h1>
     <nav
-      class="navigation"
+      className="navigation"
     >
       <a
-        class="navigation__link"
+        className="navigation__link"
         href="#"
       >
         Test
       </a>
     </nav>
-  </header>
+  </Header>
   <main>
-    <h1>
-      Hello world
-    </h1>
+    <Routes />
   </main>
   <footer>
     Copyright 2018
