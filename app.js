@@ -26,6 +26,33 @@ app.use('/static', express.static(path.join(__dirname, 'client/build/static')));
  * Define Routes
  * */
 
+app.get('/api/v1/media/:id', (req, res) => {
+  const { id } = req.params;
+
+  if (id !== '1') {
+    res.status(404).send({
+      error: `Cannot find media with id ${id}`
+    });
+    return;
+  }
+
+  res.send({
+    id,
+    name: 'The Shawshank Redemption',
+    description: 'Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.',
+    rating: 9.3,
+    // 14 October 1994, in unix timestamp
+    released: 782136617,
+    actors: ['Tim Robbins', 'Morgan Freeman', 'Bob Gunton'],
+    director: 'Frank Darabont',
+    thumbnails: {
+      small: 'https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_UX182_CR0,0,182,268_AL_.jpg',
+      large: null
+    },
+    type: 'movie'
+  });
+});
+
 // Api handler
 app.use('/graphql', require('./routes/api.js'));
 
