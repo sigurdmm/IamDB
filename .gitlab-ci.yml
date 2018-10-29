@@ -1,5 +1,12 @@
 image: node:10.12.0-stretch
 
+cache:
+  untracked: true
+  key: "$CI_BUILD_REF_NAME"
+  paths:
+  - node_modules/
+  - client/node_modules/
+
 variables:
   # Use development to enable logging
   NODE_ENV: development
