@@ -27,7 +27,7 @@ class HomePage extends React.Component {
   };
 
   componentDidMount() {
-    this.props.fetchMediaById(2);
+    this.props.fetchMediaById(1);
   }
 
   render() {
@@ -42,12 +42,16 @@ class HomePage extends React.Component {
       </div>;
     }
 
-    return <div>
-      {loading && <div>
-        <p>Loading media ...</p>
-      </div>}
+    if (loading) {
+      return <div>
+        <div className="feedback feedback--info">
+          <p className="feedback__message">Loading media ...</p>
+        </div>
+      </div>;
+    }
 
-      {detailedMedia.id !== -1 && <section>
+    return <div>
+      <section>
         <em>Media: {detailedMedia.id}</em>
         <h2>{detailedMedia.name}</h2>
 
@@ -57,7 +61,7 @@ class HomePage extends React.Component {
           {detailedMedia.actors.map(actor => <li
             key={`actor-${actor.replace(' ', '-')}`}>{actor}</li>)}
         </ul>
-      </section>}
+      </section>
     </div>;
   }
 }
