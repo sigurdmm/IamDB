@@ -8,6 +8,7 @@ stages:
 - setup
 - build
 - testing
+- predeploy
 
 backend-install:
   stage: setup
@@ -60,3 +61,10 @@ frontend-test:
   - npm run test:coverage --prefix './client'
   only:
   - branches
+
+# Build the front-end to ensure the size limit isn't reached etc
+frontend-build:
+  stage: predeploy
+  image: node:10.12.0-stretch
+  script:
+  - npm run build:prod --prefic './client'
