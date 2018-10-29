@@ -1,12 +1,5 @@
 image: node:10.12.0-stretch
 
-cache:
-  untracked: true
-  key: "$CI_BUILD_REF_NAME"
-  paths:
-  - node_modules/
-  - client/node_modules/
-
 variables:
   # Use development to enable logging
   NODE_ENV: development
@@ -25,6 +18,10 @@ backend-install:
   - npm install
   only:
   - branches
+  artifacts:
+    expire_in: 1 week
+    paths:
+    - node_modules
 
 frontend-install:
   stage: setup
@@ -35,6 +32,10 @@ frontend-install:
   - npm install --prefix './client'
   only:
   - branches
+  artifacts:
+    expire_in: 1 week
+    paths:
+    - client/node_modules
 
 backend-lint:
   stage: testing
