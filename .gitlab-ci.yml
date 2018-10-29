@@ -1,0 +1,46 @@
+image: node:10.12.0-stretch
+
+variables:
+  # Use development to enable logging
+  NODE_ENV: development
+
+stages:
+- setup
+- build
+- testing
+
+backend-install:
+  stage: setup
+  image: node:10.12.0-stretch
+  variables:
+    NODE_ENV: development
+  script:
+  - npm install
+  only:
+  - branches
+
+frontend-install:
+  stage: setup
+  image: node:10.12.0-stretch
+  variables:
+    NODE_ENV: development
+  script:
+  - npm install --prefix './client'
+  only:
+  - branches
+
+backend-lint:
+  stage: testing
+  image: node:10.12.0-stretch
+  script:
+  - npm run lint
+  only:
+  - branches
+
+frontend-lint:
+  stage: testing
+  image: node:10.12.0-stretch
+  script:
+  - npm run lint --prefix './client'
+  only:
+  - branches
