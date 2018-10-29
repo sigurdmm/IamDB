@@ -5,9 +5,11 @@ import './index.less';
 import App from './App';
 import configureStore from './store';
 
+const store = configureStore();
+
 ReactDOM.render(
-<Provider store={configureStore()}>
-  <App />
+  <Provider store={store}>
+    <App/>
   </Provider>,
-document.getElementById('root'),
+  document.getElementById('root'),
 );

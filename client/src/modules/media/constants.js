@@ -1,0 +1,2 @@
+export const FETCH_MEDIA_DETAILS = 'FETCH_MEDIA_DETAILS';
+export const SEARCH_MEDIA = 'SEARCH_MEDIA';
