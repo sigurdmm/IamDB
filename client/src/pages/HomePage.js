@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { fetchMediaDetails } from '../modules/media/actions';
+import { fetchMediaById } from '../modules/media/actions';
 
 class HomePage extends React.Component {
   static propTypes = {
-    fetchMediaDetails: PropTypes.func.isRequired,
+    fetchMediaById: PropTypes.func.isRequired,
     detailedMedia: PropTypes.shape({
       id: PropTypes.any.isRequired,
       name: PropTypes.string.isRequired,
@@ -22,17 +22,28 @@ class HomePage extends React.Component {
       }),
       type: PropTypes.oneOf(['movie', 'tv-show']),
     }),
+    loading: PropTypes.bool.isRequired,
+    error: PropTypes.string,
   };
 
   componentDidMount() {
-    this.props.fetchMediaDetails(1);
+    this.props.fetchMediaById(2);
   }
 
   render() {
-    const { detailedMedia } = this.props;
+    const { detailedMedia, loading, error } = this.props;
+
+    if (error) {
+      return <div>
+        <section className="feedback feedback--error">
+          <h3 className="feedback__heading">Failed to load media</h3>
+          <p className="feedback__message">{error}</p>
+        </section>
+      </div>;
+    }
 
     return <div>
-      {detailedMedia.id === -1 && <div>
+      {loading && <div>
         <p>Loading media ...</p>
       </div>}
 
@@ -53,10 +64,12 @@ class HomePage extends React.Component {
 
 const mapStateToProps = state => ({
   detailedMedia: state.media.detailedMedia,
+  loading: state.media.loading,
+  error: state.media.error,
 });
 
 const actionsToProps = {
-  fetchMediaDetails,
+  fetchMediaById,
 };
 
 export default connect(mapStateToProps, actionsToProps)(HomePage);
