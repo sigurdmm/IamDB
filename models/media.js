@@ -23,7 +23,9 @@ MediaSchema.index(
   },
   {
     weights: {
+      // Give name the most weight in search
       name: 9,
+      // Description has some relevance, but only minor
       description: 1,
       director: 2
     }
