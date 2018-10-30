@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
+import './HomePage.less';
 import { fetchMediaById } from '../modules/media/actions';
+import SearchBar from '../components/SearchBar';
 
 class HomePage extends React.Component {
   static propTypes = {
@@ -30,6 +31,8 @@ class HomePage extends React.Component {
     this.props.fetchMediaById('5bd8b0453179170b0d5b7485');
   }
 
+  onSearchSubmit = value => value;
+
   render() {
     const { detailedMedia, loading, error } = this.props;
 
@@ -51,6 +54,9 @@ class HomePage extends React.Component {
     }
 
     return <div>
+      <div className="searchbar__container">
+        <SearchBar onSubmit={this.onSearchSubmit}/>
+      </div>
       <section>
         <em>Media: {detailedMedia.id}</em>
         <h2>{detailedMedia.name}</h2>
