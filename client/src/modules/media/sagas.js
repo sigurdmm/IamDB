@@ -19,6 +19,12 @@ function* fetchMedia(action) {
       return;
     }
 
+    // Failing to find a media, yields an error
+    if (media.media === null) {
+      yield put({ error: `Cannot find media with id: ${id}`, type: FETCH_MEDIA_DETAILS_FAILED });
+      return;
+    }
+
     yield put({ media: media.media, type: FETCH_MEDIA_DETAILS_SUCCESS });
   } catch (e) {
     yield put({ type: FETCH_MEDIA_DETAILS_FAILED, error: e.message });

@@ -27,7 +27,7 @@ class HomePage extends React.Component {
   };
 
   componentDidMount() {
-    this.props.fetchMediaById('5bd88d95aeacc60a2c4c6924');
+    this.props.fetchMediaById('5bd8b0453179170b0d5b7485');
   }
 
   render() {
