@@ -23,7 +23,7 @@ MediaSchema.index(
   },
   {
     weights: {
-      name: 5,
+      name: 9,
       description: 1,
       director: 2
     }
