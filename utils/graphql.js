@@ -31,8 +31,8 @@ const mapImdbToMedia = (imdbMedia) => {
 
   media.name = title;
   media.released = buildRelaseDate(year, released);
-  media.description = plot;
-  media.director = director;
+  media.description = !!plot && plot !== 'N/A' ? plot : null;
+  media.director = !!director && director !== 'N/A' ? director : null;
   // Actors can either be a csv string, or an array of strings
   media.actors = extractListOrStringAsList(actors, ', ');
   media.rating = rating || 0.0;
