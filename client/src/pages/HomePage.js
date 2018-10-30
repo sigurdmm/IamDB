@@ -13,7 +13,7 @@ class HomePage extends React.Component {
       description: PropTypes.string,
       rating: PropTypes.number,
       // In unix timestamp
-      released: PropTypes.number,
+      released: PropTypes.any,
       actors: PropTypes.array,
       director: PropTypes.string,
       thumbnails: PropTypes.shape({
@@ -27,7 +27,7 @@ class HomePage extends React.Component {
   };
 
   componentDidMount() {
-    this.props.fetchMediaById(1);
+    this.props.fetchMediaById('5bd88d95aeacc60a2c4c6924');
   }
 
   render() {

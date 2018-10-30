@@ -19,7 +19,7 @@ function* fetchMedia(action) {
       return;
     }
 
-    yield put({ media, type: FETCH_MEDIA_DETAILS_SUCCESS });
+    yield put({ media: media.media, type: FETCH_MEDIA_DETAILS_SUCCESS });
   } catch (e) {
     yield put({ type: FETCH_MEDIA_DETAILS_FAILED, error: e.message });
   }
