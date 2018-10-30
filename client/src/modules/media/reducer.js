@@ -1,7 +1,7 @@
 import {
   FETCH_MEDIA_DETAILS_FAILED,
   FETCH_MEDIA_DETAILS_REQUESTED,
-  FETCH_MEDIA_DETAILS_SUCCESS
+  FETCH_MEDIA_DETAILS_SUCCESS,
 } from './constants';
 
 const initialState = {
@@ -10,21 +10,19 @@ const initialState = {
     id: -1,
     name: '',
     description: '',
-    actors: []
+    actors: [],
   },
   loading: false,
   error: null,
 };
 
 export default function mediaReducer(state = initialState, action) {
-  switch(action.type) {
+  switch (action.type) {
     case FETCH_MEDIA_DETAILS_REQUESTED:
-      const { id } = action.media;
-
       return {
         ...state,
         // Initial media object, with the requesting id
-        detailedMedia: Object.assign(initialState.detailedMedia, { id }),
+        detailedMedia: Object.assign(initialState.detailedMedia, { id: action.media.id }),
         loading: true,
       };
     case FETCH_MEDIA_DETAILS_SUCCESS:
@@ -34,10 +32,9 @@ export default function mediaReducer(state = initialState, action) {
         loading: false,
       };
     case FETCH_MEDIA_DETAILS_FAILED:
-      const { error } = action;
       return {
         ...state,
-        error,
+        error: action.error,
         loading: false,
       };
     default:

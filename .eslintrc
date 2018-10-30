@@ -30,7 +30,7 @@
     ],
     "max-len": [
       "error",
-      100,
+      125,
       2,
       {
         "ignoreUrls": true,
@@ -43,7 +43,7 @@
     "no-console": [
       "error",
       {
-        "allow": ["warn", "error"]
+        "allow": ["debug", "info", "warn", "error"]
       }
     ]
   }

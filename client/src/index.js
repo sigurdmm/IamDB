@@ -4,6 +4,7 @@
  *
  * [0] https://github.com/redux-saga/redux-saga/issues/280#issuecomment-291133023
  * */
+// eslint-disable-next-line import/no-extraneous-dependencies
 import 'regenerator-runtime/runtime';
 
 import React from 'react';

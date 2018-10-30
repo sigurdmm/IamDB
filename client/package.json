@@ -11,7 +11,7 @@
     "watch:server": "nodemon server/index.js",
     "build": "webpack-cli --config webpack.config.js --mode development",
     "build:prod": "webpack-cli --config webpack.config.prod.js --mode production || true",
-    "lint": "eslint src/**/*.js"
+    "lint": "eslint src/"
   },
   "author": "",
   "license": "ISC",

@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Header/> renders with children 1`] = `
+<header
+  class="header"
+>
+  <h1
+    class="header__title"
+  >
+    Hello world
+  </h1>
+  <nav>
+    <a
+      href="#1"
+    >
+      Link 1
+    </a>
+    <a
+      href="#2"
+    >
+      Link 2
+    </a>
+  </nav>
+</header>
+`;
+
+exports[`<Header/> renders without children 1`] = `
+<header
+  class="header"
+>
+  <h1
+    class="header__title"
+  >
+    Hello world
+  </h1>
+</header>
+`;
