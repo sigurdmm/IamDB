@@ -1,43 +1,58 @@
 const { buildSchema } = require('graphql');
+const Media = require('../models/media');
 
 const schema = buildSchema(`
   type Query {
-    media(id: Int!): Media
-    medias(title: String): [Media]
+    searchMedia(query: String!, offset: Int, limit: Int): [Media]
+    media(id: String!): Media
   },
   type Mutation {
     createMedia(id: Int!, title: String!, rating: Float): Media
   },
   type Media {
-    id: Int
-    title: String!
+    id: String!
+    name: String!
     description: String
     rating: Float
     imdbUrl: String
   }
 `);
 
-const allMedia = [
-  {
-    id: 1,
-    title: 'Test test',
-    description: 'lorem lipsum dolor sit amed',
-    rating: 8.9,
-    imdbUrl: 'https://imdb.com/52'
+const searchMedia = async ({ query, offset = 0, limit = 20 }) => {
+  if (query.length < 3) {
+    throw new Error(`Search phrase is too short. Must be 3 chars long, your's is ${query.length}`);
   }
-];
 
-const getMedia = ({ id }) => allMedia.find(m => m.id === id);
+  const foundMedia = await Media.find({ $text: { $search: query } }).skip(offset).limit(limit).exec();
+
+  console.info(foundMedia);
+  if (foundMedia.length < 1) {
+    // TODO(fredrfli) Ask IMDB for the information, search on title
+  }
+
+  return foundMedia;
+};
+
+const getMedia = async (query, other) => {
+  // console.info(query);
+  console.info(other);
+
+  const { id } = query;
+  const media = await Media.findById(id);
+  console.info(media);
+
+  return media;
+};
 
 const createMedia = (args) => {
   // eslint-disable-next-line no-console
-  console.log(args);
+  console.info(args);
 };
 
-const rootValue ={
+const rootValue = {
+  searchMedia,
   createMedia,
   media: getMedia,
-  medias: () => []
 };
 
 module.exports = {
