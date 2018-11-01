@@ -15,21 +15,7 @@ const MediaSchema = new mongoose.Schema({
   type: { type: String, enum: ['movie', 'series'] }
 });
 
-MediaSchema.index(
-  {
-    name: 'text',
-    description: 'test',
-    director: 'text'
-  },
-  {
-    weights: {
-      // Give name the most weight in search
-      name: 9,
-      // Description has some relevance, but only minor
-      description: 1,
-      director: 2
-    }
-  });
+MediaSchema.index({ name: 'text', description: 'text', director: 'text' });
 
 const Media = mongoose.model('Media', MediaSchema);
 
