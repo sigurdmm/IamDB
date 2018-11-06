@@ -98,7 +98,7 @@ const schema = buildSchema(`
 const searchMedia = async ({ query, offset = 0, limit = 20 }) => {
   console.info(`[Search Media] query: ${query}, offset: ${offset}, limit: ${limit}`);
   if (query.length < 3) {
-    throw new Error(`Search phrase is too short. Must be 3 chars long, your's is ${query.length}`);
+    throw new Error(`Search phrase is too short. Must be minimum 3 chars long, your's is ${query.length}`);
   }
 
   const foundMedia = await Media.textSearch(query, offset, limit);
@@ -111,34 +111,25 @@ const searchMedia = async ({ query, offset = 0, limit = 20 }) => {
 
   console.debug('Couldn\'t find any media locally, asking IMDB for data');
 
-  let imdbMedia = null;
-  try {
-    imdbMedia = await searchByName(query);
-  } catch (err) {
-    console.error('Failed to fetch api data', err);
-    throw new Error(err.message);
-  }
+  const imdbMedia = await searchByName(query);
 
   if (!imdbMedia || !imdbMedia.results) {
     throw new Error(`Couldn't find any media with name: ${query}`);
   }
-
-  // Async call to fetch detailed information about the top 5 media
 
   const media = await Promise.all(imdbMedia
     .results
     // Keep only movie or series from results
     .filter(m => ['movie', 'series'].includes(m.type))
     // We can assume only the first 10 is relevant (and likely even fever)
-    .slice(0, 20)
+    .slice(0, 25)
     .map(fetchMediaDetails)
   );
 
-  let mediaModels = media
-    // Remove any filtered out values
-    .filter(m => !!m)
-    .map(mapImdbToMedia);
+  // Remove any filtered out empty values, and map to Media model
+  let mediaModels = media.filter(m => !!m).map(mapImdbToMedia);
 
+  // Fetch and store actors in the database
   console.debug('Mapping actors for all media');
   mediaModels = await Promise.all(mediaModels.map(m => saveActor(m)));
   console.debug('Mapping completed');

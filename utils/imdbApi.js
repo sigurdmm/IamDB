@@ -17,6 +17,17 @@ module.exports = {
     return get({ name });
   },
   async searchByName(name) {
-    return search({ name });
+    try {
+      return await search({ name });
+    } catch (err) {
+      console.error('Failed to fetch data from imdb', err);
+
+      // Failing to find a media isn't critical
+      if (err.message.startsWith('Movie not found!:')) {
+        return [];
+      }
+
+      throw new Error(err.message);
+    }
   }
 };
