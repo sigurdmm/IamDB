@@ -1,22 +1,62 @@
 @import './constants';
 
-.application{
-  background-color: @white;
+.systemcover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  z-index: -1;
+  background-position: center;
+  background-size: cover;
+}
+
+.application {
+  align-items: stretch;
+
   box-sizing: border-box;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: flex-start;
 
   margin: 0 auto;
   max-width: 60em;
   min-height: 100vh;
 
-  padding: 1em;
+  padding: 0;
   position: relative;
 
-
   width: 100%;
+
+  > * {
+    flex: 1;
+  }
+
+  &__header,
+  &__footer {
+    flex: 0;
+  }
+
+  &__content {
+    height: auto;
+  }
+
+  &__footer {
+    box-sizing: border-box;
+
+    margin-top: auto;
+
+    padding: 0.5em 1em;
+  }
 }
 
 h1,
 h2,
 h3 {
+  color: @primaryColor;
   margin: 0;
 }

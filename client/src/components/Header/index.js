@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import './index.less';
+
 const Header = ({ title, children = null }) => <header className="header">
   <h1 className="header__title">{title}</h1>
   {children}

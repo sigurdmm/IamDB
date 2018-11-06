@@ -28,6 +28,7 @@ const SearchBar = ({ onSubmit }) => <div>
           <Field
             type="field"
             className="searchbar__field"
+            placeholder="The dark knight rises"
             name="search"/>
           <button type="submit" className="searchbar__submit">
             <img src={icon}/>
