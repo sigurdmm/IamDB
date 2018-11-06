@@ -1,5 +1,6 @@
 const { buildSchema } = require('graphql');
 const Media = require('../models/media');
+const Actor = require('../models/actor');
 const { searchByName, getById } = require('./imdbApi');
 const { buildRelaseDate, extractListOrStringAsList } = require('./valueHelpers');
 
@@ -34,7 +35,7 @@ const mapImdbToMedia = (imdbMedia) => {
   media.description = !!plot && plot !== 'N/A' ? plot : null;
   media.director = !!director && director !== 'N/A' ? director : null;
   // Actors can either be a csv string, or an array of strings
-  media.actors = extractListOrStringAsList(actors, ', ');
+  media.actors = extractListOrStringAsList(actors, ', ').map(name => new Actor({ name }));
   media.rating = rating || 0.0;
   media.imdbid = imdbid;
   media.type = type;
@@ -47,6 +48,20 @@ const mapImdbToMedia = (imdbMedia) => {
   return media;
 };
 
+/**
+ * Will store all actors
+ * into the database,
+ * and place a reference into the media
+ * */
+const saveActor = async (media) => {
+  for (let i = 0; i < media.actors.length; i += 1) {
+    const actor = media.actors[i];
+    // Reassign to assure _id is correct
+    media.actors[i] = await Actor.findOneOrCreate({ name: actor.name }, actor);
+  }
+
+  return media;
+};
 
 const schema = buildSchema(`
   type Query {
@@ -61,12 +76,17 @@ const schema = buildSchema(`
     large: String
   }
   
+  type Actor {
+    id: String!
+    name: String!
+  }
+  
   type Media {
     id: String!
     name: String!
     description: String
     rating: Float
-    actors: [String]!
+    actors: [Actor]!
     director: String
     imdbid: String
     released: String
@@ -81,14 +101,7 @@ const searchMedia = async ({ query, offset = 0, limit = 20 }) => {
     throw new Error(`Search phrase is too short. Must be 3 chars long, your's is ${query.length}`);
   }
 
-  const foundMedia = await Media
-    // Search uses MongoDB's build in features, such as stopword removing and stemming
-    // https://docs.mongodb.com/manual/reference/operator/query/text/#match-operation
-    .find({ $text: { $search: query } })
-    .skip(offset)
-    // Allow modification of limit, but no more than 100 at a time
-    .limit(limit < 100 ? limit : 100)
-    .exec();
+  const foundMedia = await Media.textSearch(query, offset, limit);
 
   // Exit early if we found some data, or we risked
   // filtering out our stored data
@@ -117,14 +130,18 @@ const searchMedia = async ({ query, offset = 0, limit = 20 }) => {
     // Keep only movie or series from results
     .filter(m => ['movie', 'series'].includes(m.type))
     // We can assume only the first 10 is relevant (and likely even fever)
-    .slice(0, 10)
+    .slice(0, 20)
     .map(fetchMediaDetails)
   );
 
-  const mediaModels = media
+  let mediaModels = media
     // Remove any filtered out values
     .filter(m => !!m)
     .map(mapImdbToMedia);
+
+  console.debug('Mapping actors for all media');
+  mediaModels = await Promise.all(mediaModels.map(m => saveActor(m)));
+  console.debug('Mapping completed');
 
   try {
     // Save all media
