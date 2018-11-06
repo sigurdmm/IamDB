@@ -105,7 +105,7 @@ const searchMedia = async ({ query, offset = 0, limit = 20 }) => {
 
   // Exit early if we found some data, or we risked
   // filtering out our stored data
-  if (foundMedia.length > 0 || offset > 0) {
+  if (foundMedia.length > 2 || offset > 0 || limit < 1) {
     return foundMedia;
   }
 
