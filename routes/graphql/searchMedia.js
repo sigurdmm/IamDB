@@ -1,8 +1,7 @@
-const { buildSchema } = require('graphql');
-const Media = require('../models/media');
-const Actor = require('../models/actor');
-const { searchByName, getById } = require('./imdbApi');
-const { buildRelaseDate, extractListOrStringAsList } = require('./valueHelpers');
+const Media = require('../../models/media');
+const Actor = require('../../models/actor');
+const { searchByName, getById } = require('../../utils/imdbApi');
+const { buildRelaseDate, extractListOrStringAsList } = require('../../utils/valueHelpers');
 
 const fetchMediaDetails = async (imdbMedia) => {
   try {
@@ -14,6 +13,12 @@ const fetchMediaDetails = async (imdbMedia) => {
   }
 };
 
+/**
+ * Accepts some media from imdb,
+ * and maps it to a Media object
+ * @param {object} imdbMedia
+ * @return {Media} Mapped model of the given media
+ * */
 const mapImdbToMedia = (imdbMedia) => {
   const {
     title,
@@ -34,7 +39,7 @@ const mapImdbToMedia = (imdbMedia) => {
   media.released = buildRelaseDate(year, released);
   media.description = !!plot && plot !== 'N/A' ? plot : null;
   media.director = !!director && director !== 'N/A' ? director : null;
-  // Actors can either be a csv string, or an array of strings
+  // Identify the actors, and map it into the Actor model
   media.actors = extractListOrStringAsList(actors, ', ').map(name => new Actor({ name }));
   media.rating = rating || 0.0;
   media.imdbid = imdbid;
@@ -62,38 +67,6 @@ const saveActor = async (media) => {
 
   return media;
 };
-
-const schema = buildSchema(`
-  type Query {
-    searchMedia(query: String!, offset: Int, limit: Int): [Media]
-    media(id: String!): Media
-  },
-  type Mutation {
-    createMedia(id: Int!, title: String!, rating: Float): Media
-  },
-  type Thumbnail {
-    small: String
-    large: String
-  }
-  
-  type Actor {
-    id: String!
-    name: String!
-  }
-  
-  type Media {
-    id: String!
-    name: String!
-    description: String
-    rating: Float
-    actors: [Actor]!
-    director: String
-    imdbid: String
-    released: String
-    thumbnails: Thumbnail
-    type: String
-  }
-`);
 
 const searchMedia = async ({ query, offset = 0, limit = 20 }) => {
   console.info(`[Search Media] query: ${query}, offset: ${offset}, limit: ${limit}`);
@@ -150,24 +123,4 @@ const searchMedia = async ({ query, offset = 0, limit = 20 }) => {
   return mediaModels;
 };
 
-const getMedia = async (query) => {
-  const { id } = query;
-
-  return await Media.findById(id);
-};
-
-const createMedia = (args) => {
-  // eslint-disable-next-line no-console
-  console.info(args);
-};
-
-const rootValue = {
-  searchMedia,
-  createMedia,
-  media: getMedia,
-};
-
-module.exports = {
-  schema,
-  rootValue
-};
+module.exports = searchMedia;
