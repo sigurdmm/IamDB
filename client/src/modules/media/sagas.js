@@ -3,9 +3,12 @@ import {
   FETCH_MEDIA_DETAILS_FAILED,
   FETCH_MEDIA_DETAILS_REQUESTED,
   FETCH_MEDIA_DETAILS_SUCCESS,
+  SEARCH_MEDIA_REQUESTED,
+  SEARCH_MEDIA_SUCCESS,
+  SEARCH_MEDIA_FAILED,
 } from './constants';
 
-import { fetchMediaById } from './api';
+import { fetchMediaById, searchMediaByQuery } from './api';
 
 function* fetchMedia(action) {
   const { id } = action.media;
@@ -31,9 +34,29 @@ function* fetchMedia(action) {
   }
 }
 
+function* searchMedia(action) {
+  const { query, type } = action.query;
+  console.info(action.query);
+
+  try {
+    const results = yield call(searchMediaByQuery, query, type, 50, 0);
+
+    // Catch errors in the response
+    if (results.error) {
+      yield put({ error: results.error, type: SEARCH_MEDIA_FAILED });
+      return;
+    }
+
+    yield put({ media: results.searchMedia, type: SEARCH_MEDIA_SUCCESS });
+  } catch (e) {
+    yield put({ type: SEARCH_MEDIA_FAILED, error: e.message });
+  }
+}
+
 function* mediaSaga() {
   // Optionally could we use takeEvery, but we only care about the latest request
   yield takeLatest(FETCH_MEDIA_DETAILS_REQUESTED, fetchMedia);
+  yield takeLatest(SEARCH_MEDIA_REQUESTED, searchMedia);
 }
 
 export default mediaSaga;

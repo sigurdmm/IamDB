@@ -1,7 +1,7 @@
 import {
   FETCH_MEDIA_DETAILS_FAILED,
   FETCH_MEDIA_DETAILS_REQUESTED,
-  FETCH_MEDIA_DETAILS_SUCCESS,
+  FETCH_MEDIA_DETAILS_SUCCESS, SEARCH_MEDIA_FAILED, SEARCH_MEDIA_REQUESTED, SEARCH_MEDIA_SUCCESS,
 } from './constants';
 
 const initialState = {
@@ -36,6 +36,23 @@ export default function mediaReducer(state = initialState, action) {
         ...state,
         error: action.error,
         loading: false,
+      };
+    case SEARCH_MEDIA_SUCCESS:
+      return {
+        ...state,
+        allMedia: action.media,
+        loading: false,
+      };
+    case SEARCH_MEDIA_FAILED:
+      return {
+        ...state,
+        error: action.error,
+        loading: false,
+      };
+    case SEARCH_MEDIA_REQUESTED:
+      return {
+        ...state,
+        loading: true,
       };
     default:
       return state;

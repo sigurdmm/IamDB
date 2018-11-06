@@ -27,3 +27,22 @@ export const fetchMediaById = id => query(`
     }
   }
 `, { id });
+
+export const searchMediaByQuery = (queryString, type, limit, offset) => query(`
+  query($query: String!, $limit: Int = 50, $offset: Int = 0) {
+    searchMedia(query: $query, limit: $limit, offset: $offset) {
+      id
+      name
+      rating
+      type
+      thumbnails {
+        small
+      }
+    }
+  }
+`, {
+  type,
+  limit,
+  offset,
+  query: queryString,
+});
