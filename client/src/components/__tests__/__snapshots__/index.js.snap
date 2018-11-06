@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Index/> should load properly 1`] = `
+<div>
+  <Formik
+    enableReinitialize={false}
+    initialValues={
+      Object {
+        "search": "",
+      }
+    }
+    isInitialValid={false}
+    onSubmit={[Function]}
+    validate={[Function]}
+    validateOnBlur={true}
+    validateOnChange={true}
+  >
+    <div>
+      <Form
+        className="searchbar"
+      >
+        <C
+          className="searchbar__field"
+          name="search"
+          placeholder="The dark knight rises"
+          type="field"
+        />
+        <button
+          className="searchbar__submit"
+          type="submit"
+        >
+          <img
+            src="search.svg"
+          />
+        </button>
+      </Form>
+      <C
+        className="error"
+        component="div"
+        name="search"
+      />
+    </div>
+  </Formik>
+</div>
+`;

@@ -5,7 +5,7 @@ import {
   Field,
   ErrorMessage,
 } from 'formik';
-import './SearchBar.less';
+import './index.less';
 import PropTypes from 'prop-types';
 import icon from './search.svg';
 

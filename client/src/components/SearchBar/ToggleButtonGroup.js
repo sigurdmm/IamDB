@@ -11,12 +11,6 @@ export default class ToggleButtonGroup extends React.Component {
     onToggle: PropTypes.func.isRequired,
   };
 
-  handleClick = i => () => {
-    this.setState({
-      toggled: i,
-    });
-  };
-
   render() {
     const buttons = this.props.buttons.map(
       (button, i) => <button
