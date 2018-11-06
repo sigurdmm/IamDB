@@ -11,8 +11,8 @@ export default class CoverDisplay extends React.Component {
   render() {
     return <div className='coverdisplay'>
       { this.props.media
-        ? this.props.media.map((object, i) => <CoverImage link={object.thumbnails.small} key={i} />)
-        : <p>NOTHING FOUND</p>}
+        ? this.props.media.map((cover, i) => <CoverImage link={cover.thumbnails.small} key={i} />)
+        : <p className='coverdisplay__error'>NOTHING FOUND</p>}
     </div>;
   }
 }
