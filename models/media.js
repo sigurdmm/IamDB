@@ -2,12 +2,12 @@ const mongoose = require('mongoose');
 
 const MediaSchema = new mongoose.Schema({
   name: { type: String, required: true },
-  description: { type: String },
+  description: String,
   rating: { type: Number, default: 0.0 },
   imdbid: { type: String, unique: true, required: true },
   released: { type: Date, default: Date.now() },
   actors: { type: Array, default: [] },
-  director: { type: String },
+  director: String,
   thumbnails: {
     small: String,
     large: String
@@ -15,20 +15,23 @@ const MediaSchema = new mongoose.Schema({
   type: { type: String, enum: ['movie', 'series'] }
 });
 
-MediaSchema.index(
-  {
-    name: 'text',
-    description: 'test',
-    director: 'text'
-  },
-  {
-    weights: {
-      // Give name the most weight in search
-      name: 9,
-      // Description has some relevance, but only minor
-      description: 1,
-      director: 2
-    }
-  });
+MediaSchema.index({ name: 'text', director: 'text' });
 
-module.exports = mongoose.model('Media', MediaSchema);
+const Media = mongoose.model('Media', MediaSchema);
+
+Media.on('index', (err) => {
+  if (err) {
+    console.error('Failed to create index for Media', err);
+    return;
+  }
+
+  console.debug('Indices for collection Media has been created');
+
+  if (process.env.NODE_ENV === 'development') {
+    Media.collection.getIndexes({ full: true })
+      .then(indices => console.debug('Indices created', indices))
+      .catch(console.error);
+  }
+});
+
+module.exports = Media;

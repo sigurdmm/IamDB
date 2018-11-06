@@ -30,6 +30,11 @@ db.on('open', () => {
   console.info('Database connection established!');
 });
 
+// Silences the deprecation warning for collection.ensureIndex
+mongoose.set('createIndexes', true);
+// Print debug data, if we are in development mode
+mongoose.set('debug', process.env.NODE_ENV === 'development');
+
 mongoose.connect('mongodb://mongo/media-searcher');
 
 // Api handler
