@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ToggleButtonGroup/> should load properly 1`] = `
+<div
+  className="togglebuttons__container"
+>
+  <button
+    className="toggleButton toggleButtonGroup__toggled"
+    key="0"
+  >
+    Movie
+  </button>
+  <button
+    className="toggleButton"
+    key="1"
+  >
+    TV Show
+  </button>
+</div>
+`;

@@ -2,7 +2,7 @@
 
 exports[`<Header/> renders with children 1`] = `
 <header
-  class="header"
+  class="undefined header"
 >
   <h1
     class="header__title"
@@ -26,7 +26,7 @@ exports[`<Header/> renders with children 1`] = `
 
 exports[`<Header/> renders without children 1`] = `
 <header
-  class="header"
+  class="undefined header"
 >
   <h1
     class="header__title"

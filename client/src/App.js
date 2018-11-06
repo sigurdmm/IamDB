@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from './components/Header';
-import 'App.less';
+import './App.less';
 
 import Routes from './Routes';
 

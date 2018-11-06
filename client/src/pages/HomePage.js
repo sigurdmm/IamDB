@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import './HomePage.less';
 import { fetchMediaById, searchMedia } from '../modules/media/actions';
-import SearchBar from '../components/SearchBar';
-import ToggleButtonGroup from '../components/ToggleButtonGroup';
+import Index from '../components/SearchBar/index';
+import ToggleButtonGroup from '../components/SearchBar/ToggleButtonGroup';
 
 class HomePage extends React.Component {
   static propTypes = {
@@ -51,7 +51,7 @@ class HomePage extends React.Component {
     // const { detailedMedia, loading, error } = this.props;
 
     return <div className="homepage">
-      <SearchBar onSubmit={this.onSearchSubmit}/>
+      <Index onSubmit={this.onSearchSubmit}/>
       <ToggleButtonGroup
         toggled={this.state.toggled}
         onToggle={this.onToggle}
