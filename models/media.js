@@ -15,7 +15,7 @@ const MediaSchema = new mongoose.Schema({
   type: { type: String, enum: ['movie', 'series'] }
 });
 
-MediaSchema.index({ name: 'text', description: 'text', director: 'text' });
+MediaSchema.index({ name: 'text', director: 'text' });
 
 const Media = mongoose.model('Media', MediaSchema);
 
