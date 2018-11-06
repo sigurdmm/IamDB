@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import './index.less';
 
-const Header = ({ title, children = null }) => <header className="header">
+const Header = ({ title, children = null, ...props }) => <header {...props} className={`${props.className} header`}>
   <h1 className="header__title">{title}</h1>
   {children}
 </header>;

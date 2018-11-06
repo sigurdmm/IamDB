@@ -1,5 +1,6 @@
 @import './constants';
 
+// The cover image for the whole application
 .systemcover {
   position: absolute;
   top: 0;
@@ -32,31 +33,57 @@
 
   width: 100%;
 
-  > * {
-    flex: 1;
-  }
-
   &__header,
-  &__footer {
-    flex: 0;
-  }
-
-  &__content {
-    height: auto;
-  }
-
   &__footer {
     box-sizing: border-box;
 
-    margin-top: auto;
+    color: #ffffff;
+
+    flex: 0;
 
     padding: 0.5em 1em;
+  }
+
+  &__content {
+    box-sizing: border-box;
+    flex: 1;
+
+    display: block;
+    height: auto;
+
+    padding: 0 1em;
+    position: relative;
+  }
+
+  // Modifier class to center the page content on the page
+  &__content--centered {
+    align-items: stretch;
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+  }
+
+  &__footer {
+    .text-shadow-1;
+    margin-top: auto;
   }
 }
 
 h1,
 h2,
+h3,
+h4,
+h5 {
+  margin: 0;
+}
+
+h1 {
+  color: @textLightColor;
+}
+
+h2,
 h3 {
   color: @primaryColor;
-  margin: 0;
 }

@@ -19,13 +19,13 @@ const selectRandomItem = list => list[Math.floor(Math.random() * list.length)];
 const App = () => <>
   <div className="systemcover"
        style={{ backgroundImage: `url('${selectRandomItem(coverimages)}')` }}/>
-  <div className="application">
+  <div className="application application--light">
     <Header title="Hello world" className="application__header">
       <nav className="navigation">
         <a href="#" className="navigation__link">Test</a>
       </nav>
     </Header>
-    <main className="application__content">
+    <main className="application__content application__content--centered">
       <Routes/>
     </main>
     <footer className="application__footer">

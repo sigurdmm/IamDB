@@ -50,21 +50,19 @@ class HomePage extends React.Component {
   render() {
     // const { detailedMedia, loading, error } = this.props;
 
-    return <div>
-      <div className="searchbar__container">
-        <SearchBar onSubmit={this.onSearchSubmit}/>
-        <ToggleButtonGroup
-          toggled={this.state.toggled}
-          onToggle={this.onToggle}
-          buttons={[
-            {
-              content: 'Movie',
-            },
-            {
-              content: 'TV Show',
-            },
-          ]}/>
-      </div>
+    return <div className="homepage">
+      <SearchBar onSubmit={this.onSearchSubmit}/>
+      <ToggleButtonGroup
+        toggled={this.state.toggled}
+        onToggle={this.onToggle}
+        buttons={[
+          {
+            content: 'Movie',
+          },
+          {
+            content: 'TV Show',
+          },
+        ]}/>
     </div>;
   }
 }
