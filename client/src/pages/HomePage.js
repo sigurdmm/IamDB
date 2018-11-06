@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
-import { fetchMediaById } from '../modules/media/actions';
+import './HomePage.less';
+import { fetchMediaById, searchMedia } from '../modules/media/actions';
+import SearchBar from '../components/SearchBar';
+import ToggleButtonGroup from '../components/ToggleButtonGroup';
 
 class HomePage extends React.Component {
   static propTypes = {
-    fetchMediaById: PropTypes.func.isRequired,
+    searchMedia: PropTypes.func.isRequired,
     detailedMedia: PropTypes.shape({
       id: PropTypes.any.isRequired,
       name: PropTypes.string.isRequired,
@@ -26,54 +28,56 @@ class HomePage extends React.Component {
     error: PropTypes.string,
   };
 
-  componentDidMount() {
-    this.props.fetchMediaById('5bd8b0453179170b0d5b7485');
-  }
+  state = {
+    toggled: 0,
+  };
+
+  onSearchSubmit = (value) => {
+    console.info(value);
+    this.props.searchMedia(value, this.state.toggled);
+    // console.log(`find ${this.state.toggled === 0 ? 'movies' : 'tvshow'} named ${value}`);
+  };
+
+  onToggle = i => () => {
+    if (this.state.toggled !== i) {
+      this.setState({
+        toggled: i,
+      });
+    }
+  };
+
 
   render() {
-    const { detailedMedia, loading, error } = this.props;
-
-    if (error) {
-      return <div>
-        <section className="feedback feedback--error">
-          <h3 className="feedback__heading">Failed to load media</h3>
-          <p className="feedback__message">{error}</p>
-        </section>
-      </div>;
-    }
-
-    if (loading) {
-      return <div>
-        <div className="feedback feedback--info">
-          <p className="feedback__message">Loading media ...</p>
-        </div>
-      </div>;
-    }
+    // const { detailedMedia, loading, error } = this.props;
 
     return <div>
-      <section>
-        <em>Media: {detailedMedia.id}</em>
-        <h2>{detailedMedia.name}</h2>
-
-        <p>{detailedMedia.description}</p>
-
-        <ul>
-          {detailedMedia.actors.map(actor => <li
-            key={`actor-${actor.replace(' ', '-')}`}>{actor}</li>)}
-        </ul>
-      </section>
+      <div className="searchbar__container">
+        <SearchBar onSubmit={this.onSearchSubmit}/>
+        <ToggleButtonGroup
+          toggled={this.state.toggled}
+          onToggle={this.onToggle}
+          buttons={[
+            {
+              content: 'Movie',
+            },
+            {
+              content: 'TV Show',
+            },
+          ]}/>
+      </div>
     </div>;
   }
 }
 
 const mapStateToProps = state => ({
-  detailedMedia: state.media.detailedMedia,
+  allMedia: state.media.allMedia,
   loading: state.media.loading,
   error: state.media.error,
 });
 
 const actionsToProps = {
   fetchMediaById,
+  searchMedia,
 };
 
 export default connect(mapStateToProps, actionsToProps)(HomePage);
