@@ -1,10 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-// const createError = require('http-errors');
-
 const expressGraphql = require('express-graphql');
-const { schema, rootValue } = require('../utils/graphql');
+const { schema, rootValue } = require('./graphql');
 
 /* GET home page. */
 router.use('', expressGraphql({

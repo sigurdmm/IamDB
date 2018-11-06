@@ -6,7 +6,7 @@ const MediaSchema = new mongoose.Schema({
   rating: { type: Number, default: 0.0 },
   imdbid: { type: String, unique: true, required: true },
   released: { type: Date, default: Date.now() },
-  actors: { type: Array, default: [] },
+  actors: [{ type: mongoose.Schema.Types.ObjectId, default: [], ref: 'Actor' }],
   director: String,
   thumbnails: {
     small: String,
@@ -16,6 +16,19 @@ const MediaSchema = new mongoose.Schema({
 });
 
 MediaSchema.index({ name: 'text', director: 'text' });
+
+MediaSchema.statics.textSearch = async function textSearch(query, offset = 0, limit = 100) {
+  return this
+    // Search uses MongoDB's build in features, such as stopword removing and stemming
+    // https://docs.mongodb.com/manual/reference/operator/query/text/#match-operation
+    .find({ $text: { $search: query } })
+    // Fill inn relation with actors
+    .populate('actors')
+    .skip(offset)
+    // Allow modification of limit, but no more than 100 at a time
+    .limit(limit < 100 ? limit : 100)
+    .exec();
+};
 
 const Media = mongoose.model('Media', MediaSchema);
 
