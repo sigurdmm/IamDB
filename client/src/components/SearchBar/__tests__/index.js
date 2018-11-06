@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import Index from '../SearchBar/index';
+import Index from '../index';
 
 describe('<Index/>', () => {
   it('should load properly', () => {

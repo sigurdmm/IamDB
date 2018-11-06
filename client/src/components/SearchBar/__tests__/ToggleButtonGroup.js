@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import ToggleButtonGroup from '../SearchBar/ToggleButtonGroup';
+import ToggleButtonGroup from '../ToggleButtonGroup';
 
 const mockedState = {
   toggled: 0,
