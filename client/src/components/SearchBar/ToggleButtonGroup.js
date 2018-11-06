@@ -17,13 +17,13 @@ export default class ToggleButtonGroup extends React.Component {
         key={i}
         onClick={this.props.onToggle(i)}
         className={this.props.toggled === i
-          ? 'toggleButton toggleButtonGroup__toggled'
-          : 'toggleButton'}
+          ? 'togglebuttons__button togglebuttons__button__toggled'
+          : 'togglebuttons__button'}
       >
         {button.content}
       </button>,
     );
-    return <div className="togglebuttons__container">
+    return <div className="togglebuttons">
       {buttons}
     </div>;
   }

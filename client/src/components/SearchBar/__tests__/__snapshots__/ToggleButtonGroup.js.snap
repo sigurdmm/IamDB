@@ -2,16 +2,16 @@
 
 exports[`<ToggleButtonGroup/> should load properly 1`] = `
 <div
-  className="togglebuttons__container"
+  className="togglebuttons"
 >
   <button
-    className="toggleButton toggleButtonGroup__toggled"
+    className="togglebuttons__button togglebuttons__button__toggled"
     key="0"
   >
     Movie
   </button>
   <button
-    className="toggleButton"
+    className="togglebuttons__button"
     key="1"
   >
     TV Show

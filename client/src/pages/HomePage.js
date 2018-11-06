@@ -35,7 +35,6 @@ class HomePage extends React.Component {
   onSearchSubmit = (value) => {
     console.info(value);
     this.props.searchMedia(value, this.state.toggled);
-    // console.log(`find ${this.state.toggled === 0 ? 'movies' : 'tvshow'} named ${value}`);
   };
 
   onToggle = i => () => {
