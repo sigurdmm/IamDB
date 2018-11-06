@@ -3,14 +3,19 @@ const { buildSchema } = require('graphql');
 const searchMedia = require('./searchMedia');
 const getMedia = require('./getMedia');
 
+const searchActors = require('./searchActors');
+
 const schema = buildSchema(`
   type Query {
     searchMedia(query: String!, offset: Int, limit: Int): [Media]
     media(id: String!): Media
+    searchActors(query: String!, offset: Int, limit: Int): [Actor]
   },
+  
   type Mutation {
     createMedia(id: Int!, title: String!, rating: Float): Media
   },
+  
   type Thumbnail {
     small: String
     large: String
@@ -19,6 +24,7 @@ const schema = buildSchema(`
   type Actor {
     id: String!
     name: String!
+    media: [Media]
   }
   
   type Media {
@@ -38,6 +44,7 @@ const schema = buildSchema(`
 
 const rootValue = {
   searchMedia,
+  searchActors,
   media: getMedia,
 };
 

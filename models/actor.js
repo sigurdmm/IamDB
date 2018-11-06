@@ -31,6 +31,19 @@ ActorSchema.statics.findOneOrCreate = async function findOneOrCreate(query, acto
   return actor;
 };
 
+ActorSchema.statics.textSearch = async function textSearch(query, offset = 0, limit = 100) {
+  return this
+    // Search uses MongoDB's build in features, such as stopword removing and stemming
+    // https://docs.mongodb.com/manual/reference/operator/query/text/#match-operation
+    .find({ $text: { $search: query } })
+
+    // .populate('actors')
+    .skip(offset)
+    // Allow modification of limit, but no more than 100 at a time
+    .limit(limit < 100 ? limit : 100)
+    .exec();
+};
+
 const Actor = mongoose.model('Actor', ActorSchema);
 
 Actor.on('index', (err) => {
