@@ -30,23 +30,14 @@ class HomePage extends React.Component {
     error: PropTypes.string,
   };
 
-  state = {
-    toggled: 0,
-  };
+  state = { toggled: 0 };
 
   onSearchSubmit = (value) => {
     console.info(value);
     this.props.searchMedia(value, this.state.toggled);
   };
 
-  onToggle = i => () => {
-    if (this.state.toggled !== i) {
-      this.setState({
-        toggled: i,
-      });
-    }
-  };
-
+  onToggle = id => this.setState({ toggled: id });
 
   render() {
     // const { detailedMedia, loading, error } = this.props

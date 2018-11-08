@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import './ToggleButtonGroup.less';
 import PropTypes from 'prop-types';
 
-export default class ToggleButtonGroup extends React.Component {
+const ToggleButton = ({ children, onClick, active }) => <button
+  onClick={onClick}
+  className={`togglebuttons__button${active ? ' togglebuttons__button--toggled' : ''}`}>{children}</button>;
+
+ToggleButton.propTypes = {
+  children: PropTypes.any.isRequired,
+  onClick: PropTypes.func.isRequired,
+  active: PropTypes.bool.isRequired,
+};
+
+export default class ToggleButtonGroup extends PureComponent {
   static propTypes = {
     toggled: PropTypes.number.isRequired,
     buttons: PropTypes.arrayOf(PropTypes.shape({
@@ -11,20 +21,19 @@ export default class ToggleButtonGroup extends React.Component {
     onToggle: PropTypes.func.isRequired,
   };
 
+  onChange = id => () => {
+    if (id === this.props.toggled) {
+      return;
+    }
+    this.props.onToggle(id);
+  };
+
   render() {
-    const buttons = this.props.buttons.map(
-      (button, i) => <button
-        key={i}
-        onClick={this.props.onToggle(i)}
-        className={this.props.toggled === i
-          ? 'togglebuttons__button togglebuttons__button__toggled'
-          : 'togglebuttons__button'}
-      >
-        {button.content}
-      </button>,
-    );
     return <div className="togglebuttons">
-      {buttons}
+      {this.props.buttons.map((button, i) => <ToggleButton
+        key={`togglebutton-${i}`}
+        active={this.props.toggled === i}
+        onClick={this.onChange(i)}>{button.content}</ToggleButton>)}
     </div>;
   }
 }
