@@ -50,7 +50,7 @@ class HomePage extends React.Component {
 
   render() {
     // const { detailedMedia, loading, error } = this.props
-    return <div className="homepage">
+    return <main className="homepage">
       <Index onSubmit={this.onSearchSubmit}/>
       <ToggleButtonGroup
         toggled={this.state.toggled}
@@ -63,9 +63,8 @@ class HomePage extends React.Component {
             content: 'TV Show',
           },
         ]}/>
-      <CoverDisplay media={this.props.allMedia}
-       />
-    </div>;
+      <CoverDisplay media={this.props.allMedia}/>
+    </main>;
   }
 }
 
