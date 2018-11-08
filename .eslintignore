@@ -3,3 +3,5 @@ data
 bin
 
 client
+
+cypress/support
