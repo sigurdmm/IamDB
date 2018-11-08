@@ -7,7 +7,7 @@ import Index from '../components/SearchBar/index';
 import ToggleButtonGroup from '../components/SearchBar/ToggleButtonGroup';
 import CoverDisplay from '../components/CoverDisplay/index';
 
-class HomePage extends React.Component {
+export class HomePage extends React.Component {
   static propTypes = {
     searchMedia: PropTypes.func.isRequired,
     allMedia: PropTypes.array,

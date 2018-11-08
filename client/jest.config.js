@@ -32,5 +32,11 @@ module.exports = {
       lines: 65,
       statements: -40
     },
+    'src/pages/**/*.js': {
+      branches: 50,
+      functions: 50,
+      lines: 50,
+      statements: -50
+    }
   }
 };
