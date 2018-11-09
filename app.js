@@ -35,7 +35,13 @@ mongoose.set('createIndexes', true);
 // Print debug data, if we are in development mode
 mongoose.set('debug', process.env.NODE_ENV === 'development');
 
-mongoose.connect('mongodb://mongo/media-searcher');
+/**
+ * Identifies if a custom DB_HOST has been set.
+ * If not will it attempt to connect to MongoDB through localhost
+ * */
+const dbHost = process.env.DB_HOST || 'localhost';
+
+mongoose.connect(`mongodb://${dbHost}/media-searcher`);
 
 // Api handler
 app.use('/graphql', require('./routes/api.js'));
