@@ -2,6 +2,11 @@ const mongoose = require('mongoose');
 
 const ActorSchema = new mongoose.Schema({
   name: { type: String, required: true, unique: true },
+  thumbnails: {
+    small: String,
+    large: String
+  },
+  popularity: Number,
 });
 
 ActorSchema.index({ name: 'text' });

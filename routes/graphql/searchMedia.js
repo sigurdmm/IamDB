@@ -1,5 +1,6 @@
 const Media = require('../../models/media');
 const Actor = require('../../models/actor');
+const { searchPerson, getImageUrl } = require('../../utils/tmdbApi');
 const { searchByName, getById } = require('../../utils/imdbApi');
 const { buildRelaseDate, extractListOrStringAsList } = require('../../utils/valueHelpers');
 
@@ -54,13 +55,44 @@ const mapImdbToMedia = (imdbMedia) => {
 };
 
 /**
+ * Searches TMDB and inserts more details about an actor
+ * */
+const findActorDetails = async (actor) => {
+  let person = null;
+  try {
+    person = await searchPerson(actor.name);
+  } catch(err) {
+    console.error('Failed to find details about actor on TMDB', err);
+  }
+
+  if (!person) {
+    // Set defaults
+    actor.thumbnails = {
+      small: null,
+      large: null
+    };
+    actor.popularity = 0.0;
+
+    return actor;
+  }
+
+  actor.thumbnails = {
+    small: getImageUrl(person.profile_path),
+    large: null
+  };
+  actor.popularity = person.popularity;
+
+  return actor;
+};
+
+/**
  * Will store all actors
  * into the database,
  * and place a reference into the media
  * */
 const saveActor = async (media) => {
   for (let i = 0; i < media.actors.length; i += 1) {
-    const actor = media.actors[i];
+    const actor = await findActorDetails(media.actors[i]);
     // Reassign to assure _id is correct
     media.actors[i] = await Actor.findOneOrCreate({ name: actor.name }, actor);
   }

@@ -16,6 +16,7 @@ services:
     - DB_HOST=mongo
     - NODE_ENV=development
     - PORT=3000
+    - THEMOVIEDB_API_KEY=86eb3df764e812dc8aba77203bb4a2fc
     - OMDB_API_KEY=a7b507e7
   mongo:
     image: mongo:3.2.21-jessie

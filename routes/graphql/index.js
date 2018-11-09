@@ -25,6 +25,8 @@ const schema = buildSchema(`
     id: String!
     name: String!
     media: [Media]
+    popularity: Float
+    thumbnails: Thumbnail
   }
   
   type Media {
