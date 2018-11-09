@@ -11,6 +11,7 @@ const initialState = {
     name: '',
     description: '',
     actors: [],
+    thumbnails: {},
   },
   loading: false,
   error: null,
