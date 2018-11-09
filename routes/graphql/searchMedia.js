@@ -86,15 +86,33 @@ const findActorDetails = async (actor) => {
 };
 
 /**
- * Will store all actors
- * into the database,
- * and place a reference into the media
+ * Will store all actors into the database,
+ * and place a reference into the media.
+ * Also fills inn more details about the actor from TMDB
  * */
 const saveActor = async (media) => {
   for (let i = 0; i < media.actors.length; i += 1) {
-    const actor = await findActorDetails(media.actors[i]);
+    let actor = await Actor.findOne({ name: media.actors[0].name });
+
+    // Actor already exists. Skipping
+    if (actor !== null) {
+      continue;
+    }
+
+    actor = await findActorDetails(media.actors[i]);
+
+    try {
+      await actor.save();
+    } catch(err) {
+      // Pass the err along, if it is not duplicate key err
+      if (!err.message.startsWith('E11000')) {
+        console.error('Failed to save actor', err);
+        throw err;
+      }
+    }
+
     // Reassign to assure _id is correct
-    media.actors[i] = await Actor.findOneOrCreate({ name: actor.name }, actor);
+    media.actors[i] = actor;
   }
 
   return media;
