@@ -4,8 +4,7 @@ import './App.less';
 
 import Routes from './Routes';
 
-const App = () =>
-  <div className="application application--light">
+const App = () => <div className="application application--light">
     <Header title="Hello world" className="application__header">
       <nav className="navigation">
         <a href="#" className="navigation__link">Test</a>
