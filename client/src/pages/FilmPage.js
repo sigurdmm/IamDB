@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchMediaById } from '../modules/media/actions';
-import InformationSection from '../components/InformationSection';
+import InformationSection from '../components/InformationSection/index';
+import CoverDisplay from '../components/CoverDisplay/index';
 import './FilmPage.less';
 
 
@@ -55,6 +56,10 @@ class FilmPage extends React.Component {
       <div className='description__container'>
         <h2>Description</h2>
         <p>{detailedMedia.description}</p>
+      </div>
+      <div>
+        <h2>Actors</h2>
+        <CoverDisplay media={detailedMedia.actors}/>
       </div>
     </div>;
   }
