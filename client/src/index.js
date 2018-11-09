@@ -6,6 +6,7 @@
  * */
 // eslint-disable-next-line import/no-extraneous-dependencies
 import 'regenerator-runtime/runtime';
+import 'whatwg-fetch';
 
 import React from 'react';
 import ReactDOM from 'react-dom';

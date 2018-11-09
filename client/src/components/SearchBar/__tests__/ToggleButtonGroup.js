@@ -18,13 +18,27 @@ describe('<ToggleButtonGroup/>', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('functions should be called on press', () => {
+  it('should call onToggle on change', () => {
     const spy = jest.fn();
     const wrapper = shallow(<ToggleButtonGroup
       toggled={mockedState.toggled}
       onToggle={spy}
       buttons={mockedState.buttons}/>);
-    wrapper.find('button').at(1).simulate('click');
+    wrapper.find('ToggleButton').at(1).simulate('click');
     expect(spy).toHaveBeenCalled();
+  });
+
+  it('should not call onToggle if already selected', () => {
+    const spy = jest.fn();
+
+    const wrapper = shallow(<ToggleButtonGroup
+      toggled={0}
+      onToggle={spy}
+      buttons={mockedState.buttons}
+    />);
+
+    wrapper.find('ToggleButton').at(0).simulate('click');
+
+    expect(spy).not.toHaveBeenCalled();
   });
 });

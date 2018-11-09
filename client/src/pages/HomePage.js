@@ -5,10 +5,12 @@ import './HomePage.less';
 import { fetchMediaById, searchMedia } from '../modules/media/actions';
 import Index from '../components/SearchBar/index';
 import ToggleButtonGroup from '../components/SearchBar/ToggleButtonGroup';
+import CoverDisplay from '../components/CoverDisplay/index';
 
-class HomePage extends React.Component {
+export class HomePage extends React.Component {
   static propTypes = {
     searchMedia: PropTypes.func.isRequired,
+    allMedia: PropTypes.array,
     detailedMedia: PropTypes.shape({
       id: PropTypes.any.isRequired,
       name: PropTypes.string.isRequired,
@@ -28,28 +30,18 @@ class HomePage extends React.Component {
     error: PropTypes.string,
   };
 
-  state = {
-    toggled: 0,
-  };
+  state = { toggled: 0 };
 
   onSearchSubmit = (value) => {
     console.info(value);
     this.props.searchMedia(value, this.state.toggled);
   };
 
-  onToggle = i => () => {
-    if (this.state.toggled !== i) {
-      this.setState({
-        toggled: i,
-      });
-    }
-  };
-
+  onToggle = id => this.setState({ toggled: id });
 
   render() {
-    // const { detailedMedia, loading, error } = this.props;
-
-    return <div className="homepage">
+    // const { detailedMedia, loading, error } = this.props
+    return <main className="homepage">
       <Index onSubmit={this.onSearchSubmit}/>
       <ToggleButtonGroup
         toggled={this.state.toggled}
@@ -62,9 +54,22 @@ class HomePage extends React.Component {
             content: 'TV Show',
           },
         ]}/>
-    </div>;
+      <CoverDisplay media={this.props.allMedia}/>
+    </main>;
   }
 }
+
+// [{ thumbnails: { small: 'https://m.media-amazon.com/images/M/MV5BMzIxMDkxNDM2M15BMl5BanBnXkFtZTcwMDA5ODY1OQ@@._V1_SX300.jpg' } },
+//   { thumbnails: { small: 'https://m.media-amazon.com/images/M/MV5BOThhYmY3MjItMWFiZC00ZmRjLTg1NmQtMzdkMDJkYzc0ZDNhXkEyXkFqcGdeQXVyNzAwMjQwMTA@._V1_SX300.jpg' } },
+// ]
+
+
+// ['https://m.media-amazon.com/images/M/MV5BMzIxMDkxNDM2M15BMl5BanBnXkFtZTcwMDA5ODY1OQ@@._V1_SX300.jpg',
+//   'https://m.media-amazon.com/images/M/MV5BOThhYmY3MjItMWFiZC00ZmRjLTg1NmQtMzdkMDJkYzc0ZDNhXkEyXkFqcGdeQXVyNzAwMjQwMTA@._V1_SX300.jpg',
+//   'https://m.media-amazon.com/images/M/MV5BMzRjOTg1YWYtZTE0NC00MGI5LTlmNDAtMzllM2M1MmQ4N2ViXkEyXkFqcGdeQXVyNjczMzc5NzQ@._V1_SX300.jpg',
+//   'https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_SX300.jpg',
+//   'https://images-na.ssl-images-amazon.com/images/M/MV5BMzIxNzU4NjkwMV5BMl5BanBnXkFtZTgwNDU4NjM4MDE@._V1_SX300.jpg',
+// ];
 
 const mapStateToProps = state => ({
   allMedia: state.media.allMedia,

@@ -67,4 +67,4 @@ frontend-build:
   stage: predeploy
   image: node:10.12.0-stretch
   script:
-  - npm run build:prod --prefic './client'
+  - npm run build:prod --prefix './client' || true

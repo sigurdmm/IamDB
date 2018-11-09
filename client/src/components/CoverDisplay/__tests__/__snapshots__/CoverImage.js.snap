@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CoverImage/> should render img, when link exists 1`] = `
+<div
+  class="coverdisplay__gridelement"
+>
+  <img
+    src="https://example.com/test.jpg"
+  />
+</div>
+`;

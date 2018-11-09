@@ -25,9 +25,7 @@ const App = () => <>
         <a href="#" className="navigation__link">Test</a>
       </nav>
     </Header>
-    <main className="application__content application__content--centered">
-      <Routes/>
-    </main>
+    <Routes/>
     <footer className="application__footer">
       Copyright 2018
     </footer>
