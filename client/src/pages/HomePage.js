@@ -36,7 +36,7 @@ export class HomePage extends React.Component {
 
   onSearchSubmit = (value) => {
     console.info(value);
-    this.props.searchMedia(value, this.state.toggled);
+    this.props.searchMedia(value, null);
   };
 
   onToggle = id => this.setState({ toggled: id });

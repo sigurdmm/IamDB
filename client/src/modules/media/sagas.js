@@ -36,7 +36,6 @@ function* fetchMedia(action) {
 
 function* searchMedia(action) {
   const { query, type } = action.query;
-  console.info(action.query);
 
   try {
     const results = yield call(searchMediaByQuery, query, type, 50, 0);
