@@ -2,6 +2,7 @@ const { buildSchema } = require('graphql');
 
 const searchMedia = require('./searchMedia');
 const getMedia = require('./getMedia');
+const getActor = require('./getActor');
 
 const searchActors = require('./searchActors');
 
@@ -9,6 +10,7 @@ const schema = buildSchema(`
   type Query {
     searchMedia(query: String!, offset: Int, limit: Int, sortOn: String, sortDirection: Int , type: String): SearchMetadata
     media(id: String!): Media
+    getActor(id: String!): Actor
     searchActors(query: String!, offset: Int, limit: Int, sortOn: String): [Actor]
   },
   
@@ -62,6 +64,7 @@ const schema = buildSchema(`
 const rootValue = {
   searchMedia,
   searchActors,
+  getActor,
   media: getMedia,
 };
 
