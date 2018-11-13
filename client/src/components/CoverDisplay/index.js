@@ -21,7 +21,9 @@ export default class CoverDisplay extends PureComponent {
 
     return <div className='coverdisplay'>
       {media.map((cover, i) => <CoverImage
-        link={cover.thumbnails.small}
+        thumbnail={cover.thumbnails.small}
+        title={cover.name}
+        rating={cover.rating}
         key={`cover-${i}`}/>)
       }
     </div>;
