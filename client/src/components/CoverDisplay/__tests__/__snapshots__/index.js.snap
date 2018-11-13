@@ -1,39 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<CoverDisplay/> should render error message properly 1`] = `
-<div
-  class="coverdisplay"
->
-  <p
-    class="coverdisplay__error"
-  >
-    NOTHING FOUND
-  </p>
-</div>
-`;
+exports[`<CoverDisplay/> should render error message properly 1`] = `null`;
 
-exports[`<CoverDisplay/> should render list properly 1`] = `
-<div
-  class="coverdisplay"
->
-  <div
-    class="coverdisplay__gridelement"
-  >
-    <img
-      src="https://example.com/test.jpg"
-    />
-  </div>
-  <div
-    class="coverdisplay__gridelement"
-  >
-    <img
-      src="https://example.com/test2.png"
-    />
-  </div>
-  <div
-    class="coverdisplay__gridelement"
-  >
-    <img />
-  </div>
-</div>
-`;
+exports[`<CoverDisplay/> should render list properly 1`] = `null`;
