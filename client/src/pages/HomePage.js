@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import './HomePage.less';
 import { fetchMediaById, searchMedia } from '../modules/media/actions';
-import Index from '../components/SearchBar/index';
-import ToggleButtonGroup from '../components/SearchBar/ToggleButtonGroup';
+import SearchBar from '../components/SearchBar/index';
 import CoverDisplay from '../components/CoverDisplay/index';
+import FilterAndSort from '../components/FilterAndSort';
 
 export class HomePage extends React.Component {
   static propTypes = {
@@ -40,36 +40,13 @@ export class HomePage extends React.Component {
   onToggle = id => this.setState({ toggled: id });
 
   render() {
-    // const { detailedMedia, loading, error } = this.props
     return <main className="homepage">
-      <Index onSubmit={this.onSearchSubmit}/>
-      <ToggleButtonGroup
-        toggled={this.state.toggled}
-        onToggle={this.onToggle}
-        buttons={[
-          {
-            content: 'Movie',
-          },
-          {
-            content: 'TV Show',
-          },
-        ]}/>
+      <SearchBar onSubmit={this.onSearchSubmit}/>
+      <FilterAndSort/>
       <CoverDisplay media={this.props.allMedia}/>
     </main>;
   }
 }
-
-// [{ thumbnails: { small: 'https://m.media-amazon.com/images/M/MV5BMzIxMDkxNDM2M15BMl5BanBnXkFtZTcwMDA5ODY1OQ@@._V1_SX300.jpg' } },
-//   { thumbnails: { small: 'https://m.media-amazon.com/images/M/MV5BOThhYmY3MjItMWFiZC00ZmRjLTg1NmQtMzdkMDJkYzc0ZDNhXkEyXkFqcGdeQXVyNzAwMjQwMTA@._V1_SX300.jpg' } },
-// ]
-
-
-// ['https://m.media-amazon.com/images/M/MV5BMzIxMDkxNDM2M15BMl5BanBnXkFtZTcwMDA5ODY1OQ@@._V1_SX300.jpg',
-//   'https://m.media-amazon.com/images/M/MV5BOThhYmY3MjItMWFiZC00ZmRjLTg1NmQtMzdkMDJkYzc0ZDNhXkEyXkFqcGdeQXVyNzAwMjQwMTA@._V1_SX300.jpg',
-//   'https://m.media-amazon.com/images/M/MV5BMzRjOTg1YWYtZTE0NC00MGI5LTlmNDAtMzllM2M1MmQ4N2ViXkEyXkFqcGdeQXVyNjczMzc5NzQ@._V1_SX300.jpg',
-//   'https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_SX300.jpg',
-//   'https://images-na.ssl-images-amazon.com/images/M/MV5BMzIxNzU4NjkwMV5BMl5BanBnXkFtZTgwNDU4NjM4MDE@._V1_SX300.jpg',
-// ];
 
 const mapStateToProps = state => ({
   allMedia: state.media.allMedia,
