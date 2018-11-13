@@ -6,6 +6,7 @@ import { fetchMediaById, searchMedia } from '../modules/media/actions';
 import Index from '../components/SearchBar/index';
 import ToggleButtonGroup from '../components/SearchBar/ToggleButtonGroup';
 import CoverDisplay from '../components/CoverDisplay/index';
+import ApplicationAnimationCover from '../components/ApplicationAnimationCover';
 
 export class HomePage extends React.Component {
   static propTypes = {
@@ -24,7 +25,7 @@ export class HomePage extends React.Component {
         small: PropTypes.string,
         large: PropTypes.string,
       }),
-      type: PropTypes.oneOf(['movie', 'tv-show']),
+      type: PropTypes.oneOf(['movie', 'series']),
     }),
     loading: PropTypes.bool.isRequired,
     error: PropTypes.string,
@@ -40,9 +41,12 @@ export class HomePage extends React.Component {
 
   onToggle = id => this.setState({ toggled: id });
 
+
   render() {
     // const { detailedMedia, loading, error } = this.props
-    return <main className="homepage">
+    return <>
+      <ApplicationAnimationCover/>
+      <main className="homepage">
       <Index onSubmit={this.onSearchSubmit}/>
       <ToggleButtonGroup
         toggled={this.state.toggled}
@@ -55,8 +59,9 @@ export class HomePage extends React.Component {
             content: 'TV Show',
           },
         ]}/>
-      <CoverDisplay media={this.props.allMedia} hasSearched={this.props.hasSearched}/>
-    </main>;
+        <CoverDisplay media={this.props.allMedia} hasSearched={this.props.hasSearched}/>
+    </main>
+    </>;
   }
 }
 

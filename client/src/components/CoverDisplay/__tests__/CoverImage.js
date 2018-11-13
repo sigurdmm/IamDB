@@ -1,10 +1,20 @@
 import { render } from 'enzyme';
+import { MemoryRouter } from 'react-router-dom';
 
 import CoverImage from '../CoverImage';
 
 describe('<CoverImage/>', () => {
   it('should render img, when link exists', () => {
-    const wrapper = render(<CoverImage title={'Title'} thumbnail="https://example.com/test.jpg"/>);
+    const wrapper = render(<MemoryRouter>
+      <CoverImage rating={5} title={'title'} thumbnail="https://example.com/test.jpg" id='1'/>
+    </MemoryRouter>);
+
+    expect(wrapper).toMatchSnapshot();
+  });
+  it('should render img, when link does not exist', () => {
+    const wrapper = render(<MemoryRouter>
+      <CoverImage rating={3} title={'title'} thumbnail={null} id='1'/>
+    </MemoryRouter>);
 
     expect(wrapper).toMatchSnapshot();
   });

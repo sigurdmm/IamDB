@@ -10,9 +10,11 @@ const initialState = {
     id: -1,
     name: '',
     description: '',
+    type: 'movie',
     actors: [],
+    thumbnails: {},
   },
-  loading: false,
+  loading: true,
   error: null,
   hasSearched: false,
 };

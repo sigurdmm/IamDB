@@ -4,21 +4,17 @@ import './App.less';
 
 import Routes from './Routes';
 
-import ApplicationAnimationCover from './components/ApplicationAnimationCover';
+const App = () => <div className="application application--light">
+  <Header title="Hello world" className="application__header">
+    <nav className="navigation">
+      <a href="#" className="navigation__link">Test</a>
+    </nav>
+  </Header>
+  <Routes/>
+  <footer className="application__footer">
+    Copyright 2018
+  </footer>
+</div>;
 
-const App = () => <>
-  <ApplicationAnimationCover/>
-  <div className="application application--light">
-    <Header title="Hello world" className="application__header">
-      <nav className="navigation">
-        <a href="#" className="navigation__link">Test</a>
-      </nav>
-    </Header>
-    <Routes/>
-    <footer className="application__footer">
-      Copyright 2018
-    </footer>
-  </div>
-</>;
 
 export default App;

@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MediaDirector/> should render director when director is set 1`] = `
+<h3>
+  🎬: Existing Director
+</h3>
+`;
