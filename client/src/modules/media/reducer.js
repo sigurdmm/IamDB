@@ -13,7 +13,7 @@ const initialState = {
     actors: [],
     thumbnails: {},
   },
-  loading: false,
+  loading: true,
   error: null,
 };
 
