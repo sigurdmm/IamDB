@@ -42,7 +42,7 @@ export default function mediaReducer(state = initialState, action) {
     case SEARCH_MEDIA_SUCCESS:
       return {
         ...state,
-        allMedia: action.media,
+        allMedia: action.media.results,
         loading: false,
       };
     case SEARCH_MEDIA_FAILED:

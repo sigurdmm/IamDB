@@ -77,7 +77,7 @@ const findActorDetails = async (actor) => {
   }
 
   actor.thumbnails = {
-    small: getImageUrl(person.profile_path),
+    small: person.profile_path ? getImageUrl(person.profile_path) : null,
     large: null
   };
   actor.popularity = person.popularity;

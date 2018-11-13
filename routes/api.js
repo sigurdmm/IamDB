@@ -8,7 +8,17 @@ const { schema, rootValue } = require('./graphql');
 router.use('', expressGraphql({
   schema,
   rootValue,
-  graphiql: true
+  graphiql: true,
+  formatError: (error) => {
+    console.error('Error in GraphQL query', error);
+
+    return {
+      message: error.message,
+      locations: error.locations,
+      stack: error.stack ? error.stack.split('\n') : [],
+      path: error.path
+    };
+  }
 }));
 
 /**
