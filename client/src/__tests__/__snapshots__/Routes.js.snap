@@ -8,6 +8,11 @@ exports[`<Router/> renders properly 1`] = `
       exact={true}
       path="/"
     />
+    <Route
+      component={[Function]}
+      exact={true}
+      path="/media/:id"
+    />
   </Switch>
 </BrowserRouter>
 `;

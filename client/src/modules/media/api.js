@@ -18,7 +18,13 @@ export const fetchMediaById = id => query(`
       rating
       type
       released
-      actors
+      actors {
+        id
+        name
+        thumbnails {
+          small
+        }
+      }
       director
       thumbnails {
         small

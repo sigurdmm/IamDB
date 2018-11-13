@@ -5,7 +5,8 @@ import './HomePage.less';
 import { fetchMediaById, searchMedia } from '../modules/media/actions';
 import SearchBar from '../components/SearchBar/index';
 import CoverDisplay from '../components/CoverDisplay/index';
-import FilterAndSort from '../components/FilterAndSort';
+import ToggleButtonGroup from '../components/SearchBar/ToggleButtonGroup';
+import ApplicationAnimationCover from '../components/ApplicationAnimationCover';
 
 export class HomePage extends React.Component {
   static propTypes = {
@@ -24,10 +25,11 @@ export class HomePage extends React.Component {
         small: PropTypes.string,
         large: PropTypes.string,
       }),
-      type: PropTypes.oneOf(['movie', 'tv-show']),
+      type: PropTypes.oneOf(['movie', 'series']),
     }),
     loading: PropTypes.bool.isRequired,
     error: PropTypes.string,
+    hasSearched: PropTypes.bool.isRequired,
   };
 
   state = { toggled: 0 };
@@ -39,12 +41,26 @@ export class HomePage extends React.Component {
 
   onToggle = id => this.setState({ toggled: id });
 
+
   render() {
-    return <main className="homepage">
+    return <>
+      <ApplicationAnimationCover/>
+      <main className="homepage">
       <SearchBar onSubmit={this.onSearchSubmit}/>
-      <FilterAndSort/>
-      <CoverDisplay media={this.props.allMedia}/>
-    </main>;
+      <ToggleButtonGroup
+        toggled={this.state.toggled}
+        onToggle={this.onToggle}
+        buttons={[
+          {
+            content: 'Movie',
+          },
+          {
+            content: 'TV Show',
+          },
+        ]}/>
+        <CoverDisplay media={this.props.allMedia} hasSearched={this.props.hasSearched}/>
+    </main>
+    </>;
   }
 }
 
@@ -52,6 +68,7 @@ const mapStateToProps = state => ({
   allMedia: state.media.allMedia,
   loading: state.media.loading,
   error: state.media.error,
+  hasSearched: state.media.hasSearched,
 });
 
 const actionsToProps = {

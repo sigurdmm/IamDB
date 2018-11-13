@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FilmPage/> should render properly 1`] = `
+<div
+  class="media__container"
+>
+  <div
+    class="information__container"
+  >
+    <div
+      class="mediaimage"
+    >
+      <img
+        class="image__item"
+        src="no-image-found.jpg"
+      />
+    </div>
+    <div>
+      <div
+        class="title__container"
+      >
+        <h2 />
+      </div>
+      <h3>
+        ⭐️: 0
+      </h3>
+      <h3>
+        🎥: movie
+      </h3>
+      <h3>
+        🎬: unknown
+      </h3>
+    </div>
+  </div>
+  <div
+    class="description__container"
+  >
+    <h2>
+      Description
+    </h2>
+    <p />
+  </div>
+  <div>
+    <h2>
+      Actors
+    </h2>
+    <div
+      class="coverdisplay"
+    />
+  </div>
+</div>
+`;

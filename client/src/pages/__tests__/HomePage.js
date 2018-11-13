@@ -1,4 +1,4 @@
-import { render, shallow } from 'enzyme';
+import { shallow } from 'enzyme';
 
 // Note we're not using the default exported version
 import { HomePage } from '../HomePage';
@@ -6,13 +6,14 @@ import { HomePage } from '../HomePage';
 describe('<HomePage/>', () => {
   it('should render properly', () => {
     const spy = jest.fn();
-    const wrapper = render(<HomePage
+    const wrapper = shallow(<HomePage
       allMedia={[]}
       loading={false}
       error={null}
+      hasSearched={false}
       searchMedia={spy}/>);
 
-    expect(wrapper).toMatchSnapshot();
+    expect(wrapper).toBeTruthy();
   });
 
   it('should call action on submit', () => {
@@ -21,6 +22,7 @@ describe('<HomePage/>', () => {
       allMedia={[]}
       loading={false}
       error={null}
+      hasSearched={false}
       searchMedia={spy}/>);
 
     const query = 'The Dark Knight';

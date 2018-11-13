@@ -10,10 +10,13 @@ const initialState = {
     id: -1,
     name: '',
     description: '',
+    type: 'movie',
     actors: [],
+    thumbnails: {},
   },
-  loading: false,
+  loading: true,
   error: null,
+  hasSearched: false,
 };
 
 export default function mediaReducer(state = initialState, action) {
@@ -24,6 +27,7 @@ export default function mediaReducer(state = initialState, action) {
         // Initial media object, with the requesting id
         detailedMedia: Object.assign(initialState.detailedMedia, { id: action.media.id }),
         loading: true,
+        hasSearched: true,
       };
     case FETCH_MEDIA_DETAILS_SUCCESS:
       return {
@@ -52,6 +56,7 @@ export default function mediaReducer(state = initialState, action) {
     case SEARCH_MEDIA_REQUESTED:
       return {
         ...state,
+        hasSearched: true,
         loading: true,
       };
     default:

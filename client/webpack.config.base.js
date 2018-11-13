@@ -14,6 +14,7 @@ const config = {
   context: __dirname,
   output: {
     path: BUILD_DIR,
+    publicPath: '/',
     filename: `${STATIC_OUT_DIR}/js/[name].bundle.js`
   },
   module: {

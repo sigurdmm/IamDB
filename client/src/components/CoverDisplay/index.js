@@ -6,17 +6,27 @@ import CoverImage from './CoverImage';
 export default class CoverDisplay extends PureComponent {
   static propTypes = {
     media: PropTypes.array,
-  };
-
-  static defaultProps = {
-    media: [],
+    hasSearched: PropTypes.bool.isRequired,
   };
 
   render() {
+    const { media } = this.props;
+
+    if (!this.props.hasSearched) {
+      return null;
+    }
+    if (media === null) {
+      return <p className='coverdisplay__error'>NOTHING FOUND</p>;
+    }
+
     return <div className='coverdisplay'>
-      { this.props.media && this.props.media.length > 0
-        ? this.props.media.map((cover, i) => <CoverImage link={cover.thumbnails.small} key={`cover-${i}`} />)
-        : <p className='coverdisplay__error'>NOTHING FOUND</p>}
+      {media.map((cover, i) => <CoverImage
+        thumbnail={cover.thumbnails ? cover.thumbnails.small : null}
+        title={cover.name}
+        rating={cover.rating}
+        id={cover.id}
+        key={`cover-${i}`}/>)
+      }
     </div>;
   }
 }
