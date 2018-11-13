@@ -9,18 +9,20 @@ import MediaImage from './MediaImage';
 
 const InformationSection = ({ details }) => (
   <div className='information__container'>
-        <MediaImage image={details.thumbnails}/>
+    <MediaImage image={details.thumbnails ? details.thumbnails.small : null}/>
     <div>
-        <Title title={details.name}/>
-        <ImdbRating rating={details.rating}/>
-        <MediaType type={details.type}/>
-        <MediaDirector director={details.director}/>
-        </div>
+      <Title title={details.name}/>
+      <ImdbRating rating={details.rating}/>
+      <MediaType type={details.type}/>
+      <MediaDirector director={details.director}/>
     </div>
+  </div>
 );
 
 InformationSection.propTypes = {
-  details: PropTypes.shape.isRequired,
+  details: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default InformationSection;
