@@ -103,6 +103,8 @@ const saveActor = async (media) => {
 
     actor = await findActorDetails(media.actors[i]);
 
+    // Since saving happens async, can we risk duplicates,
+    // which throws errors.
     try {
       await actor.save();
     } catch(err) {
@@ -124,6 +126,8 @@ const saveActor = async (media) => {
  * Asks external services, like IMDB and TMDB,
  * for a certain movie or tv-show.
  * which it then will attempt to import into the database.
+ * @param {string} query Same search query as on searchMedia
+ * @return {object} The media details fetched from IMDB and TMDB
  * */
 async function fetchAndSaveMedia(query) {
   const imdbMedia = await searchByName(query);
@@ -199,7 +203,9 @@ const searchMedia = async ({ query, offset = 0, limit = 20, sortOn = null, sortD
   // Attempt to import from external sources
   await fetchAndSaveMedia(query);
 
-  // Do the search again
+  // Do the search again.
+  // This is to ensure the ranking and matching is deterministic
+  // (search ranking from imdb is different from our database)
   foundMedia = await Media.textSearch(
     query,
     offset,
