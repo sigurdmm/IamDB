@@ -92,10 +92,12 @@ const findActorDetails = async (actor) => {
  * */
 const saveActor = async (media) => {
   for (let i = 0; i < media.actors.length; i += 1) {
-    let actor = await Actor.findOne({ name: media.actors[0].name });
+    let actor = await Actor.findOne({ name: media.actors[i].name });
 
-    // Actor already exists. Skipping
+    // Actor already exists, jump to next actor
     if (actor !== null) {
+      // Reassign to assure _id is correct
+      media.actors[i] = actor;
       continue;
     }
 
