@@ -7,7 +7,7 @@ const CoverImage = ({ thumbnail, title, rating }) => <div className='cover'>
   <img className='cover__thumbnail' src={thumbnail}/>
   <div className='cover__overlay'>
     <div className='cover__overlay__title'>{title}</div>
-    <div className='cover__overlay__rating'>{rating}</div>
+    <div className='cover__overlay__rating'>{rating}/10</div>
   </div>
 </div>;
 
