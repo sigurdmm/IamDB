@@ -2,34 +2,14 @@ const mongoose = require('mongoose');
 
 const ActorSchema = new mongoose.Schema({
   name: { type: String, required: true, unique: true },
+  thumbnails: {
+    small: String,
+    large: String
+  },
+  popularity: Number,
 });
 
 ActorSchema.index({ name: 'text' });
-
-/**
- * Will first attempt to find an actor based on the query,
- * or if not create an instance
- * */
-ActorSchema.statics.findOneOrCreate = async function findOneOrCreate(query, actor) {
-  let foundActor = await this.findOne(query).exec();
-
-  if (foundActor !== null) {
-    return foundActor;
-  }
-  try {
-    await actor.save();
-  } catch (e) {
-    console.error('Failed to create actor', e);
-    // Actor was actually inserted somewhere else
-    if (e.message.startsWith('E11000')) {
-      return foundActor;
-    }
-
-    throw e;
-  }
-
-  return actor;
-};
 
 ActorSchema.statics.textSearch = async function textSearch(query, offset = 0, limit = 100) {
   return this

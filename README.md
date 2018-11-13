@@ -1,0 +1,175 @@
+Media Searcher
+===
+
+> Merk at produksjonsapplikasjonen er tilgjengelig på `http://it2810-20.idi.ntnu.no/`, og ikke `http://it2810-20.idi.ntnu.no/prosjekt4`. Prosjekt 2 kan fortsatt aksesseres på `http://it2810-20.idi.ntnu.no/prosjekt2`
+
+# Komme i gang
+
+## Installer dependencies
+
+1. **back-end** `npm install`
+2. **front-end** `cd client && npm install`
+
+## Bygge front-end
+
+1. `cd client` (om du ikke allerede er der)
+2. `npm run build` eller `npm run build:prod` for produksjonspakkene
+
+> Alternativt kan du også i roten av prosjektet kalle `npm run build --prefix './client'`, for å bygge front-end
+
+## Starte serveren
+
+Her er det viktig at du har Docker installert på systemet ditt. Bruker du windows kan dette være litt problematisk, da dette krever Hyper-V.
+
+1. `docker-compose up`. Dette kan ta litt tid første gangen, siden den skal bygge hele prosjektet, og hente ned mongodb
+2. Besøk siden på `localhost:3000`
+
+> Docker compose vil lete etter filen `docker-compose.yml`, som inneholder en spesifikasjon på hvordan vi vil at applikasjonen skal se ut og hva den trenger. Det er også mulig å bruke egendefinerte navn, men da må du spesifisere dette til docker-compose: `docker-compose -f <ditt filnavn> up`.
+
+### Starte serveren uten docker
+
+Merk at det skal være mulig å bare kjøre serveren ved hjelp av `npm`, da vi hovedsakelig bruker docker-compose til å enkelt koble sammen back-end og databasen. Men dette er lite testet og krever noden manuelle steg fra din side
+
+1. Start mongodb. Se guides for hvordan dette gjøres på ditt OS. MongoDB bør være tilgjengelig på localhost, uten noe form for autentisering.
+2. Påse at du har nodejs versjon som er større eller lik versjon `v8.9.1` (vi brukes `ES6` syntaks og `async/await`). Tidligere versjoner kan fungere, men har ikke blitt testet.
+3. Start serveren ved å kjøre `OMDB_API_KEY=a7b507e7 node bin/www`. Første kommandoen sette kun miljøvariabelen `OMDB_API_KEY`, som er nødvendig for å importere IMDB data.
+4. Serveren skal nå vere tilgjengelig på samme adresse som over.
+
+# Prosjektstruktur
+
+Prosjektet skiller seg en del ut i fra de React applikasjonene vi har sett i kurset. Den største sepparatoren er at vi ikke har brukt `create-react-app` for å bootstrappe front-end, men i stedet har vi satt opp manuelle konfigurasjoner i webpack, sammen med Babel 7, for å transpilere React kode til vanlig ECMAScript 5 syntaks.
+
+Det er flere grunner til dette valget akkurat dette valget, men de største grunnen til dette valget er:
+
+* Gir oss større kontroll på prosjektet, og gjør oss ikke avhengige av at create-react-app for å oppdatere tredjepartsmoduler.
+* Kan gjøre applikasjonen mindre i størrelse og kompleksitet, ved å eliminere all boiler plate kode som create-react-app legger til i bakgrunnen.
+* Gir oss en betydelig dypere forståelse av hvordan en React applikasjon fungerer
+* Ville separere back-end og front-end, men fortsatt kunne aksessere begge applikasjoner på samme domene/host. Unngår også at vi må håndtere [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) for å snakke med back-end fra front-end.
+
+## Mappestruktur
+
+Mappestrukturen vil nok ved første øyekast virke noe omfattende ut, men den er (forhåpentligvis) ganske logisk strukturert. 
+
+Prosjektet består egentlig av to separate prosjekter: front-end og back-end. All logikk som hører til front-end vil man finne i mappen `client/`. All logikk som ligger på roten av prosjektet hører da til back-end delen av prosjektet.
+
+```bash
+media-searcher
+| bin/www # Start scriptet for ExpressJS applikasjonen
+| client
+  | build
+    | # Sluttpunkt for filer som er bygd. Brukes av back-end
+  | config/jest
+  | node_modules
+    | # Dependencies for Front-end
+  | public
+  | src
+    | components
+      | # Forskjellige komponenter, som ikke er pages
+    | modules
+      | media
+        | # Redux moduler for media
+      | rootReducer.js # Kombinerer alle reducere
+      | rootSaga.js # Binder alle sagas til store
+    | pages
+      | # Komponenter som fungerer som sider i applikasjonen
+    | utils
+      | Forskjellige hjelpemoduler for applikasjonen
+    | App.js
+    | config.js
+    | index.js # Første endepunkt for applikasjonen
+    | Routes.js
+    | store.js # Setter opp Redux store
+    | testSetup.js
+| node_modules # Dependencies for back-end
+| ci
+  | # Scripts som brukes av Gitlab
+| docker
+  | # Dockerfiler og scripts som brukes av docker
+| data
+  | # Volumet for databasen. Brukes av docker, og er eksludert av git
+| models
+  | # Samling av Mongoose modeller
+| routes
+  | # Forskjellige back-end ruter/kontrollere. Definerer også logikken for gGraphQL
+| utils
+  | # Forskjellige hjelpemoduler for back-end
+app.js # Starten på business logikken til applikasjonen
+```
+
+### client/
+
+Client inneholder all logikk og moduler for front-end applikasjonen, og er egentlig fullstendig uavhengig av back-end. Det eneste punktet der front-end snaker med back-end, utenom ved API kall, er for å laste inn `index.html` og statiske filer.
+
+I filen `app.js` vil du se følgende:
+
+```js
+// app.js, linje: 49
+app.all('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client/build/index.html'));
+});
+``` 
+Denne ruten fanger alle forespørsler, som ennå ikke har blitt fanget, og sender tilbake filen `index.html`. Dette gjør at du får opp front-end grensesnittet når du besøker `localhost:3000` og de fleste undersidene på dette domenet.
+
+Men vi trenger også en rute for å kunne gi oss de nødvendige javascript og css filene. Dette gjør linjen:
+
+```js
+// app.js, linje: 24
+app.use('/static', express.static(path.join(__dirname, 'client/build/static')));
+```
+
+# GraphQL
+
+På prosjektet bestemte vi oss for å bruke GraphQL til å gjøre spørringer fra front-end til api-et. Dette lot oss enkelt definere konkrete spørringer, hva den aksepterte og hva den kunne returnere. I tillegg snakker GraphQL godt sammen med MongoDB, siden MongoDB i all enkelhet er JSON (egentlig BSON).
+
+Interaktiv versjon av GraphQL kan man finne på `localhost:3000/graphql`, som også er endepunktet som front-end vil kalle.
+
+Ruten og business-logikken for spørringen ligger i undermappen `routes/graphql/`.
+
+## Eksempel på spørring
+
+Eksempelet under viser hvordan man kan gjenomføre søk etter media (film/tv-serie), basert på en søkestreng.
+
+```javascript
+query($query: String!, $limit: Int = 50, $offset: Int = 0) {
+  searchMedia(query: $query, limit: $limit, offset: $offset) {
+    id
+    name
+    rating
+    director
+    actors {
+      id
+      name
+    }
+  }
+}
+
+# Variables
+{
+  "query": "The Dark knight",
+  "limit": 80,
+  "offset": 0
+}
+```
+
+# Deployment til produksjon
+
+Applikasjonen på produksjonsserveren ser litt annerledes ut, enn hva prosjektet etterspør. I stedet for Apache bruker vi heller Nginx, fordi denne er noe enklere å sette opp `reverse proxy` på, samt definere ekstra endepunkt, som `/prosjekt2`. Denne konfigurasjonen finner du på `/etc/nginx/sites-enabled/default`.
+
+Videre bruker vi også her Docker for å kjøre applikasjonen, slik at oppsettet på utviklingsoppsettet og produksjonoppsettet, var mest mulig "synkroniserte". I tillegg var det vesentlig enklere å starte og stoppe applikasjonen med dette oppsettet
+
+## Starte applikasjonen
+
+1. Påse at Nginx kjører: `sudo service ngnix status`
+2. `cd /var/www/html/prosjekt4`
+3. Installer moduler:
+  1. `sudo npm install`
+  2. `cd client && sudo npm install`
+4. Bygg front-end moduler: 
+  1. `cd client`
+  2. `sudo npm run build:prod`
+5. Start server og database `docker-compose -f docker-compose.production.yml up -d`. Pass på at du ikke er i undermappen `client/` når du kjører dette
+6. Docker vil nå bygge applikasjonen og starte den i bakgrunnen.
+7. Du kan verifisere at denne kjører ved å kalle `docker-compose ps` og hente ut logger ved å kalle `docker-compose logs`
+
+Applikasjonen vil etter dette være tilgjengelig på endepunktet `http://it2810-20.idi.ntnu.no/`. Internt på serveren kan du pinge applikasjonen på `localhost:3000`.
+

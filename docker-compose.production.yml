@@ -2,29 +2,33 @@ version: '3.4'
 
 services:
   app:
-    image: it2810-20/media-server-dev
+    image: it2810-20/media-server
+    restart: always
     build:
       context: .
       dockerfile: docker/Dockerfile.dev
-      target: development
     volumes:
     - .:/srv/app
-    command: ./docker/run_dev.sh
+    command: ./docker/run_production.sh
     ports:
     - "3000:3000"
     environment:
     - DB_HOST=mongo
-    - NODE_ENV=development
+    - NODE_ENV=production
     - PORT=3000
     - THEMOVIEDB_API_KEY=86eb3df764e812dc8aba77203bb4a2fc
     - OMDB_API_KEY=a7b507e7
   mongo:
+    restart: always
     image: mongo:3.2.21-jessie
     environment:
     - MONGO_DATA_DIR=/data/db
     - MONGO_LOG_DIR=/dev/null
     volumes:
-    - ./data/db:/data/db
+    - mongoproddata:/data/db
     ports:
     - "27017:27017"
     command: mongod --smallfiles --logpath=/dev/null # --quiet
+
+volumes:
+  mongoproddata:
