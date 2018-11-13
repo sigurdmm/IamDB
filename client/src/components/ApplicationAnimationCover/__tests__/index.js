@@ -7,12 +7,11 @@ describe('<ApplicationAnimationCover/>', () => {
     const wrapper = shallow(<ApplicationAnimationCover/>);
 
     const { style } = wrapper.props();
+    const coverImage = style.backgroundImage;
 
-    expect(style.backgroundImage.startsWith('background-image: ')).toBeTruthy();
+    expect(coverImage.length).toBeTruthy();
 
-    const coverUrl = style.backgroundImage.replace('background-image: ', '');
-
-    // After stripping the property, expect an url to exists
-    expect(coverUrl).toBeTruthy();
+    // Should contain the url function
+    expect(coverImage.includes('url(')).toBeTruthy();
   });
 });

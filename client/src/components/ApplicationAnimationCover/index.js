@@ -18,6 +18,6 @@ const selectRandomItem = list => list[Math.floor(Math.random() * list.length)];
 const ApplicationAnimationCover = props => <div
   {...props}
   className={`applicationanimationcover ${props.className || ''}`}
-  style={{ backgroundImage: `background-image: ${selectRandomItem(coverimages)}` }}/>;
+  style={{ backgroundImage: `url('${selectRandomItem(coverimages)}')` }}/>;
 
 export default ApplicationAnimationCover;
