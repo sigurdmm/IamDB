@@ -28,6 +28,7 @@ export class HomePage extends React.Component {
     }),
     loading: PropTypes.bool.isRequired,
     error: PropTypes.string,
+    hasSearched: PropTypes.bool.isRequired,
   };
 
   state = { toggled: 0 };
@@ -54,7 +55,7 @@ export class HomePage extends React.Component {
             content: 'TV Show',
           },
         ]}/>
-      <CoverDisplay media={this.props.allMedia}/>
+      <CoverDisplay media={this.props.allMedia} hasSearched={this.props.hasSearched}/>
     </main>;
   }
 }
@@ -75,6 +76,7 @@ const mapStateToProps = state => ({
   allMedia: state.media.allMedia,
   loading: state.media.loading,
   error: state.media.error,
+  hasSearched: state.media.hasSearched,
 });
 
 const actionsToProps = {
