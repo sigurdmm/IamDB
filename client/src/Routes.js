@@ -2,6 +2,8 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 // eslint-disable-next-line import/no-named-as-default
 import HomePage from './pages/HomePage';
+
+// eslint-disable-next-line import/no-named-as-default
 import FilmPage from './pages/FilmPage';
 
 const Routes = () => <BrowserRouter>

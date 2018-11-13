@@ -7,7 +7,7 @@ import CoverDisplay from '../components/CoverDisplay/index';
 import './FilmPage.less';
 
 
-class FilmPage extends React.Component {
+export class FilmPage extends React.Component {
   static propTypes = {
     match: PropTypes.shape({
       params: PropTypes.shape({
@@ -40,11 +40,13 @@ class FilmPage extends React.Component {
 
   render() {
     const { detailedMedia, loading, error } = this.props;
+
     if (loading) {
       return <div>
         Laster inn
       </div>;
     }
+
     if (error) {
       return <div className='error__container'>
         Kunne ikke finne informasjon
