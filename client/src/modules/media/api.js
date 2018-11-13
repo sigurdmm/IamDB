@@ -21,6 +21,9 @@ export const fetchMediaById = id => query(`
       actors {
         id
         name
+        thumbnails {
+          small
+        }
       }
       director
       thumbnails {
