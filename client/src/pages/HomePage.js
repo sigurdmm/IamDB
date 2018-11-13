@@ -28,6 +28,7 @@ export class HomePage extends React.Component {
     }),
     loading: PropTypes.bool.isRequired,
     error: PropTypes.string,
+    hasSearched: PropTypes.bool.isRequired,
   };
 
   state = { toggled: 0 };
@@ -54,27 +55,16 @@ export class HomePage extends React.Component {
             content: 'TV Show',
           },
         ]}/>
-      <CoverDisplay media={this.props.allMedia}/>
+      <CoverDisplay media={this.props.allMedia} hasSearched={this.props.hasSearched}/>
     </main>;
   }
 }
-
-// [{ thumbnails: { small: 'https://m.media-amazon.com/images/M/MV5BMzIxMDkxNDM2M15BMl5BanBnXkFtZTcwMDA5ODY1OQ@@._V1_SX300.jpg' } },
-//   { thumbnails: { small: 'https://m.media-amazon.com/images/M/MV5BOThhYmY3MjItMWFiZC00ZmRjLTg1NmQtMzdkMDJkYzc0ZDNhXkEyXkFqcGdeQXVyNzAwMjQwMTA@._V1_SX300.jpg' } },
-// ]
-
-
-// ['https://m.media-amazon.com/images/M/MV5BMzIxMDkxNDM2M15BMl5BanBnXkFtZTcwMDA5ODY1OQ@@._V1_SX300.jpg',
-//   'https://m.media-amazon.com/images/M/MV5BOThhYmY3MjItMWFiZC00ZmRjLTg1NmQtMzdkMDJkYzc0ZDNhXkEyXkFqcGdeQXVyNzAwMjQwMTA@._V1_SX300.jpg',
-//   'https://m.media-amazon.com/images/M/MV5BMzRjOTg1YWYtZTE0NC00MGI5LTlmNDAtMzllM2M1MmQ4N2ViXkEyXkFqcGdeQXVyNjczMzc5NzQ@._V1_SX300.jpg',
-//   'https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_SX300.jpg',
-//   'https://images-na.ssl-images-amazon.com/images/M/MV5BMzIxNzU4NjkwMV5BMl5BanBnXkFtZTgwNDU4NjM4MDE@._V1_SX300.jpg',
-// ];
 
 const mapStateToProps = state => ({
   allMedia: state.media.allMedia,
   loading: state.media.loading,
   error: state.media.error,
+  hasSearched: state.media.hasSearched,
 });
 
 const actionsToProps = {

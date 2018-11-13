@@ -41,14 +41,5 @@ exports[`<HomePage/> should render properly 1`] = `
       TV Show
     </button>
   </div>
-  <div
-    class="coverdisplay"
-  >
-    <p
-      class="coverdisplay__error"
-    >
-      NOTHING FOUND
-    </p>
-  </div>
 </main>
 `;

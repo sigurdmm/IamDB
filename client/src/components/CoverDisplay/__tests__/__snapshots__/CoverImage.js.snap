@@ -2,10 +2,25 @@
 
 exports[`<CoverImage/> should render img, when link exists 1`] = `
 <div
-  class="coverdisplay__gridelement"
+  class="cover"
 >
   <img
+    class="cover__thumbnail"
     src="https://example.com/test.jpg"
   />
+  <div
+    class="cover__overlay"
+  >
+    <div
+      class="cover__overlay__title"
+    >
+      Title
+    </div>
+    <div
+      class="cover__overlay__rating"
+    >
+      /10
+    </div>
+  </div>
 </div>
 `;
