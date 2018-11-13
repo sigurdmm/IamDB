@@ -10,6 +10,7 @@ describe('<HomePage/>', () => {
       allMedia={[]}
       loading={false}
       error={null}
+      hasSearched={false}
       searchMedia={spy}/>);
 
     expect(wrapper).toBeTruthy();
@@ -21,6 +22,7 @@ describe('<HomePage/>', () => {
       allMedia={[]}
       loading={false}
       error={null}
+      hasSearched={false}
       searchMedia={spy}/>);
 
     const query = 'The Dark Knight';

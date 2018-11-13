@@ -22,13 +22,13 @@ exports[`<FilmPage/> should render properly 1`] = `
         <h2 />
       </div>
       <h3>
-        Imdb rating: 0
+        ⭐️: 0
       </h3>
       <h3>
-        Type of media: movie
+        🎥: movie
       </h3>
       <h3>
-        Director: unknown
+        🎬: unknown
       </h3>
     </div>
   </div>
@@ -46,13 +46,7 @@ exports[`<FilmPage/> should render properly 1`] = `
     </h2>
     <div
       class="coverdisplay"
-    >
-      <p
-        class="coverdisplay__error"
-      >
-        NOTHING FOUND
-      </p>
-    </div>
+    />
   </div>
 </div>
 `;

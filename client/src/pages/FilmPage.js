@@ -28,7 +28,7 @@ export class FilmPage extends React.Component {
         small: PropTypes.string,
         large: PropTypes.string,
       }),
-      type: PropTypes.oneOf(['movie', 'tv-show']),
+      type: PropTypes.oneOf(['movie', 'series']),
     }),
     loading: PropTypes.bool,
     error: PropTypes.string,
@@ -61,7 +61,7 @@ export class FilmPage extends React.Component {
       </div>
       <div>
         <h2>Actors</h2>
-        <CoverDisplay media={detailedMedia.actors}/>
+        <CoverDisplay hasSearched={true} media={detailedMedia.actors}/>
       </div>
     </div>;
   }

@@ -2,6 +2,6 @@
 
 exports[`<MediaType/> should render type when type is set 1`] = `
 <h3>
-  Type of media: Existing type
+  🎥: Existing type
 </h3>
 `;

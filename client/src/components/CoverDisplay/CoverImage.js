@@ -3,14 +3,27 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import defaultImage from '../InformationSection/no-image-found.jpg';
 
-const CoverImage = ({ link, id }) => <div className='coverdisplay__gridelement'>
+import './CoverImage.less';
+
+const CoverImage = ({
+  thumbnail,
+  title,
+  rating,
+  id,
+}) => <div className='cover'>
   <Link to={`/media/${id}`}>
-    <img src={link || defaultImage}/>
+    <img className='cover__thumbnail' src={thumbnail || defaultImage}/>
   </Link>
+  <div className='cover__overlay'>
+    <div className='cover__overlay__title'>{title}</div>
+    <div className='cover__overlay__rating'>{rating}/10</div>
+  </div>
 </div>;
 
 CoverImage.propTypes = {
-  link: PropTypes.string,
+  thumbnail: PropTypes.string,
+  title: PropTypes.string.isRequired,
+  rating: PropTypes.number,
   id: PropTypes.string,
 };
 

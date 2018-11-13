@@ -21,13 +21,13 @@ exports[`<InformationSection/> should render properly 1`] = `
       </h2>
     </div>
     <h3>
-      Imdb rating: 8.8
+      ⭐️: 8.8
     </h3>
     <h3>
-      Type of media: movie
+      🎥: movie
     </h3>
     <h3>
-      Director: director
+      🎬: director
     </h3>
   </div>
 </div>

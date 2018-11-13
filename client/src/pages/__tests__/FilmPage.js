@@ -10,6 +10,7 @@ const mockedDetails = {
   director: '',
   type: 'movie',
   thumbnails: {},
+  actors: [],
 };
 
 describe('<FilmPage/>', () => {

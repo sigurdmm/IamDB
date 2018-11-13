@@ -2,28 +2,58 @@
 
 exports[`<CoverImage/> should render img, when link does not exist 1`] = `
 <div
-  class="coverdisplay__gridelement"
+  class="cover"
 >
   <a
     href="/media/1"
   >
     <img
+      class="cover__thumbnail"
       src="no-image-found.jpg"
     />
   </a>
+  <div
+    class="cover__overlay"
+  >
+    <div
+      class="cover__overlay__title"
+    >
+      title
+    </div>
+    <div
+      class="cover__overlay__rating"
+    >
+      3/10
+    </div>
+  </div>
 </div>
 `;
 
 exports[`<CoverImage/> should render img, when link exists 1`] = `
 <div
-  class="coverdisplay__gridelement"
+  class="cover"
 >
   <a
     href="/media/1"
   >
     <img
+      class="cover__thumbnail"
       src="https://example.com/test.jpg"
     />
   </a>
+  <div
+    class="cover__overlay"
+  >
+    <div
+      class="cover__overlay__title"
+    >
+      title
+    </div>
+    <div
+      class="cover__overlay__rating"
+    >
+      5/10
+    </div>
+  </div>
 </div>
 `;
