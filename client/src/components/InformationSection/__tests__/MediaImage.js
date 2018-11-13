@@ -10,12 +10,12 @@ const mockedImage = {
 
 describe('<MediaImage/>', () => {
   it('should render img, when link exists', () => {
-    const wrapper = render(<MediaImage image={mockedImage.thumbnails}/>);
+    const wrapper = render(<MediaImage image={mockedImage.thumbnails.small}/>);
 
     expect(wrapper).toMatchSnapshot();
   });
   it('should render default img, when link does not exist ', () => {
-    const wrapper = render(<MediaImage image={mockedImage.noThumbnails}/>);
+    const wrapper = render(<MediaImage image={mockedImage.noThumbnails.small}/>);
 
     expect(wrapper).toMatchSnapshot();
   });
