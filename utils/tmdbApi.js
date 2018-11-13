@@ -14,11 +14,8 @@ const getKey = () => {
 const searchPerson = async (query) => {
   const key = getKey();
   const url = `${personUrl}?api_key=${key}&query=${encodeURIComponent(query)}`;
-  console.debug(`TMDB url: ${url}`);
 
   const res = await axios.get(url);
-  console.debug(`Status: ${res.status}`);
-
   if (!res || !res.data) {
     return null;
   }

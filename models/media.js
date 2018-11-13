@@ -17,17 +17,45 @@ const MediaSchema = new mongoose.Schema({
 
 MediaSchema.index({ name: 'text', director: 'text' });
 
-MediaSchema.statics.textSearch = async function textSearch(query, offset = 0, limit = 100) {
-  return this
+MediaSchema.statics.textSearch = async function textSearch(query, offset = 0, limit = 100, sort = null, type = null) {
+  const search = { $text: { $search: query } };
+
+  if (type) {
+    console.info(`Filter on: ${type}`);
+    search.type = type;
+  }
+
+  const actuallLimit = limit < 100 ? limit : 100;
+
+  const searchBuilder = this
     // Search uses MongoDB's build in features, such as stopword removing and stemming
     // https://docs.mongodb.com/manual/reference/operator/query/text/#match-operation
-    .find({ $text: { $search: query } })
+    .find(search)
     // Fill inn relation with actors
     .populate('actors')
     .skip(offset)
     // Allow modification of limit, but no more than 100 at a time
-    .limit(limit < 100 ? limit : 100)
-    .exec();
+    .limit(actuallLimit);
+
+  if (sort) {
+    console.info(`Sorting on : ${sort.field} ${sort.direction}`);
+    searchBuilder.sort({ [sort.field]: sort.direction });
+  }
+
+  // Count is used for in the metadata,
+  // to tell the client how many matches the query gave
+  const total = await this.count(search).exec();
+  const results = await searchBuilder.exec();
+
+  // Format the results, to match the GraphQL type
+  return {
+    sort,
+    offset,
+    total,
+    type,
+    results,
+    limit: actuallLimit
+  };
 };
 
 const Media = mongoose.model('Media', MediaSchema);
