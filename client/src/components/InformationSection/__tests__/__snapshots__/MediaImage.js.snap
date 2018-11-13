@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MediaImage/> should render default img, when link does not exist  1`] = `
+<div
+  class="mediaimage"
+>
+  <img
+    class="image__item"
+    src="no-image-found.jpg"
+  />
+</div>
+`;
+
+exports[`<MediaImage/> should render img, when link exists 1`] = `
+<div
+  class="mediaimage"
+>
+  <img
+    class="image__item"
+    src="https://example.com/test.jpg"
+  />
+</div>
+`;

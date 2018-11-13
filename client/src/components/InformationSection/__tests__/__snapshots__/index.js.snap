@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<InformationSection/> should render properly 1`] = `
+<div
+  class="information__container"
+>
+  <div
+    class="mediaimage"
+  >
+    <img
+      class="image__item"
+      src="image"
+    />
+  </div>
+  <div>
+    <div
+      class="title__container"
+    >
+      <h2>
+        title
+      </h2>
+    </div>
+    <h3>
+      Imdb rating: 8.8
+    </h3>
+    <h3>
+      Type of media: movie
+    </h3>
+    <h3>
+      Director: director
+    </h3>
+  </div>
+</div>
+`;

@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ImdbRating/> should render rating when rating is set 1`] = `
+<h3>
+  Imdb rating: 8.8
+</h3>
+`;
