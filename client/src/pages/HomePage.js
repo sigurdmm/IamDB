@@ -39,12 +39,8 @@ export class HomePage extends React.Component {
   };
 
   onSelectorChange = (value) => {
-    console.log(this.state.selectedMediaType);
     this.setState({ selectedMediaType: value });
   };
-
-  onToggle = id => this.setState({ toggled: id });
-
 
   render() {
     return <>
