@@ -16,7 +16,8 @@ export default class ToggleButtonGroup extends PureComponent {
   static propTypes = {
     toggled: PropTypes.number.isRequired,
     buttons: PropTypes.arrayOf(PropTypes.shape({
-      content: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
+      value: PropTypes.string.isRequired,
     })),
     onToggle: PropTypes.func.isRequired,
   };
@@ -33,7 +34,7 @@ export default class ToggleButtonGroup extends PureComponent {
       {this.props.buttons.map((button, i) => <ToggleButton
         key={`togglebutton-${i}`}
         active={this.props.toggled === i}
-        onClick={this.onChange(i)}>{button.content}</ToggleButton>)}
+        onClick={this.onChange(i)}>{button.label}</ToggleButton>)}
     </div>;
   }
 }

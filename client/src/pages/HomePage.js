@@ -31,16 +31,14 @@ export class HomePage extends React.Component {
     hasSearched: PropTypes.bool.isRequired,
   };
 
-  state = { selectedMediaType: { value: 'all', label: 'All' } };
+  state = { toggled: 0 };
 
   onSearchSubmit = (value) => {
     console.info(value);
     this.props.searchMedia(value, this.state.toggled);
   };
 
-  onSelectorChange = (value) => {
-    this.setState({ selectedMediaType: value });
-  };
+  onToggle = id => this.setState({ toggled: id });
 
   render() {
     return <>
@@ -48,8 +46,9 @@ export class HomePage extends React.Component {
       <main className="homepage">
       <SearchBar
         onSubmit={this.onSearchSubmit}
-        onSelectorChange={this.onSelectorChange}
-        selectedMediaType={this.state.selectedMediaType}/>
+        onToggle={this.onToggle}
+        toggled={this.state.toggled}
+      />
       <CoverDisplay media={this.props.allMedia} hasSearched={this.props.hasSearched}/>
     </main>
     </>;

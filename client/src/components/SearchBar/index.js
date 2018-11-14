@@ -8,13 +8,20 @@ import {
 import './index.less';
 import PropTypes from 'prop-types';
 import icon from './search.svg';
-import MediaTypeSelector from './MediaTypeSelector';
+import ToggleButtonGroup from './ToggleButtonGroup';
 
-const SearchBar = ({ onSubmit, onSelectorChange, selectedMediaType }) => <div>
-  <MediaTypeSelector
-    onSelectorChange={onSelectorChange}
-    selectedMediaType={selectedMediaType}/>
-  <Formik
+const SearchBar = ({ onSubmit, toggled, onToggle }) => <div className='filterandsearch'>
+
+      <ToggleButtonGroup
+        toggled={toggled}
+        onToggle={onToggle}
+        buttons={[
+          { label: 'All', value: 'all' },
+          { label: 'Movies', value: 'movies' },
+          { label: 'TV Shows', value: 'series' },
+        ]}
+      />
+      <Formik
       initialValues={{ search: '' }}
       validate={(values) => {
         const errors = {};
@@ -45,11 +52,8 @@ const SearchBar = ({ onSubmit, onSelectorChange, selectedMediaType }) => <div>
 
 SearchBar.propTypes = {
   onSubmit: PropTypes.func.isRequired,
-  onSelectorChange: PropTypes.func.isRequired,
-  selectedMediaType: PropTypes.shape({
-    value: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired,
-  }).isRequired,
+  onToggle: PropTypes.func.isRequired,
+  toggled: PropTypes.number.isRequired,
 };
 
 export default SearchBar;
