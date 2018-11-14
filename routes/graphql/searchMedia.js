@@ -77,7 +77,7 @@ const findActorDetails = async (actor) => {
   }
 
   actor.thumbnails = {
-    small: getImageUrl(person.profile_path),
+    small: person.profile_path ? getImageUrl(person.profile_path) : null,
     large: null
   };
   actor.popularity = person.popularity;
@@ -103,6 +103,8 @@ const saveActor = async (media) => {
 
     actor = await findActorDetails(media.actors[i]);
 
+    // Since saving happens async, can we risk duplicates,
+    // which throws errors.
     try {
       await actor.save();
     } catch(err) {
@@ -120,22 +122,14 @@ const saveActor = async (media) => {
   return media;
 };
 
-const searchMedia = async ({ query, offset = 0, limit = 20 }) => {
-  console.info(`[Search Media] query: ${query}, offset: ${offset}, limit: ${limit}`);
-  if (query.length < 3) {
-    throw new Error(`Search phrase is too short. Must be minimum 3 chars long, your's is ${query.length}`);
-  }
-
-  const foundMedia = await Media.textSearch(query, offset, limit);
-
-  // Exit early if we found some data, or we risked
-  // filtering out our stored data
-  if (foundMedia.length > 2 || offset > 0 || limit < 1) {
-    return foundMedia;
-  }
-
-  console.debug('Couldn\'t find any media locally, asking IMDB for data');
-
+/**
+ * Asks external services, like IMDB and TMDB,
+ * for a certain movie or tv-show.
+ * which it then will attempt to import into the database.
+ * @param {string} query Same search query as on searchMedia
+ * @return {object} The media details fetched from IMDB and TMDB
+ * */
+async function fetchAndSaveMedia(query) {
   const imdbMedia = await searchByName(query);
 
   if (!imdbMedia || !imdbMedia.results) {
@@ -171,8 +165,60 @@ const searchMedia = async ({ query, offset = 0, limit = 20 }) => {
     }
   }
 
-  // Return the stored media
   return mediaModels;
+}
+
+/**
+ * Searches after a certain type of media, based on the given fields.
+ * If nothing is found, will it ask external sources for the given data
+ * @return {object} the result object, containing the results and metadata
+ * */
+const searchMedia = async ({ query, offset = 0, limit = 20, sortOn = null, sortDirection = 1, type = null }) => {
+  console.info(`[Search Media] query: ${query}, offset: ${offset}, limit: ${limit}`);
+  if (query.length < 3) {
+    throw new Error(`Search phrase is too short. Must be minimum 3 chars long, your's is ${query.length}`);
+  }
+
+  let foundMedia = await Media.textSearch(
+    query,
+    offset,
+    limit,
+    {
+      field: sortOn,
+      direction: sortDirection
+    },
+    type
+  );
+
+  const { results } = foundMedia;
+
+  // Exit early if we found some data, or we risked
+  // filtering out our stored data
+  if (results.length > 2 || offset > 0 || limit <= 2) {
+    return foundMedia;
+  }
+
+  console.debug('Couldn\'t find any media locally, asking IMDB for data');
+
+  // Attempt to import from external sources
+  await fetchAndSaveMedia(query);
+
+  // Do the search again.
+  // This is to ensure the ranking and matching is deterministic
+  // (search ranking from imdb is different from our database)
+  foundMedia = await Media.textSearch(
+    query,
+    offset,
+    limit,
+    {
+      field: sortOn,
+      direction: sortDirection
+    },
+    type
+  );
+
+  // Return the stored media
+  return foundMedia;
 };
 
 module.exports = searchMedia;

@@ -34,15 +34,17 @@ export const fetchMediaById = id => query(`
   }
 `, { id });
 
-export const searchMediaByQuery = (queryString, type, limit, offset) => query(`
-  query($query: String!, $limit: Int = 50, $offset: Int = 0) {
-    searchMedia(query: $query, limit: $limit, offset: $offset) {
-      id
-      name
-      rating
-      type
-      thumbnails {
-        small
+export const searchMediaByQuery = (queryString, type, limit, offset, sort = {}) => query(`
+  query($query: String!, $limit: Int = 50, $offset: Int = 0, $sortOn: String = "rating", $sortDirection: Int = 1, $type: String = null) {
+    searchMedia(query: $query, limit: $limit, offset: $offset, sortOn: $sortOn, sortDirection: $sortDirection, type: $type) {
+      total
+      results {
+        id
+        name
+        rating
+        thumbnails {
+          small
+        }
       }
     }
   }
@@ -51,4 +53,6 @@ export const searchMediaByQuery = (queryString, type, limit, offset) => query(`
   limit,
   offset,
   query: queryString,
+  sortOn: sort.field || null,
+  sortDirection: sort.direction || 1,
 });
