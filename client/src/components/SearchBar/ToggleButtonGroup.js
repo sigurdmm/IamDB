@@ -15,8 +15,8 @@ ToggleButton.propTypes = {
 export default class ToggleButtonGroup extends PureComponent {
   static propTypes = {
     toggled: PropTypes.shape({
-      label: PropTypes.string.isRequired,
-      value: PropTypes.string.isRequired,
+      label: PropTypes.string,
+      value: PropTypes.string,
     }),
     buttons: PropTypes.arrayOf(PropTypes.shape({
       label: PropTypes.string.isRequired,
@@ -29,7 +29,8 @@ export default class ToggleButtonGroup extends PureComponent {
     /**
      * Don't change the toggled state if toggled state is already set to the clicked button
      */
-    if (button === this.props.toggled) {
+    if (button.value === this.props.toggled.value) {
+      console.log('break');
       return;
     }
     this.props.onToggle(button);

@@ -54,8 +54,8 @@ SearchBar.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   onToggle: PropTypes.func.isRequired,
   toggled: PropTypes.shape({
-    label: PropTypes.string.isRequired,
-    value: PropTypes.string.isRequired,
+    label: PropTypes.string,
+    value: PropTypes.string,
   }),
   buttons: PropTypes.arrayOf(PropTypes.shape({
     label: PropTypes.string.isRequired,

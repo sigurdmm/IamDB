@@ -52,6 +52,10 @@ export class HomePage extends React.Component {
 
   onToggle = button => this.setState({ toggled: button });
 
+  componentDidMount() {
+    this.setState({ toggled: toggleButtons[0] });
+  }
+
   render() {
     return <>
       <ApplicationAnimationCover/>
@@ -67,6 +71,7 @@ export class HomePage extends React.Component {
     </>;
   }
 }
+
 
 const mapStateToProps = state => ({
   allMedia: state.media.allMedia,
