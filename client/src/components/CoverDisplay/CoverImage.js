@@ -6,7 +6,6 @@ import defaultImage from '../InformationSection/no-image-found.jpg';
 import './CoverImage.less';
 
 const getRating = (rating) => {
-  console.log(rating);
   if (typeof (rating) !== 'undefined') {
     return <div className='cover__overlay__rating'>{rating}/10</div>;
   }
