@@ -47,10 +47,10 @@ export class HomePage extends React.Component {
 
   state = { toggled: 0 };
 
-  onSearchSubmit = (value) => {
-    console.info(value);
+  onSearchSubmit = (query) => {
     const offset = this.props.offset || 0;
-    this.props.searchMedia(value, null, 3, offset);
+    this.props.updateSearchFields({ query });
+    this.props.searchMedia(query, null, 3, offset);
   };
 
   onToggle = id => this.setState({ toggled: id });
@@ -58,7 +58,18 @@ export class HomePage extends React.Component {
   /**
    * Updates the search fields with a new offset value
    * */
-  doPagination = newOffset => this.props.updateSearchFields({ offset: newOffset });
+  doPagination = (newOffset) => {
+    const {
+      limit,
+      query,
+      type,
+    } = this.props;
+
+    // Ensure the metadata is updated
+    this.props.updateSearchFields({ offset: newOffset });
+    // Do the actual search
+    this.props.searchMedia(query, type, limit, newOffset);
+  };
 
   render() {
     const {
@@ -102,6 +113,7 @@ const mapStateToProps = state => ({
   total: state.media.total,
   query: state.media.query,
   sort: state.media.sort,
+  type: state.media.type,
   offset: state.media.offset,
   limit: state.media.limit,
   loading: state.media.loading,

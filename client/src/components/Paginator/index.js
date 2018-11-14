@@ -21,7 +21,11 @@ const Paginator = (props) => {
                      totalItemsCount={total}
                      itemsCountPerPage={limit}
                      pageRangeDisplayed={pageCount}
-                     onChange={page => onPagination(pageToOffset(page, limit))}/>;
+                     onChange={page => onPagination(pageToOffset(page, limit))}
+                     prevPageText="prev"
+                     nextPageText="next"
+                     firstPageText="first"
+                     lastPageText="last"/>;
 };
 
 Paginator.propTypes = {
