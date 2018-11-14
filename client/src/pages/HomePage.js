@@ -3,10 +3,15 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import './HomePage.less';
 import { fetchMediaById, searchMedia } from '../modules/media/actions';
-import Index from '../components/SearchBar/index';
-import ToggleButtonGroup from '../components/SearchBar/ToggleButtonGroup';
+import SearchBar from '../components/SearchBar/index';
 import CoverDisplay from '../components/CoverDisplay/index';
 import ApplicationAnimationCover from '../components/ApplicationAnimationCover';
+
+const toggleButtons = [
+  { label: 'All', value: null },
+  { label: 'Movies', value: 'movie' },
+  { label: 'TV Shows', value: 'series' },
+];
 
 export class HomePage extends React.Component {
   static propTypes = {
@@ -32,38 +37,41 @@ export class HomePage extends React.Component {
     hasSearched: PropTypes.bool.isRequired,
   };
 
-  state = { toggled: 0 };
+  state = { toggled: null };
 
   onSearchSubmit = (value) => {
-    console.info(value);
-    this.props.searchMedia(value, null);
+    /**
+     * If no media type is toggled (=== null) use the first buttons value for search
+     * else use the toggled buttons value
+     */
+    this.props.searchMedia(value,
+      this.state.toggled === null
+        ? toggleButtons[0]
+        : this.state.toggled.value);
   };
 
-  onToggle = id => this.setState({ toggled: id });
+  onToggle = button => this.setState({ toggled: button });
 
+  componentDidMount() {
+    this.setState({ toggled: toggleButtons[0] });
+  }
 
   render() {
-    // const { detailedMedia, loading, error } = this.props
     return <>
       <ApplicationAnimationCover/>
       <main className="homepage">
-      <Index onSubmit={this.onSearchSubmit}/>
-      <ToggleButtonGroup
-        toggled={this.state.toggled}
+      <SearchBar
+        onSubmit={this.onSearchSubmit}
         onToggle={this.onToggle}
-        buttons={[
-          {
-            content: 'Movie',
-          },
-          {
-            content: 'TV Show',
-          },
-        ]}/>
-        <CoverDisplay media={this.props.allMedia} hasSearched={this.props.hasSearched}/>
+        toggled={this.state.toggled}
+        buttons={toggleButtons}
+      />
+      <CoverDisplay media={this.props.allMedia} hasSearched={this.props.hasSearched}/>
     </main>
     </>;
   }
 }
+
 
 const mapStateToProps = state => ({
   allMedia: state.media.allMedia,
