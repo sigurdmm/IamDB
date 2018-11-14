@@ -7,6 +7,12 @@ import SearchBar from '../components/SearchBar/index';
 import CoverDisplay from '../components/CoverDisplay/index';
 import ApplicationAnimationCover from '../components/ApplicationAnimationCover';
 
+const toggleButtons = [
+  { label: 'All', value: 'all' },
+  { label: 'Movies', value: 'movies' },
+  { label: 'TV Shows', value: 'series' },
+];
+
 export class HomePage extends React.Component {
   static propTypes = {
     searchMedia: PropTypes.func.isRequired,
@@ -31,14 +37,20 @@ export class HomePage extends React.Component {
     hasSearched: PropTypes.bool.isRequired,
   };
 
-  state = { toggled: 0 };
+  state = { toggled: null };
 
   onSearchSubmit = (value) => {
-    console.info(value);
-    this.props.searchMedia(value, this.state.toggled);
+    /**
+     * If no media type is toggled (=== null) use the first buttons value for search
+     * else use the toggled buttons value
+     */
+    this.props.searchMedia(value,
+      this.state.toggled === null
+        ? toggleButtons[0]
+        : this.state.toggled.value);
   };
 
-  onToggle = id => this.setState({ toggled: id });
+  onToggle = button => this.setState({ toggled: button });
 
   render() {
     return <>
@@ -48,6 +60,7 @@ export class HomePage extends React.Component {
         onSubmit={this.onSearchSubmit}
         onToggle={this.onToggle}
         toggled={this.state.toggled}
+        buttons={toggleButtons}
       />
       <CoverDisplay media={this.props.allMedia} hasSearched={this.props.hasSearched}/>
     </main>
