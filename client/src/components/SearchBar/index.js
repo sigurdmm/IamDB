@@ -8,9 +8,13 @@ import {
 import './index.less';
 import PropTypes from 'prop-types';
 import icon from './search.svg';
+import MediaTypeSelector from './MediaTypeSelector';
 
-const SearchBar = ({ onSubmit }) => <div>
-    <Formik
+const SearchBar = ({ onSubmit, onSelectorChange, selectedMediaType }) => <div>
+  <MediaTypeSelector
+    onSelectorChange={onSelectorChange}
+    selectedMediaType={selectedMediaType}/>
+  <Formik
       initialValues={{ search: '' }}
       validate={(values) => {
         const errors = {};
@@ -41,6 +45,11 @@ const SearchBar = ({ onSubmit }) => <div>
 
 SearchBar.propTypes = {
   onSubmit: PropTypes.func.isRequired,
+  onSelectorChange: PropTypes.func.isRequired,
+  selectedMediaType: PropTypes.shape({
+    value: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default SearchBar;

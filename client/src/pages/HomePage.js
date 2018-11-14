@@ -5,7 +5,6 @@ import './HomePage.less';
 import { fetchMediaById, searchMedia } from '../modules/media/actions';
 import SearchBar from '../components/SearchBar/index';
 import CoverDisplay from '../components/CoverDisplay/index';
-import ToggleButtonGroup from '../components/SearchBar/ToggleButtonGroup';
 import ApplicationAnimationCover from '../components/ApplicationAnimationCover';
 
 export class HomePage extends React.Component {
@@ -32,11 +31,16 @@ export class HomePage extends React.Component {
     hasSearched: PropTypes.bool.isRequired,
   };
 
-  state = { toggled: 0 };
+  state = { selectedMediaType: { value: 'all', label: 'All' } };
 
   onSearchSubmit = (value) => {
     console.info(value);
     this.props.searchMedia(value, this.state.toggled);
+  };
+
+  onSelectorChange = (value) => {
+    console.log(this.state.selectedMediaType);
+    this.setState({ selectedMediaType: value });
   };
 
   onToggle = id => this.setState({ toggled: id });
@@ -46,19 +50,11 @@ export class HomePage extends React.Component {
     return <>
       <ApplicationAnimationCover/>
       <main className="homepage">
-      <SearchBar onSubmit={this.onSearchSubmit}/>
-      <ToggleButtonGroup
-        toggled={this.state.toggled}
-        onToggle={this.onToggle}
-        buttons={[
-          {
-            content: 'Movie',
-          },
-          {
-            content: 'TV Show',
-          },
-        ]}/>
-        <CoverDisplay media={this.props.allMedia} hasSearched={this.props.hasSearched}/>
+      <SearchBar
+        onSubmit={this.onSearchSubmit}
+        onSelectorChange={this.onSelectorChange}
+        selectedMediaType={this.state.selectedMediaType}/>
+      <CoverDisplay media={this.props.allMedia} hasSearched={this.props.hasSearched}/>
     </main>
     </>;
   }
