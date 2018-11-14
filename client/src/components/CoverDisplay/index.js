@@ -6,6 +6,7 @@ import CoverImage from './CoverImage';
 export default class CoverDisplay extends PureComponent {
   static propTypes = {
     media: PropTypes.array,
+    pagination: PropTypes.element,
     hasSearched: PropTypes.bool.isRequired,
   };
 
@@ -19,14 +20,17 @@ export default class CoverDisplay extends PureComponent {
       return <p className='coverdisplay__error'>NOTHING FOUND</p>;
     }
 
-    return <div className='coverdisplay'>
-      {media.map((cover, i) => <CoverImage
-        thumbnail={cover.thumbnails ? cover.thumbnails.small : null}
-        title={cover.name}
-        rating={cover.rating}
-        id={cover.id}
-        key={`cover-${i}`}/>)
-      }
+    return <div>
+      <div className='coverdisplay'>
+        {media.map((cover, i) => <CoverImage
+          thumbnail={cover.thumbnails ? cover.thumbnails.small : null}
+          title={cover.name}
+          rating={cover.rating}
+          id={cover.id}
+          key={`cover-${i}`}/>)
+        }
+      </div>
+      {media.length > 0 && this.props.pagination}
     </div>;
   }
 }

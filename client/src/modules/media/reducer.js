@@ -1,20 +1,23 @@
 import {
   FETCH_MEDIA_DETAILS_FAILED,
   FETCH_MEDIA_DETAILS_REQUESTED,
-  FETCH_MEDIA_DETAILS_SUCCESS, SEARCH_MEDIA_FAILED, SEARCH_MEDIA_REQUESTED, SEARCH_MEDIA_SUCCESS,
+  FETCH_MEDIA_DETAILS_SUCCESS,
+  SEARCH_MEDIA_FAILED,
+  SEARCH_MEDIA_REQUESTED,
+  SEARCH_MEDIA_SUCCESS,
+  UPDATE_SEARCH_FIELDS,
 } from './constants';
 
 const initialState = {
   /**
    * Object containing the search metadata
    * */
-  searchQuery: {
-    limit: 50,
-    offset: 0,
-    type: null,
-    query: null,
-    total: 0,
-  },
+  limit: 4,
+  offset: 0,
+  type: null,
+  query: null,
+  sort: {},
+  total: 0,
   /**
    * Array containing a list of media.
    * */
@@ -70,7 +73,7 @@ export default function mediaReducer(state = initialState, action) {
       return {
         ...state,
         allMedia: action.media,
-        searchQuery: Object.assign(state.searchQuery, action.metadata),
+        total: action.metadata.total,
         loading: false,
       };
     case SEARCH_MEDIA_FAILED:
@@ -82,12 +85,18 @@ export default function mediaReducer(state = initialState, action) {
     case SEARCH_MEDIA_REQUESTED:
       return {
         ...state,
-        searchQuery: Object.assign(state.searchQuery, {
-          query: action.query.query,
-          type: action.query.type,
-        }),
+        query: action.query.query || state.query,
+        type: action.query.type || state.type,
+        limit: action.query.limit || state.limit,
+        offset: action.query.offset || state.offset,
+        sort: action.query.sort || state.sort,
         hasSearched: true,
         loading: true,
+      };
+    case UPDATE_SEARCH_FIELDS:
+      return {
+        ...state,
+        ...action.fields,
       };
     default:
       return state;

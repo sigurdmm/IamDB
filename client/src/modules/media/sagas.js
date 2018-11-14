@@ -35,10 +35,16 @@ function* fetchMedia(action) {
 }
 
 function* searchMedia(action) {
-  const { query, type } = action.query;
+  const {
+    query,
+    type,
+    limit,
+    offset,
+    sort,
+  } = action.query;
 
   try {
-    const results = yield call(searchMediaByQuery, query, type, 50, 0);
+    const results = yield call(searchMediaByQuery, query, type, limit, offset, sort);
 
     // Catch errors in the response
     if (results.error) {
