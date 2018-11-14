@@ -141,7 +141,7 @@ async function fetchAndSaveMedia(query) {
     // Keep only movie or series from results
     .filter(m => ['movie', 'series'].includes(m.type))
     // We can assume only the first 10 is relevant (and likely even fever)
-    .slice(0, 25)
+    .slice(0, 30)
     .map(fetchMediaDetails)
   );
 

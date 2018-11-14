@@ -30,7 +30,7 @@ function* fetchMedia(action) {
 
     yield put({ media: media.media, type: FETCH_MEDIA_DETAILS_SUCCESS });
   } catch (e) {
-    yield put({ type: FETCH_MEDIA_DETAILS_FAILED, error: e.message });
+    yield put({ type: FETCH_MEDIA_DETAILS_FAILED, error: e.text || e.message });
   }
 }
 
@@ -46,9 +46,16 @@ function* searchMedia(action) {
       return;
     }
 
-    yield put({ media: results.searchMedia, type: SEARCH_MEDIA_SUCCESS });
+    yield put({
+      metadata: {
+        total: results.searchMedia.total || 0,
+      },
+      media: results.searchMedia.results,
+      type: SEARCH_MEDIA_SUCCESS,
+    });
   } catch (e) {
-    yield put({ type: SEARCH_MEDIA_FAILED, error: e.message });
+    console.error('Search failed on server', e);
+    yield put({ type: SEARCH_MEDIA_FAILED, error: e.text || e.message });
   }
 }
 
