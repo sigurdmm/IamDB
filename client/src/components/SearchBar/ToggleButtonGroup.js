@@ -30,7 +30,6 @@ export default class ToggleButtonGroup extends PureComponent {
      * Don't change the toggled state if toggled state is already set to the clicked button
      */
     if (button.value === this.props.toggled.value) {
-      console.log('break');
       return;
     }
     this.props.onToggle(button);
