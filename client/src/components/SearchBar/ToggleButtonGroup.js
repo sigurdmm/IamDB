@@ -11,7 +11,7 @@ export default class ToggleButtonGroup extends PureComponent {
     }),
     buttons: PropTypes.arrayOf(PropTypes.shape({
       label: PropTypes.string.isRequired,
-      value: PropTypes.string.isRequired,
+      value: PropTypes.string,
     })),
     onToggle: PropTypes.func.isRequired,
   };

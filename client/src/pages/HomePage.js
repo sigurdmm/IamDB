@@ -8,8 +8,8 @@ import CoverDisplay from '../components/CoverDisplay/index';
 import ApplicationAnimationCover from '../components/ApplicationAnimationCover';
 
 const toggleButtons = [
-  { label: 'All', value: 'all' },
-  { label: 'Movies', value: 'movies' },
+  { label: 'All', value: null },
+  { label: 'Movies', value: 'movie' },
   { label: 'TV Shows', value: 'series' },
 ];
 
