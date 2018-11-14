@@ -1,16 +1,7 @@
 import React, { PureComponent } from 'react';
 import './ToggleButtonGroup.less';
 import PropTypes from 'prop-types';
-
-const ToggleButton = ({ children, onClick, active }) => <button
-  onClick={onClick}
-  className={`togglebuttons__button${active ? ' togglebuttons__button--toggled' : ''}`}>{children}</button>;
-
-ToggleButton.propTypes = {
-  children: PropTypes.any.isRequired,
-  onClick: PropTypes.func.isRequired,
-  active: PropTypes.bool.isRequired,
-};
+import ToggleButton from './ToggleButton';
 
 export default class ToggleButtonGroup extends PureComponent {
   static propTypes = {
