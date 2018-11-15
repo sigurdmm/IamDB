@@ -6,7 +6,7 @@ import defaultImage from '../InformationSection/no-image-found.jpg';
 import './CoverImage.less';
 
 const getRating = (rating) => {
-  if (typeof (rating) !== 'undefined') {
+  if (typeof rating !== 'undefined') {
     return <div className='cover__overlay__rating'>{rating}/10</div>;
   }
   return (null);
@@ -30,7 +30,10 @@ const CoverImage = ({
 CoverImage.propTypes = {
   thumbnail: PropTypes.string,
   title: PropTypes.string.isRequired,
-  rating: PropTypes.number,
+  rating: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.number,
+  ]),
   id: PropTypes.string,
 };
 

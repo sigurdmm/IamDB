@@ -61,7 +61,11 @@ export class FilmPage extends React.Component {
       </div>
       <div>
         <h2>Actors</h2>
-        <CoverDisplay onSort={false} hasSearched={true} media={detailedMedia.actors}/>
+        <CoverDisplay
+          onSort={false}
+          hasSearched={true}
+          media={detailedMedia.actors}
+        />
       </div>
     </div>;
   }

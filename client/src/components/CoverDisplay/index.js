@@ -9,7 +9,10 @@ export default class CoverDisplay extends PureComponent {
     media: PropTypes.array,
     pagination: PropTypes.element,
     hasSearched: PropTypes.bool.isRequired,
-    onSort: PropTypes.func.isRequired,
+    onSort: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.bool,
+    ]).isRequired,
   };
 
   render() {
@@ -25,7 +28,11 @@ export default class CoverDisplay extends PureComponent {
     }
 
     return <div>
-      <SortingSelector sortingMethods={['Rating', 'Year', 'Alphabetical']} onSort={this.props.onSort}/>
+      <SortingSelector sortingMethods={
+        [{ label: 'Rating', value: 'rating' },
+          { label: 'Year', value: 'year' },
+          { label: 'Alphabetical', value: 'alphabetical' },
+        ]} onSort={this.props.onSort}/>
 
       <div className='coverdisplay'>
         {media.map((cover, i) => <CoverImage

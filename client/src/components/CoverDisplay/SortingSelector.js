@@ -10,9 +10,9 @@ const SortingSelector = ({ sortingMethods, onSort }) => {
     {sortingMethods.map((method, i) => (
       <option
         key={i}
-        value={method}
+        value={method.value}
       >
-        {method}
+        {method.label}
       </option>))}
   </select>;
 };
@@ -22,7 +22,10 @@ SortingSelector.propTypes = {
     PropTypes.bool,
     PropTypes.func,
   ]).isRequired,
-  sortingMethods: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  sortingMethods: PropTypes.arrayOf(PropTypes.shape({
+    label: PropTypes.string.isRequired,
+    value: PropTypes.string.isRequired,
+  })).isRequired,
 };
 
 export default SortingSelector;

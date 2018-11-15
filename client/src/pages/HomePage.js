@@ -70,7 +70,7 @@ export class HomePage extends React.Component {
 
   onToggle = button => this.setState({ toggled: button });
 
-  onSort = event => event;
+  onSort = event => console.log(event.target.value);
 
   /**
    * Updates the search fields with a new offset value
