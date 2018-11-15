@@ -19,7 +19,7 @@ const toggleButtons = [
 
 const sortOptions = [
   { label: 'Rating', value: 'rating' },
-  { label: 'Year', value: 'released' },
+  { label: 'Released', value: 'released' },
   { label: 'Name', value: 'name' },
 ];
 
@@ -94,8 +94,7 @@ export class HomePage extends React.Component {
     } = this.props;
 
     this.props.updateSearchFields({ sortField: value });
-    console.log(value);
-    console.log(sortDirection);
+
     this.props.searchMedia(
       query,
       type,
@@ -143,10 +142,6 @@ export class HomePage extends React.Component {
     this.props.searchMedia(query, type, limit, newOffset, sortField, sortDirection);
   };
 
-  componentDidMount() {
-    this.setState({ toggled: toggleButtons[0] });
-  }
-
   render() {
     const {
       total,
@@ -178,9 +173,6 @@ export class HomePage extends React.Component {
         <CoverDisplay
           media={allMedia}
           hasSearched={hasSearched}
-          onSort={this.onSort}
-          onDirectionClick={this.onDirectionClick}
-          directionValue={sortDirection}
           pagination={
             <Paginator
               limit={limit}

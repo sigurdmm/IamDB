@@ -35,7 +35,7 @@ export default class CoverDisplay extends PureComponent {
           id={cover.id}
           key={`cover-${i}`}/>)
         }
-      </div>;
+      </div>
     { media.length > 0 && pagination }
     </>;
   }

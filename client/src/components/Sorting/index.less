@@ -1,0 +1,32 @@
+@import '../../constants';
+
+.sortingbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+
+  &__direction,
+  &__type {
+    height: 25px;
+    border-color: @borderColor;
+    font-family: inherit;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    background-color: @white;
+  }
+
+  &__direction {
+    width: 25px;
+    padding: 0;
+
+  }
+
+  &__type {
+    width: 200px;
+    margin-right: 5px;
+    font-size: inherit;
+  }
+
+}

@@ -1,23 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import SortingSelector from '../CoverDisplay/SortingSelector';
-
-// [{ label: 'Rating', value: 'rating' },
-//   { label: 'Year', value: 'released' },
-//   { label: 'Name', value: 'name' },
-// ]
+import SortingSelector from './SortingSelector';
+import './index.less';
 
 const Sorting = ({
   directionValue,
   onDirectionClick,
   sortingMethods,
   onSort,
-}) => <div>
+}) => <div className='sortingbar'>
     <SortingSelector
       sortingMethods={sortingMethods}
-       onSort={onSort}
+      onSort={onSort}
     />
     <button
+      className='sortingbar__direction'
       value={directionValue}
       onClick={() => {
         onDirectionClick(directionValue === -1 ? 1 : -1);
