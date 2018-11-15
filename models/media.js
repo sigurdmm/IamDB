@@ -8,6 +8,10 @@ const MediaSchema = new mongoose.Schema({
   released: { type: Date, default: Date.now() },
   actors: [{ type: mongoose.Schema.Types.ObjectId, default: [], ref: 'Actor' }],
   director: String,
+  comments: [{
+    createdAt: { type: Date, default: Date.now() },
+    text: { type: String, required: true }
+  }],
   thumbnails: {
     small: String,
     large: String
@@ -28,8 +32,8 @@ MediaSchema.statics.textSearch = async function textSearch(query, offset = 0, li
   const actuallLimit = limit < 100 ? limit : 100;
 
   const searchBuilder = this
-    // Search uses MongoDB's build in features, such as stopword removing and stemming
-    // https://docs.mongodb.com/manual/reference/operator/query/text/#match-operation
+  // Search uses MongoDB's build in features, such as stopword removing and stemming
+  // https://docs.mongodb.com/manual/reference/operator/query/text/#match-operation
     .find(search)
     // Fill inn relation with actors
     .populate('actors')

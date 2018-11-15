@@ -1,4 +1,5 @@
 import {
+  ADD_MEDIA_COMMENT_REQUESTED,
   FETCH_MEDIA_DETAILS_REQUESTED,
   SEARCH_MEDIA_REQUESTED,
   UPDATE_SEARCH_FIELDS,
@@ -32,4 +33,15 @@ export const searchMedia = (
 export const updateSearchFields = fields => dispatch => dispatch({
   fields,
   type: UPDATE_SEARCH_FIELDS,
+});
+
+/**
+ * Appends a comment to some media
+ * @param {string} mediaId Identifier for the media we wan't the comment appended
+ * @param {string} comment Comment in text form
+ * */
+export const addComment = (mediaId, comment) => dispatch => dispatch({
+  mediaId,
+  comment,
+  type: ADD_MEDIA_COMMENT_REQUESTED,
 });

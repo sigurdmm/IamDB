@@ -1,0 +1,102 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CommentList/> should render list of comments 1`] = `
+<div
+  class="commentlist"
+>
+  <ul
+    class="commentlist__list"
+  >
+    <li>
+      <div
+        class="comment"
+      >
+        <strong
+          class="comment__published"
+        >
+          Published: 
+          <em>
+            15/10/2018
+          </em>
+        </strong>
+        <p
+          class="comment__text"
+        >
+          Hello world
+        </p>
+      </div>
+    </li>
+    <li>
+      <div
+        class="comment"
+      >
+        <strong
+          class="comment__published"
+        >
+          Published: 
+          <em>
+            15/10/2018
+          </em>
+        </strong>
+        <p
+          class="comment__text"
+        >
+          Hello world 2
+        </p>
+      </div>
+    </li>
+  </ul>
+  <form
+    class="commentform"
+  >
+    <label
+      class="commentform__label"
+      for="comment"
+    >
+      Comment
+    </label>
+    <textarea
+      class="commentform__comment"
+      id="comment"
+      name="comment"
+      rows="10"
+    />
+    <button
+      type="submit"
+    >
+      Submit comment
+    </button>
+  </form>
+</div>
+`;
+
+exports[`<CommentList/> should render without comments 1`] = `
+<div
+  class="commentlist"
+>
+  <ul
+    class="commentlist__list"
+  />
+  <form
+    class="commentform"
+  >
+    <label
+      class="commentform__label"
+      for="comment"
+    >
+      Comment
+    </label>
+    <textarea
+      class="commentform__comment"
+      id="comment"
+      name="comment"
+      rows="10"
+    />
+    <button
+      type="submit"
+    >
+      Submit comment
+    </button>
+  </form>
+</div>
+`;

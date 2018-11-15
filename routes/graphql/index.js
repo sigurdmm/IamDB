@@ -3,8 +3,7 @@ const { buildSchema } = require('graphql');
 const searchMedia = require('./searchMedia');
 const getMedia = require('./getMedia');
 const getActor = require('./getActor');
-
-const searchActors = require('./searchActors');
+const addComment = require('./addComment');
 
 const schema = buildSchema(`
   type Query {
@@ -15,7 +14,7 @@ const schema = buildSchema(`
   },
   
   type Mutation {
-    createMedia(id: Int!, title: String!, rating: Float): Media
+    addComment(id: String!, comment: String!): Media!
   },
   
   type Thumbnail {
@@ -46,6 +45,11 @@ const schema = buildSchema(`
     results: [Media]
   }
   
+  type Comment {
+    createdAt: String!
+    text: String!
+  }
+  
   type Media {
     id: String!
     name: String!
@@ -57,13 +61,14 @@ const schema = buildSchema(`
     released: String
     thumbnails: Thumbnail
     type: String
+    comments: [Comment]
   }
 `);
 
 
 const rootValue = {
   searchMedia,
-  searchActors,
+  addComment,
   getActor,
   media: getMedia,
 };

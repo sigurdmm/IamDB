@@ -32,21 +32,56 @@ exports[`<FilmPage/> should render properly 1`] = `
       </h3>
     </div>
   </div>
-  <div
+  <section
     class="description__container"
   >
     <h2>
       Description
     </h2>
     <p />
-  </div>
-  <div>
+  </section>
+  <section>
     <h2>
       Actors
     </h2>
     <div
       class="coverdisplay"
     />
-  </div>
+  </section>
+  <section
+    class="filmpage__comments"
+  >
+    <h2>
+      Comment section
+    </h2>
+    <div
+      class="commentlist"
+    >
+      <ul
+        class="commentlist__list"
+      />
+      <form
+        class="commentform"
+      >
+        <label
+          class="commentform__label"
+          for="comment"
+        >
+          Comment
+        </label>
+        <textarea
+          class="commentform__comment"
+          id="comment"
+          name="comment"
+          rows="10"
+        />
+        <button
+          type="submit"
+        >
+          Submit comment
+        </button>
+      </form>
+    </div>
+  </section>
 </div>
 `;

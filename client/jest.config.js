@@ -37,6 +37,16 @@ module.exports = {
       functions: 50,
       lines: 50,
       statements: -50
+    },
+
+    /**
+     * Forms, through Formik are difficult to test
+     * */
+    'src/components/CommentList/CommentForm.js': {
+      statements: -80,
+      branches: 0,
+      lines: 20,
+      functions: 25
     }
   }
 };

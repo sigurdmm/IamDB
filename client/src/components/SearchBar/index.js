@@ -35,7 +35,7 @@ const SearchBar = ({
           <img src={icon}/>
         </button>
       </Form>
-      <ErrorMessage className={'error'} name="search" component="div"/>
+      <ErrorMessage className="error" name="search" component="div"/>
     </div>
   </Formik>;
 
