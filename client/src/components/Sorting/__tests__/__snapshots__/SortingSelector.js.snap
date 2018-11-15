@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SortingSelector/> should render properly 1`] = `
+<Fragment>
+  <select
+    className="sortingbar__type"
+    name="select"
+    onChange={[Function]}
+  >
+    <option
+      key="0"
+      value="value"
+    >
+      label
+    </option>
+  </select>
+</Fragment>
+`;

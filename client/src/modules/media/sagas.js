@@ -43,11 +43,18 @@ function* searchMedia(action) {
     type,
     limit,
     offset,
-    sort,
+    sortField,
+    sortDirection,
   } = action.query;
 
   try {
-    const results = yield call(searchMediaByQuery, query, type, limit, offset, sort);
+    const results = yield call(searchMediaByQuery,
+      query,
+      type,
+      limit,
+      offset,
+      sortField,
+      sortDirection);
 
     // Catch errors in the response
     if (results.error) {

@@ -1,64 +1,44 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<SearchBar/> should load properly 1`] = `
-<div
-  className="filterandsearch"
+<Formik
+  enableReinitialize={false}
+  initialValues={
+    Object {
+      "search": "",
+    }
+  }
+  isInitialValid={false}
+  onSubmit={[Function]}
+  validate={[Function]}
+  validateOnBlur={true}
+  validateOnChange={true}
 >
-  <ToggleButtonGroup
-    buttons={
-      Array [
-        Object {
-          "label": "1",
-          "value": "2",
-        },
-        Object {
-          "label": "3",
-          "value": "4",
-        },
-      ]
-    }
-    onToggle={[MockFunction]}
-    toggled="2"
-  />
-  <Formik
-    enableReinitialize={false}
-    initialValues={
-      Object {
-        "search": "",
-      }
-    }
-    isInitialValid={false}
-    onSubmit={[Function]}
-    validate={[Function]}
-    validateOnBlur={true}
-    validateOnChange={true}
-  >
-    <div>
-      <Form
-        className="searchbar"
-      >
-        <C
-          autoFocus={true}
-          className="searchbar__field"
-          name="search"
-          placeholder="The dark knight rises"
-          type="field"
-        />
-        <button
-          className="searchbar__submit"
-          type="submit"
-        >
-          <img
-            src="search.svg"
-          />
-        </button>
-      </Form>
+  <div>
+    <Form
+      className="searchbar"
+    >
       <C
-        className="error"
-        component="div"
+        autoFocus={true}
+        className="searchbar__field"
         name="search"
+        placeholder="The dark knight rises"
+        type="field"
       />
-    </div>
-  </Formik>
-</div>
+      <button
+        className="searchbar__submit"
+        type="submit"
+      >
+        <img
+          src="search.svg"
+        />
+      </button>
+    </Form>
+    <C
+      className="error"
+      component="div"
+      name="search"
+    />
+  </div>
+</Formik>
 `;

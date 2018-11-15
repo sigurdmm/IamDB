@@ -17,6 +17,8 @@ describe('<HomePage/>', () => {
       query={''}
       hasSearched={false}
       updateSearchFields={() => null}
+      sortDirection={1}
+      sortField={''}
       searchMedia={spy}/>);
 
     expect(wrapper).toBeTruthy();
@@ -35,6 +37,8 @@ describe('<HomePage/>', () => {
       query={''}
       hasSearched={false}
       updateSearchFields={() => null}
+      sortDirection={1}
+      sortField={''}
       searchMedia={spy}/>);
 
     const query = 'The Dark Knight';
