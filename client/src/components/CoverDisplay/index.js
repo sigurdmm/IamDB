@@ -7,6 +7,7 @@ export default class CoverDisplay extends PureComponent {
   static propTypes = {
     media: PropTypes.array,
     hasSearched: PropTypes.bool.isRequired,
+    url: PropTypes.string,
   };
 
   render() {
@@ -24,8 +25,8 @@ export default class CoverDisplay extends PureComponent {
         thumbnail={cover.thumbnails ? cover.thumbnails.small : null}
         title={cover.name}
         rating={cover.rating}
-        id={cover.id}
-        key={`cover-${i}`}/>)
+        key={`cover-${i}`}
+        url={`${this.props.url}${cover.id}`}/>)
       }
     </div>;
   }

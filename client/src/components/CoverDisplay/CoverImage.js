@@ -9,9 +9,9 @@ const CoverImage = ({
   thumbnail,
   title,
   rating,
-  id,
+  url,
 }) => <div className='cover'>
-  <Link to={`/media/${id}`}>
+  <Link to={url}>
     <img className='cover__thumbnail' src={thumbnail || defaultImage}/>
   </Link>
   <div className='cover__overlay'>
@@ -24,7 +24,7 @@ CoverImage.propTypes = {
   thumbnail: PropTypes.string,
   title: PropTypes.string.isRequired,
   rating: PropTypes.number,
-  id: PropTypes.string,
+  url: PropTypes.string,
 };
 
 export default CoverImage;
