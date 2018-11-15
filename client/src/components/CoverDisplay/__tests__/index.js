@@ -25,7 +25,7 @@ const mockedMedia = [
 describe('<CoverDisplay/>', () => {
   it('should render list properly', () => {
     const wrapper = render(<MemoryRouter>
-      <CoverDisplay hasSearched={false} media={mockedMedia}/>
+      <CoverDisplay onSort={jest.fn()} hasSearched={false} media={mockedMedia}/>
     </MemoryRouter>);
 
     expect(wrapper).toMatchSnapshot();
@@ -33,7 +33,7 @@ describe('<CoverDisplay/>', () => {
 
   it('should render error message properly', () => {
     const wrapper = render(<MemoryRouter>
-      <CoverDisplay hasSearched={false} media={[]}/>
+      <CoverDisplay onSort={jest.fn()} hasSearched={false} media={[]}/>
     </MemoryRouter>);
 
     expect(wrapper).toMatchSnapshot();

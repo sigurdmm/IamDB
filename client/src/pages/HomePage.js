@@ -70,6 +70,8 @@ export class HomePage extends React.Component {
 
   onToggle = button => this.setState({ toggled: button });
 
+  onSort = event => event;
+
   /**
    * Updates the search fields with a new offset value
    * */
@@ -108,12 +110,18 @@ export class HomePage extends React.Component {
           toggled={this.state.toggled}
           buttons={toggleButtons}
         />
-        <CoverDisplay media={allMedia} hasSearched={hasSearched} pagination={
-          <Paginator
-            limit={limit}
-            offset={offset}
-            total={total}
-            onPagination={this.doPagination}/>}/>
+        <CoverDisplay
+          media={allMedia}
+          hasSearched={hasSearched}
+          onSort={this.onSort}
+          pagination={
+            <Paginator
+              limit={limit}
+              offset={offset}
+              total={total}
+              onPagination={this.doPagination}
+            />}
+        />
       </main>
     </>;
   }
