@@ -10,7 +10,13 @@ describe('<HomePage/>', () => {
       allMedia={[]}
       loading={false}
       error={null}
+      limit={4}
+      offset={0}
+      total={100}
+      type={null}
+      query={''}
       hasSearched={false}
+      updateSearchFields={() => null}
       searchMedia={spy}/>);
 
     expect(wrapper).toBeTruthy();
@@ -22,7 +28,13 @@ describe('<HomePage/>', () => {
       allMedia={[]}
       loading={false}
       error={null}
+      limit={4}
+      offset={0}
+      total={100}
+      type={null}
+      query={''}
       hasSearched={false}
+      updateSearchFields={() => null}
       searchMedia={spy}/>);
 
     const query = 'The Dark Knight';
