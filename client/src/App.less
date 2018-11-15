@@ -20,6 +20,7 @@
 
   width: 100%;
 
+  // Define common styles for both the header and footer
   &__header,
   &__footer {
     box-sizing: border-box;
@@ -31,9 +32,19 @@
     padding: 0.5em 1em;
   }
 
+  // Filled version of the header
+  &__header--filled {
+    background-color: @primaryColor;
+  }
+
   &__footer {
     .text-shadow-1;
     margin-top: auto;
+  }
+
+  &__footer--dark {
+    color: @primaryColor;
+    text-shadow: none;
   }
 }
 
