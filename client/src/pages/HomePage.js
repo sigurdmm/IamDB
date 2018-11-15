@@ -2,12 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import './HomePage.less';
+
 import { searchMedia, updateSearchFields } from '../modules/media/actions';
-import Index from '../components/SearchBar/index';
-import ToggleButtonGroup from '../components/SearchBar/ToggleButtonGroup';
+import SearchBar from '../components/SearchBar/index';
 import CoverDisplay from '../components/CoverDisplay/index';
 import ApplicationAnimationCover from '../components/ApplicationAnimationCover';
 import Paginator from '../components/Paginator';
+
+const toggleButtons = [
+  { label: 'All', value: null },
+  { label: 'Movies', value: 'movie' },
+  { label: 'TV Shows', value: 'series' },
+];
 
 export class HomePage extends React.Component {
   static propTypes = {
@@ -45,10 +51,16 @@ export class HomePage extends React.Component {
     hasSearched: PropTypes.bool.isRequired,
   };
 
-  state = { toggled: 0 };
+  state = { toggled: null };
 
   onSearchSubmit = (query) => {
-    const { limit, type } = this.props;
+    const { limit } = this.props;
+
+    /**
+     * If no media type is toggled (=== null) use the first buttons value for search
+     * else use the toggled buttons value
+     */
+    const type = this.state.toggled === null ? toggleButtons[0] : this.state.toggled.value;
 
     // Expect to start with a fresh offset,
     // when submitting a new search query
@@ -56,7 +68,7 @@ export class HomePage extends React.Component {
     this.props.searchMedia(query, type, limit, 0);
   };
 
-  onToggle = id => this.setState({ toggled: id });
+  onToggle = button => this.setState({ toggled: button });
 
   /**
    * Updates the search fields with a new offset value
@@ -74,6 +86,10 @@ export class HomePage extends React.Component {
     this.props.searchMedia(query, type, limit, newOffset);
   };
 
+  componentDidMount() {
+    this.setState({ toggled: toggleButtons[0] });
+  }
+
   render() {
     const {
       total,
@@ -86,26 +102,18 @@ export class HomePage extends React.Component {
     return <>
       <ApplicationAnimationCover/>
       <main className="homepage">
-        <Index onSubmit={this.onSearchSubmit}/>
-        <ToggleButtonGroup
-          toggled={this.state.toggled}
+        <SearchBar
+          onSubmit={this.onSearchSubmit}
           onToggle={this.onToggle}
-          buttons={[
-            {
-              content: 'Movie',
-            },
-            {
-              content: 'TV Show',
-            },
-          ]}/>
-        <CoverDisplay
-          pagination={<Paginator
+          toggled={this.state.toggled}
+          buttons={toggleButtons}
+        />
+        <CoverDisplay media={allMedia} hasSearched={hasSearched} pagination={
+          <Paginator
             limit={limit}
             offset={offset}
             total={total}
-            onPagination={this.doPagination}/>}
-          media={allMedia}
-          hasSearched={hasSearched}/>
+            onPagination={this.doPagination}/>}/>
       </main>
     </>;
   }

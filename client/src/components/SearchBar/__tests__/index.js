@@ -5,7 +5,14 @@ import SearchBar from '../index';
 
 describe('<SearchBar/>', () => {
   it('should load properly', () => {
-    const wrapper = shallow(<SearchBar onSubmit={jest.fn()}/>);
+    const wrapper = shallow(<SearchBar
+      onToggle={jest.fn()}
+      toggled={{ toggled: null }}
+      buttons={[
+        { label: '1', value: '2' },
+        { label: '3', value: '4' },
+      ]}
+      onSubmit={jest.fn()}/>);
 
     expect(wrapper).toMatchSnapshot();
   });

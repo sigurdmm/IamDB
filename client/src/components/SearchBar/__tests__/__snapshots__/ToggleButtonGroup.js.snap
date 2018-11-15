@@ -9,14 +9,21 @@ exports[`<ToggleButtonGroup/> should load properly 1`] = `
     key="togglebutton-0"
     onClick={[Function]}
   >
-    Movie
+    label1
   </ToggleButton>
   <ToggleButton
     active={false}
     key="togglebutton-1"
     onClick={[Function]}
   >
-    TV Show
+    label2
+  </ToggleButton>
+  <ToggleButton
+    active={false}
+    key="togglebutton-2"
+    onClick={[Function]}
+  >
+    label3
   </ToggleButton>
 </div>
 `;
