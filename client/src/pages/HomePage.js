@@ -9,11 +9,18 @@ import CoverDisplay from '../components/CoverDisplay/index';
 import ApplicationAnimationCover from '../components/ApplicationAnimationCover';
 import Paginator from '../components/Paginator';
 import ToggleButtonGroup from '../components/SearchBar/ToggleButtonGroup';
+import Sorting from '../components/Sorting';
 
 const toggleButtons = [
   { label: 'All', value: null },
   { label: 'Movies', value: 'movie' },
   { label: 'TV Shows', value: 'series' },
+];
+
+const sortOptions = [
+  { label: 'Rating', value: 'rating' },
+  { label: 'Year', value: 'released' },
+  { label: 'Name', value: 'name' },
 ];
 
 export class HomePage extends React.Component {
@@ -26,6 +33,7 @@ export class HomePage extends React.Component {
     type: PropTypes.string,
     query: PropTypes.string,
     sort: PropTypes.object,
+    sortDirection: PropTypes.number,
     total: PropTypes.number.isRequired,
 
     allMedia: PropTypes.array,
@@ -77,15 +85,34 @@ export class HomePage extends React.Component {
       limit,
       query,
       type,
+      sortDirection,
     } = this.props;
 
-    this.props.updateSearchFields({ sort: { field: value, direction: -1 } });
+    this.props.updateSearchFields({ sort: { field: value, direction: sortDirection } });
     this.props.searchMedia(
       query,
       type,
       limit,
       0,
-      { field: value, direction: -1 },
+      { field: value, direction: sortDirection },
+    );
+  };
+
+  onDirectionClick = (sortDirection) => {
+    const {
+      limit,
+      query,
+      type,
+      sort,
+    } = this.props;
+
+    this.props.updateSearchFields({ sortDirection });
+    this.props.searchMedia(
+      query,
+      type,
+      limit,
+      0,
+      { field: sort.field, direction: sortDirection },
     );
   };
 
@@ -117,6 +144,7 @@ export class HomePage extends React.Component {
       limit,
       allMedia,
       hasSearched,
+      sortDirection,
     } = this.props;
 
     return <>
@@ -132,10 +160,17 @@ export class HomePage extends React.Component {
             onSubmit={this.onSearchSubmit}
           />
         </div>
+        <Sorting
+          directionValue={sortDirection}
+          onDirectionClick={this.onDirectionClick}
+          onSort={this.onSort}
+          sortingMethods={sortOptions}/>
         <CoverDisplay
           media={allMedia}
           hasSearched={hasSearched}
           onSort={this.onSort}
+          onDirectionClick={this.onDirectionClick}
+          directionValue={sortDirection}
           pagination={
             <Paginator
               limit={limit}
@@ -154,6 +189,7 @@ const mapStateToProps = state => ({
   total: state.media.total,
   query: state.media.query,
   sort: state.media.sort,
+  sortDirection: state.media.sortDirection,
   type: state.media.type,
   offset: state.media.offset,
   limit: state.media.limit,

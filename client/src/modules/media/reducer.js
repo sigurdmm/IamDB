@@ -16,7 +16,8 @@ const initialState = {
   offset: 0,
   type: null,
   query: null,
-  sort: {},
+  sort: { field: 'rating' },
+  sortDirection: -1,
   total: 0,
   /**
    * Array containing a list of media.

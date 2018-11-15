@@ -2,18 +2,19 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import './index.less';
 import CoverImage from './CoverImage';
-import SortingSelector from './SortingSelector';
 
 export default class CoverDisplay extends PureComponent {
   static propTypes = {
     media: PropTypes.array,
     pagination: PropTypes.element,
     hasSearched: PropTypes.bool.isRequired,
-    onSort: PropTypes.func,
   };
 
   render() {
-    const { media } = this.props;
+    const {
+      media,
+      pagination,
+    } = this.props;
     // Don't render the CoverDisplay if users hasn't searched yet.
     if (!this.props.hasSearched) {
       return null;
@@ -24,16 +25,7 @@ export default class CoverDisplay extends PureComponent {
       return <p className='coverdisplay__error'>NOTHING FOUND</p>;
     }
 
-    return <div>
-      <SortingSelector
-        sortingMethods={
-        [{ label: 'Rating', value: 'rating' },
-          { label: 'Year', value: 'released' },
-          { label: 'Name', value: 'name' },
-        ]}
-        onSort={this.props.onSort}
-      />
-
+    return <>
       <div className='coverdisplay'>
         {media.map((cover, i) => <CoverImage
           thumbnail={cover.thumbnails ? cover.thumbnails.small : null}
@@ -43,8 +35,8 @@ export default class CoverDisplay extends PureComponent {
           id={cover.id}
           key={`cover-${i}`}/>)
         }
-      </div>
-      {media.length > 0 && this.props.pagination}
-    </div>;
+      </div>;
+    { media.length > 0 && pagination }
+    </>;
   }
 }
