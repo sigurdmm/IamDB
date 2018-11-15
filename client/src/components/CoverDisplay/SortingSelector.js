@@ -1,19 +1,19 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const SortingSelector = ({ sortingFactors, onSortSelect }) => <select name="select" onChange={event => onSortSelect(event)}>
-    {sortingFactors.map((factor, i) => (
+const SortingSelector = ({ sortingMethods, onSort }) => <select name="select" onChange={event => onSort(event)}>
+    {sortingMethods.map((method, i) => (
       <option
         key={i}
-        value={factor}
+        value={method}
       >
-        {factor}
+        {method}
       </option>))}
   </select>;
 
 SortingSelector.propTypes = {
-  onSortSelect: PropTypes.func.isRequired,
-  sortingFactors: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  onSort: PropTypes.func.isRequired,
+  sortingMethods: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
 };
 
 export default SortingSelector;

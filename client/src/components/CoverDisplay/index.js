@@ -8,24 +8,23 @@ export default class CoverDisplay extends PureComponent {
   static propTypes = {
     media: PropTypes.array,
     hasSearched: PropTypes.bool.isRequired,
+    onSort: PropTypes.func.isRequired,
   };
 
   render() {
     const { media } = this.props;
-
+    // Don't render the CoverDisplay if users hasn't searched yet.
     if (!this.props.hasSearched) {
       return null;
     }
+    // Render error message instead of an empty CoverDisplay
+    // when search returns nothing
     if (media === null) {
       return <p className='coverdisplay__error'>NOTHING FOUND</p>;
     }
 
-    const onSortSelect = (event) => {
-      console.log(event.target.value);
-    };
-
     return <div>
-      <SortingSelector sortingFactors={['Rating', 'Year', 'Alphabetical']} onSortSelect={onSortSelect}/>
+      <SortingSelector sortingMethods={['Rating', 'Year', 'Alphabetical']} onSort={this.props.onSort}/>
       <div className='coverdisplay'>
         {media.map((cover, i) => <CoverImage
           thumbnail={cover.thumbnails ? cover.thumbnails.small : null}

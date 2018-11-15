@@ -52,6 +52,8 @@ export class HomePage extends React.Component {
 
   onToggle = button => this.setState({ toggled: button });
 
+  onSort = event => console.log(event.target.value);
+
   componentDidMount() {
     this.setState({ toggled: toggleButtons[0] });
   }
@@ -66,7 +68,12 @@ export class HomePage extends React.Component {
         toggled={this.state.toggled}
         buttons={toggleButtons}
       />
-      <CoverDisplay media={this.props.allMedia} hasSearched={this.props.hasSearched}/>
+      <CoverDisplay
+        media={this.props.allMedia}
+        hasSearched={this.props.hasSearched}
+        onSort={this.onSort}
+        displaySort={true}
+      />
     </main>
     </>;
   }
