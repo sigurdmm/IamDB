@@ -1,7 +1,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const SortingSelector = ({ sortingMethods, onSort }) => <select name="select" onChange={event => onSort(event)}>
+const SortingSelector = ({ sortingMethods, onSort }) => {
+  // If onSort is false don't render SortingSelector
+  if (onSort === false) {
+    return null;
+  }
+  return <select name="select" onChange={event => onSort(event)}>
     {sortingMethods.map((method, i) => (
       <option
         key={i}
@@ -10,9 +15,13 @@ const SortingSelector = ({ sortingMethods, onSort }) => <select name="select" on
         {method}
       </option>))}
   </select>;
+};
 
 SortingSelector.propTypes = {
-  onSort: PropTypes.func.isRequired,
+  onSort: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.func,
+  ]).isRequired,
   sortingMethods: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
 };
 
