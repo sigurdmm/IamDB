@@ -5,6 +5,13 @@ import defaultImage from '../InformationSection/no-image-found.jpg';
 
 import './CoverImage.less';
 
+const getRating = (rating) => {
+  if (typeof (rating) !== 'undefined') {
+    return <div className='cover__overlay__rating'>{rating}/10</div>;
+  }
+  return (null);
+};
+
 const CoverImage = ({
   thumbnail,
   title,
@@ -16,7 +23,7 @@ const CoverImage = ({
   </Link>
   <div className='cover__overlay'>
     <div className='cover__overlay__title'>{title}</div>
-    <div className='cover__overlay__rating'>{rating}/10</div>
+    {getRating(rating)}
   </div>
 </div>;
 

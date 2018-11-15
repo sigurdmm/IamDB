@@ -4,8 +4,11 @@ import { shallow } from 'enzyme';
 import ToggleButtonGroup from '../ToggleButtonGroup';
 
 const mockedState = {
-  toggled: 0,
-  buttons: [{ content: 'Movie' }, { content: 'TV Show' }],
+  buttons: [
+    { label: 'label1', value: 'value1' },
+    { label: 'label2', value: 'value2' },
+    { label: 'label3', value: 'value3' }],
+  toggled: { label: 'label1', value: 'value1' },
   onToggle: jest.fn(),
 };
 
@@ -24,7 +27,7 @@ describe('<ToggleButtonGroup/>', () => {
       toggled={mockedState.toggled}
       onToggle={spy}
       buttons={mockedState.buttons}/>);
-    wrapper.find('ToggleButton').at(1).simulate('click');
+    wrapper.find('ToggleButton').at(2).simulate('click');
     expect(spy).toHaveBeenCalled();
   });
 
@@ -32,11 +35,11 @@ describe('<ToggleButtonGroup/>', () => {
     const spy = jest.fn();
 
     const wrapper = shallow(<ToggleButtonGroup
-      toggled={0}
+      toggled={mockedState.toggled}
       onToggle={spy}
       buttons={mockedState.buttons}
     />);
-
+    wrapper.find('ToggleButton').at(0).simulate('click');
     wrapper.find('ToggleButton').at(0).simulate('click');
 
     expect(spy).not.toHaveBeenCalled();

@@ -1,7 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<SearchBar/> should load properly 1`] = `
-<div>
+<div
+  className="filterandsearch"
+>
+  <ToggleButtonGroup
+    buttons={
+      Array [
+        Object {
+          "label": "1",
+          "value": "2",
+        },
+        Object {
+          "label": "3",
+          "value": "4",
+        },
+      ]
+    }
+    onToggle={[MockFunction]}
+    toggled={
+      Object {
+        "toggled": null,
+      }
+    }
+  />
   <Formik
     enableReinitialize={false}
     initialValues={
@@ -20,6 +42,7 @@ exports[`<SearchBar/> should load properly 1`] = `
         className="searchbar"
       >
         <C
+          autoFocus={true}
           className="searchbar__field"
           name="search"
           placeholder="The dark knight rises"

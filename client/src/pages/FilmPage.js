@@ -61,7 +61,7 @@ export class FilmPage extends React.Component {
       </div>
       <div>
         <h2>Actors</h2>
-        <CoverDisplay hasSearched={true} media={detailedMedia.actors} url='/actor/'/>
+        <CoverDisplay onSort={false} hasSearched={true} media={detailedMedia.actors} url='/actor/'/>
       </div>
     </div>;
   }
