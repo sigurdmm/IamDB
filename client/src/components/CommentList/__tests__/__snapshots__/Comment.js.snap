@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Comment/> should render properly 1`] = `
+<div
+  class="comment"
+>
+  <strong
+    class="comment__published"
+  >
+    Published: 
+    <em>
+      15/10/2018
+    </em>
+  </strong>
+  <p
+    class="comment__text"
+  >
+    Hello world
+  </p>
+</div>
+`;

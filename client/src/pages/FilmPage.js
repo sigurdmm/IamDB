@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchMediaById } from '../modules/media/actions';
+
+import { fetchMediaById, addComment } from '../modules/media/actions';
 import CoverDisplay from '../components/CoverDisplay/index';
 import './FilmPage.less';
 import MediaInformation from '../components/MediaInformation';
-
+import CommentList from '../components/CommentList';
 
 export class FilmPage extends React.Component {
   static propTypes = {
@@ -15,6 +16,7 @@ export class FilmPage extends React.Component {
       }),
     }),
     fetchMediaById: PropTypes.func.isRequired,
+    addComment: PropTypes.func.isRequired,
     detailedMedia: PropTypes.shape({
       id: PropTypes.any.isRequired,
       name: PropTypes.string.isRequired,
@@ -38,6 +40,8 @@ export class FilmPage extends React.Component {
     this.props.fetchMediaById(this.props.match.params.id);
   }
 
+  addComment = comment => this.props.addComment(this.props.detailedMedia.id, comment);
+
   render() {
     const { detailedMedia, loading, error } = this.props;
 
@@ -55,14 +59,18 @@ export class FilmPage extends React.Component {
 
     return <div className='media__container'>
       <MediaInformation details={detailedMedia}/>
-      <div className='description__container'>
+      <section className='description__container'>
         <h2>Description</h2>
         <p>{detailedMedia.description}</p>
-      </div>
-      <div>
+      </section>
+      <section>
         <h2>Actors</h2>
         <CoverDisplay onSort={false} hasSearched={true} media={detailedMedia.actors} url='/actor/'/>
-      </div>
+      </section>
+      <section className="filmpage__comments">
+        <h2>Comment section</h2>
+        <CommentList comments={detailedMedia.comments || []} onSubmit={this.addComment}/>
+      </section>
     </div>;
   }
 }
@@ -75,6 +83,7 @@ const mapStateToProps = state => ({
 
 const actionsToProps = {
   fetchMediaById,
+  addComment,
 };
 
 export default connect(mapStateToProps, actionsToProps)(FilmPage);

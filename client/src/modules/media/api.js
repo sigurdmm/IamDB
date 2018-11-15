@@ -1,4 +1,4 @@
-import { query } from '../../utils/api';
+import { mutate, query } from '../../utils/api';
 
 /**
  *
@@ -30,6 +30,10 @@ export const fetchMediaById = id => query(`
         small
         large
       }
+      comments {
+        createdAt
+        text
+      }
     }
   }
 `, { id });
@@ -57,3 +61,33 @@ export const searchMediaByQuery = (queryString, type, limit, offset, sort = {}) 
   sortOn: sort.field || null,
   sortDirection: sort.direction || 1,
 });
+
+export const addCommentToMedia = (id, comment) => mutate(`
+  mutation($id: String!, $comment: String!) {
+    addComment(id: $id, comment: $comment) {
+      id
+      name
+      description
+      imdbid
+      rating
+      type
+      released
+      actors {
+        id
+        name
+        thumbnails {
+          small
+        }
+      }
+      director
+      thumbnails {
+        small
+        large
+      }
+      comments {
+        createdAt
+        text
+      }
+    }
+  }
+`, { id, comment });
