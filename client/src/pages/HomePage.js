@@ -32,7 +32,7 @@ export class HomePage extends React.Component {
     offset: PropTypes.number.isRequired,
     type: PropTypes.string,
     query: PropTypes.string,
-    sort: PropTypes.object,
+    sortField: PropTypes.string,
     sortDirection: PropTypes.number,
     total: PropTypes.number.isRequired,
 
@@ -62,7 +62,12 @@ export class HomePage extends React.Component {
   };
 
   onSearchSubmit = (query) => {
-    const { limit, type } = this.props;
+    const {
+      limit,
+      type,
+      sortField,
+      sortDirection,
+    } = this.props;
 
     /**
      * If no media type is toggled (=== null) use the first buttons value for search
@@ -73,7 +78,7 @@ export class HomePage extends React.Component {
     // Expect to start with a fresh offset,
     // when submitting a new search query
     this.props.updateSearchFields({ query, offset: 0 });
-    this.props.searchMedia(query, type, limit, 0);
+    this.props.searchMedia(query, type, limit, 0, sortField, sortDirection);
   };
 
   onToggle = (button) => {
@@ -88,13 +93,16 @@ export class HomePage extends React.Component {
       sortDirection,
     } = this.props;
 
-    this.props.updateSearchFields({ sort: { field: value, direction: sortDirection } });
+    this.props.updateSearchFields({ sortField: value });
+    console.log(value);
+    console.log(sortDirection);
     this.props.searchMedia(
       query,
       type,
       limit,
       0,
-      { field: value, direction: sortDirection },
+      value,
+      sortDirection,
     );
   };
 
@@ -103,7 +111,7 @@ export class HomePage extends React.Component {
       limit,
       query,
       type,
-      sort,
+      sortField,
     } = this.props;
 
     this.props.updateSearchFields({ sortDirection });
@@ -112,7 +120,8 @@ export class HomePage extends React.Component {
       type,
       limit,
       0,
-      { field: sort.field, direction: sortDirection },
+      sortField,
+      sortDirection,
     );
   };
 
@@ -124,13 +133,14 @@ export class HomePage extends React.Component {
       limit,
       query,
       type,
-      sort,
+      sortField,
+      sortDirection,
     } = this.props;
 
     // Ensure the metadata is updated
     this.props.updateSearchFields({ offset: newOffset });
     // Do the actual search
-    this.props.searchMedia(query, type, limit, newOffset, sort);
+    this.props.searchMedia(query, type, limit, newOffset, sortField, sortDirection);
   };
 
   componentDidMount() {
@@ -188,7 +198,7 @@ const mapStateToProps = state => ({
   allMedia: state.media.allMedia,
   total: state.media.total,
   query: state.media.query,
-  sort: state.media.sort,
+  sortField: state.media.sortField,
   sortDirection: state.media.sortDirection,
   type: state.media.type,
   offset: state.media.offset,
