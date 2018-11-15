@@ -1,4 +1,6 @@
 import {
+  ADD_MEDIA_COMMENT_FAILED,
+  ADD_MEDIA_COMMENT_REQUESTED, ADD_MEDIA_COMMENT_SUCCESS,
   FETCH_MEDIA_DETAILS_FAILED,
   FETCH_MEDIA_DETAILS_REQUESTED,
   FETCH_MEDIA_DETAILS_SUCCESS,
@@ -92,6 +94,26 @@ export default function mediaReducer(state = initialState, action) {
         sort: action.query.sort || state.sort,
         hasSearched: true,
         loading: true,
+      };
+    case ADD_MEDIA_COMMENT_REQUESTED:
+      return {
+        ...state,
+        error: null,
+        loading: true,
+      };
+    case ADD_MEDIA_COMMENT_SUCCESS:
+      return {
+        ...state,
+        detailedMedia: action.media,
+        error: null,
+        loading: false,
+      };
+
+    case ADD_MEDIA_COMMENT_FAILED:
+      return {
+        ...state,
+        error: action.error,
+        loading: false,
       };
     case UPDATE_SEARCH_FIELDS:
       return {
