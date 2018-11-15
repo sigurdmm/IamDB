@@ -12,7 +12,7 @@ const initialState = {
   /**
    * Object containing the search metadata
    * */
-  limit: 4,
+  limit: 10,
   offset: 0,
   type: null,
   query: null,
