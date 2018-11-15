@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Paginator/> should render properly 1`] = `
+<ul
+  class="pagination"
+>
+  <li
+    class="disabled"
+  >
+    <a
+      class=""
+      href="#"
+    >
+      first
+    </a>
+  </li>
+  <li
+    class="disabled"
+  >
+    <a
+      class=""
+      href="#"
+    >
+      prev
+    </a>
+  </li>
+  <li
+    class="active"
+  >
+    <a
+      class="undefined"
+      href="#"
+    >
+      1
+    </a>
+  </li>
+  <li
+    class=""
+  >
+    <a
+      class=""
+      href="#"
+    >
+      2
+    </a>
+  </li>
+  <li
+    class=""
+  >
+    <a
+      class=""
+      href="#"
+    >
+      next
+    </a>
+  </li>
+  <li
+    class=""
+  >
+    <a
+      class=""
+      href="#"
+    >
+      last
+    </a>
+  </li>
+</ul>
+`;
