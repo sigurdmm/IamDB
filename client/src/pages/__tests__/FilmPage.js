@@ -18,10 +18,10 @@ describe('<FilmPage/>', () => {
     const spy = jest.fn();
     const wrapper = render(<FilmPage
       fetchMediaById={spy}
+      addComment={() => null}
       detailedMedia={mockedDetails}
       loading={false}
-      error={null}
-      />);
+      error={null}/>);
 
     expect(wrapper).toMatchSnapshot();
   });

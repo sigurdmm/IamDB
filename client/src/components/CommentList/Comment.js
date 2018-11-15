@@ -9,6 +9,7 @@ const Comment = ({ createdAt, children }) => <div className="comment">
     </strong>
     <p className="comment__text">{children}</p>
   </div>;
+
 Comment.propTypes = {
   createdAt: PropTypes.any,
   children: PropTypes.string,

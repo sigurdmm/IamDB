@@ -5,6 +5,9 @@ import Comment from './Comment';
 
 import './index.less';
 
+/**
+ * Lists up existing comments, and enables users to add additional ones
+ * */
 const CommentList = ({ comments, onSubmit }) => <div className="commentlist">
   <ul className="commentlist__list">
     {comments.map((comment, idx) => <li key={`comment-${idx}`}>
