@@ -42,6 +42,7 @@ export const searchMediaByQuery = (queryString, type, limit, offset, sort = {}) 
         id
         name
         rating
+        released
         thumbnails {
           small
         }

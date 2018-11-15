@@ -24,6 +24,7 @@ export class HomePage extends React.Component {
     offset: PropTypes.number.isRequired,
     type: PropTypes.string,
     query: PropTypes.string,
+    sort: PropTypes.object,
     total: PropTypes.number.isRequired,
 
     allMedia: PropTypes.array,
@@ -51,16 +52,14 @@ export class HomePage extends React.Component {
     hasSearched: PropTypes.bool.isRequired,
   };
 
-  state = { toggled: null };
-
   onSearchSubmit = (query) => {
-    const { limit } = this.props;
+    const { limit, type } = this.props;
 
     /**
      * If no media type is toggled (=== null) use the first buttons value for search
      * else use the toggled buttons value
      */
-    const type = this.state.toggled === null ? toggleButtons[0] : this.state.toggled.value;
+    // const type = this.state.toggled === null ? toggleButtons[0] : this.state.toggled.value;
 
     // Expect to start with a fresh offset,
     // when submitting a new search query
@@ -68,9 +67,26 @@ export class HomePage extends React.Component {
     this.props.searchMedia(query, type, limit, 0);
   };
 
-  onToggle = button => this.setState({ toggled: button });
+  onToggle = (button) => {
+    this.props.updateSearchFields({ type: button.value });
+  };
 
-  onSort = event => console.log(event.target.value);
+  onSort = (value) => {
+    const {
+      limit,
+      query,
+      type,
+    } = this.props;
+
+    this.props.updateSearchFields({ sort: { field: value, direction: -1 } });
+    this.props.searchMedia(
+      query,
+      type,
+      limit,
+      0,
+      { field: value, direction: -1 },
+    );
+  };
 
   /**
    * Updates the search fields with a new offset value
@@ -80,12 +96,13 @@ export class HomePage extends React.Component {
       limit,
       query,
       type,
+      sort,
     } = this.props;
 
     // Ensure the metadata is updated
     this.props.updateSearchFields({ offset: newOffset });
     // Do the actual search
-    this.props.searchMedia(query, type, limit, newOffset);
+    this.props.searchMedia(query, type, limit, newOffset, sort);
   };
 
   componentDidMount() {
@@ -107,7 +124,7 @@ export class HomePage extends React.Component {
         <SearchBar
           onSubmit={this.onSearchSubmit}
           onToggle={this.onToggle}
-          toggled={this.state.toggled}
+          toggled={this.props.type}
           buttons={toggleButtons}
         />
         <CoverDisplay

@@ -18,11 +18,7 @@ exports[`<SearchBar/> should load properly 1`] = `
       ]
     }
     onToggle={[MockFunction]}
-    toggled={
-      Object {
-        "toggled": null,
-      }
-    }
+    toggled="2"
   />
   <Formik
     enableReinitialize={false}

@@ -12,17 +12,26 @@ const getRating = (rating) => {
   return (null);
 };
 
+const getTitleAndYear = (title, released) => {
+  if (typeof released === 'undefined') {
+    return <div className='cover__overlay__title'>{title}</div>;
+  }
+  const timestamp = new Date(parseInt(released, 10));
+  return <div className='cover__overlay__title'>{`${title} (${timestamp.getFullYear()})`}</div>;
+};
+
 const CoverImage = ({
   thumbnail,
   title,
   rating,
+  released,
   id,
 }) => <div className='cover'>
   <Link to={`/media/${id}`}>
     <img className='cover__thumbnail' src={thumbnail || defaultImage}/>
   </Link>
   <div className='cover__overlay'>
-    <div className='cover__overlay__title'>{title}</div>
+    {getTitleAndYear(title, released)}
     {getRating(rating)}
   </div>
 </div>;
@@ -34,6 +43,7 @@ CoverImage.propTypes = {
     PropTypes.bool,
     PropTypes.number,
   ]),
+  released: PropTypes.any,
   id: PropTypes.string,
 };
 
