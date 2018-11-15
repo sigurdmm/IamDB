@@ -44,11 +44,9 @@ exports[`<FilmPage/> should render properly 1`] = `
     <h2>
       Actors
     </h2>
-    <div>
-      <div
-        class="coverdisplay"
-      />
-    </div>
+    <div
+      class="coverdisplay"
+    />
   </div>
 </div>
 `;
