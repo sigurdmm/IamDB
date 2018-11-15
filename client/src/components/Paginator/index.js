@@ -13,7 +13,6 @@ const Paginator = (props) => {
     total,
     onPagination,
   } = props;
-  console.info(`offset: ${offset}, limit: ${limit}, total: ${total}`);
 
   const pageCount = 5;
 

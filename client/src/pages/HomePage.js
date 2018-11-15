@@ -48,9 +48,12 @@ export class HomePage extends React.Component {
   state = { toggled: 0 };
 
   onSearchSubmit = (query) => {
-    const offset = this.props.offset || 0;
-    this.props.updateSearchFields({ query });
-    this.props.searchMedia(query, null, 3, offset);
+    const { limit, type } = this.props;
+
+    // Expect to start with a fresh offset,
+    // when submitting a new search query
+    this.props.updateSearchFields({ query, offset: 0 });
+    this.props.searchMedia(query, type, limit, 0);
   };
 
   onToggle = id => this.setState({ toggled: id });

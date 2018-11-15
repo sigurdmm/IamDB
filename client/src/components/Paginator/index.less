@@ -1,7 +1,6 @@
 @import '../../constants';
 
 .pagination {
-  background-color: @backgroundColor;
   display: inline-block;
   padding-left: 0;
   margin: 20px 0;
@@ -22,8 +21,8 @@
       line-height: 1.42857143;
       text-decoration: none;
       color: @primaryColor;
-      background-color: #fff;
-      border: 1px solid #ddd;
+      background-color: @backgroundColor;
+      border: 1px solid @backgroundColor;
       margin-left: -1px;
     }
   }
@@ -42,9 +41,9 @@
   .disabled > a,
   .disabled > a:focus,
   .disabled > a:hover {
-    color: #777;
-    background-color: #fff;
-    border-color: #ddd;
+    color: @textPrimaryColor;
+    background-color: @backgroundColor;
+    border-color: @backgroundColor;
     cursor: not-allowed;
   }
 
@@ -52,9 +51,9 @@
   .active > a:focus,
   .active > a:hover {
     z-index: 3;
-    color: #fff;
-    background-color: #337ab7;
-    border-color: #337ab7;
+    color: @textLightColor;
+    background-color: @primaryColor;
+    border-color: @primaryColor;
     cursor: default;
   }
 }
