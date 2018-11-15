@@ -8,20 +8,10 @@ import {
 import './index.less';
 import PropTypes from 'prop-types';
 import icon from './search.svg';
-import ToggleButtonGroup from './ToggleButtonGroup';
 
 const SearchBar = ({
   onSubmit,
-  toggled,
-  onToggle,
-  buttons,
-}) => <div className='filterandsearch'>
-  <ToggleButtonGroup
-    toggled={toggled}
-    onToggle={onToggle}
-    buttons={buttons}
-  />
-  <Formik
+}) => <Formik
     initialValues={{ search: '' }}
     validate={(values) => {
       const errors = {};
@@ -47,17 +37,10 @@ const SearchBar = ({
       </Form>
       <ErrorMessage className={'error'} name="search" component="div"/>
     </div>
-  </Formik>
-</div>;
+  </Formik>;
 
 SearchBar.propTypes = {
   onSubmit: PropTypes.func.isRequired,
-  onToggle: PropTypes.func.isRequired,
-  toggled: PropTypes.string,
-  buttons: PropTypes.arrayOf(PropTypes.shape({
-    label: PropTypes.string.isRequired,
-    value: PropTypes.string,
-  })),
 };
 
 export default SearchBar;

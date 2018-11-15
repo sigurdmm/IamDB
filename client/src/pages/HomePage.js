@@ -8,6 +8,7 @@ import SearchBar from '../components/SearchBar/index';
 import CoverDisplay from '../components/CoverDisplay/index';
 import ApplicationAnimationCover from '../components/ApplicationAnimationCover';
 import Paginator from '../components/Paginator';
+import ToggleButtonGroup from '../components/SearchBar/ToggleButtonGroup';
 
 const toggleButtons = [
   { label: 'All', value: null },
@@ -121,12 +122,16 @@ export class HomePage extends React.Component {
     return <>
       <ApplicationAnimationCover/>
       <main className="homepage">
-        <SearchBar
-          onSubmit={this.onSearchSubmit}
-          onToggle={this.onToggle}
-          toggled={this.props.type}
-          buttons={toggleButtons}
-        />
+        <div className='filterandsearch'>
+          <ToggleButtonGroup
+            toggled={this.props.type}
+            onToggle={this.onToggle}
+            buttons={toggleButtons}
+          />
+          <SearchBar
+            onSubmit={this.onSearchSubmit}
+          />
+        </div>
         <CoverDisplay
           media={allMedia}
           hasSearched={hasSearched}
