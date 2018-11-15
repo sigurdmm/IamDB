@@ -8,7 +8,7 @@ const mockedState = {
     { label: 'label1', value: 'value1' },
     { label: 'label2', value: 'value2' },
     { label: 'label3', value: 'value3' }],
-  toggled: { label: 'label1', value: 'value1' },
+  toggled: 'value1',
   onToggle: jest.fn(),
 };
 
