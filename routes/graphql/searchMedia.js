@@ -141,7 +141,7 @@ async function fetchAndSaveMedia(query) {
     // Keep only movie or series from results
     .filter(m => ['movie', 'series'].includes(m.type))
     // We can assume only the first 10 is relevant (and likely even fever)
-    .slice(0, 25)
+    .slice(0, 30)
     .map(fetchMediaDetails)
   );
 
@@ -175,8 +175,8 @@ async function fetchAndSaveMedia(query) {
  * */
 const searchMedia = async ({ query, offset = 0, limit = 20, sortOn = null, sortDirection = 1, type = null }) => {
   console.info(`[Search Media] query: ${query}, offset: ${offset}, limit: ${limit}`);
-  if (query.length < 3) {
-    throw new Error(`Search phrase is too short. Must be minimum 3 chars long, your's is ${query.length}`);
+  if (query.length < 1) {
+    throw new Error(`Search phrase is too short. Must be minimum 1 char long, your's is ${query.length}`);
   }
 
   let foundMedia = await Media.textSearch(
@@ -192,9 +192,10 @@ const searchMedia = async ({ query, offset = 0, limit = 20, sortOn = null, sortD
 
   const { results } = foundMedia;
 
-  // Exit early if we found some data, or we risked
-  // filtering out our stored data
-  if (results.length > 2 || offset > 0 || limit <= 2) {
+  // Exit early if we found some data,
+  // or the current query has some values,
+  // that would make it likely that no data will be retrieved
+  if (results.length > 2 || offset > 0 || limit <= 2 || query.length < 4) {
     return foundMedia;
   }
 

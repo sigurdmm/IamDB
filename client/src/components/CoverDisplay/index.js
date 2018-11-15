@@ -7,6 +7,7 @@ import SortingSelector from './SortingSelector';
 export default class CoverDisplay extends PureComponent {
   static propTypes = {
     media: PropTypes.array,
+    pagination: PropTypes.element,
     hasSearched: PropTypes.bool.isRequired,
     onSort: PropTypes.func.isRequired,
   };
@@ -25,6 +26,7 @@ export default class CoverDisplay extends PureComponent {
 
     return <div>
       <SortingSelector sortingMethods={['Rating', 'Year', 'Alphabetical']} onSort={this.props.onSort}/>
+
       <div className='coverdisplay'>
         {media.map((cover, i) => <CoverImage
           thumbnail={cover.thumbnails ? cover.thumbnails.small : null}
@@ -34,6 +36,7 @@ export default class CoverDisplay extends PureComponent {
           key={`cover-${i}`}/>)
         }
       </div>
+      {media.length > 0 && this.props.pagination}
     </div>;
   }
 }

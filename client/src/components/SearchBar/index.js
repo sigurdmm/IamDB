@@ -22,25 +22,25 @@ const SearchBar = ({
     buttons={buttons}
   />
   <Formik
-  initialValues={{ search: '' }}
-  validate={(values) => {
-    const errors = {};
-    if (!values.search) {
-      errors.search = 'Search input can\'t be empty';
-    }
-    return errors;
-  }}
-  onSubmit={(values) => {
-    onSubmit(values.search);
-  }}
-  >
+    initialValues={{ search: '' }}
+    validate={(values) => {
+      const errors = {};
+      if (!values.search) {
+        errors.search = 'Search input can\'t be empty';
+      }
+      return errors;
+    }}
+    onSubmit={(values) => {
+      onSubmit(values.search);
+    }}>
     <div>
       <Form className="searchbar">
         <Field
           type="field"
           className="searchbar__field"
           placeholder="The dark knight rises"
-          name="search"/>
+          name="search"
+          autoFocus/>
         <button type="submit" className="searchbar__submit">
           <img src={icon}/>
         </button>
@@ -48,7 +48,7 @@ const SearchBar = ({
       <ErrorMessage className={'error'} name="search" component="div"/>
     </div>
   </Formik>
-  </div>;
+</div>;
 
 SearchBar.propTypes = {
   onSubmit: PropTypes.func.isRequired,
