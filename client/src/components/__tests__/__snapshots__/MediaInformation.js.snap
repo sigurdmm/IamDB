@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<InformationSection/> should render properly 1`] = `
+exports[`<MediaInformation/> should render properly 1`] = `
 <div
   class="information__container"
 >
@@ -22,6 +22,12 @@ exports[`<InformationSection/> should render properly 1`] = `
     </div>
     <h3>
       ⭐️: 8.8
+    </h3>
+    <h3>
+      🎥: movie
+    </h3>
+    <h3>
+      🎬: director
     </h3>
   </div>
 </div>

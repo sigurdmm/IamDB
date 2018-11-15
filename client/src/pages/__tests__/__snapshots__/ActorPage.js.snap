@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ActorPage/> should render properly 1`] = `
+<div
+  class="media__container"
+>
+  <div
+    class="information__container"
+  >
+    <div
+      class="mediaimage"
+    >
+      <img
+        class="image__item"
+        src="no-image-found.jpg"
+      />
+    </div>
+    <div>
+      <div
+        class="title__container"
+      >
+        <h2 />
+      </div>
+      <h3>
+        ⭐️: 0
+      </h3>
+    </div>
+  </div>
+  <div>
+    <h2>
+      Known for
+    </h2>
+    <div>
+      <select
+        name="select"
+      >
+        <option
+          value="Rating"
+        >
+          Rating
+        </option>
+        <option
+          value="Year"
+        >
+          Year
+        </option>
+        <option
+          value="Alphabetical"
+        >
+          Alphabetical
+        </option>
+      </select>
+      <div
+        class="coverdisplay"
+      />
+    </div>
+  </div>
+</div>
+`;

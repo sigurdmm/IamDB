@@ -8,8 +8,6 @@ const mockedDetails = {
   },
   name: 'title',
   rating: 8.8,
-  type: 'movie',
-  director: 'director',
 };
 
 describe('<InformationSection/>', () => {

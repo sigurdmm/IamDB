@@ -12,5 +12,10 @@ exports[`<Router/> renders properly 1`] = `
     exact={true}
     path="/media/:id"
   />
+  <Route
+    component={[Function]}
+    exact={true}
+    path="/actor/:id"
+  />
 </Switch>
 `;

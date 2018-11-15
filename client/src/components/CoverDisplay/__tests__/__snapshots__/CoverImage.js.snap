@@ -5,7 +5,7 @@ exports[`<CoverImage/> should render img, when link does not exist 1`] = `
   class="cover"
 >
   <a
-    href="/media/1"
+    href="/url"
   >
     <img
       class="cover__thumbnail"
@@ -34,7 +34,7 @@ exports[`<CoverImage/> should render img, when link exists 1`] = `
   class="cover"
 >
   <a
-    href="/media/1"
+    href="/url"
   >
     <img
       class="cover__thumbnail"
