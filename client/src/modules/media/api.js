@@ -34,6 +34,26 @@ export const fetchMediaById = id => query(`
   }
 `, { id });
 
+export const fetchActorById = id => query(`
+  query($id: String!) {
+    getActor(id: $id) {
+      id
+      name
+      media {
+        id
+        name
+        thumbnails {
+          small
+        }
+      }
+      thumbnails {
+        small
+      }
+      popularity
+    }
+  }
+`, { id });
+
 export const searchMediaByQuery = (queryString, type, limit, offset, sort = {}) => query(`
   query($query: String!, $limit: Int = 50, $offset: Int = 0, $sortOn: String = "rating", $sortDirection: Int = 1, $type: String = null) {
     searchMedia(query: $query, limit: $limit, offset: $offset, sortOn: $sortOn, sortDirection: $sortDirection, type: $type) {
