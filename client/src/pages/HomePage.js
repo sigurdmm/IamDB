@@ -52,7 +52,7 @@ export class HomePage extends React.Component {
 
   onToggle = button => this.setState({ toggled: button });
 
-  onSort = event => console.log(event.target.value);
+  onSort = event => event;
 
   componentDidMount() {
     this.setState({ toggled: toggleButtons[0] });
