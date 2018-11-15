@@ -2,13 +2,16 @@
 
 exports[`<Header/> renders with children 1`] = `
 <header
-  class="undefined header"
+  class=" header"
 >
-  <h1
+  <a
     class="header__title"
+    href="/"
   >
-    Hello world
-  </h1>
+    <h1>
+      Hello world
+    </h1>
+  </a>
   <nav>
     <a
       href="#1"
@@ -26,12 +29,15 @@ exports[`<Header/> renders with children 1`] = `
 
 exports[`<Header/> renders without children 1`] = `
 <header
-  class="undefined header"
+  class=" header"
 >
-  <h1
+  <a
     class="header__title"
+    href="/"
   >
-    Hello world
-  </h1>
+    <h1>
+      Hello world
+    </h1>
+  </a>
 </header>
 `;
