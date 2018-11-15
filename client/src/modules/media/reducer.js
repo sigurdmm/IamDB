@@ -3,10 +3,6 @@ import {
   FETCH_MEDIA_DETAILS_REQUESTED,
   FETCH_MEDIA_DETAILS_SUCCESS,
 
-  FETCH_ACTOR_DETAILS_FAILED,
-  FETCH_ACTOR_DETAILS_REQUESTED,
-  FETCH_ACTOR_DETAILS_SUCCESS,
-
   SEARCH_MEDIA_FAILED,
   SEARCH_MEDIA_REQUESTED,
   SEARCH_MEDIA_SUCCESS,
@@ -39,12 +35,6 @@ const initialState = {
     actors: [],
     thumbnails: {},
   },
-  detailedActor: {
-    id: -1,
-    name: '',
-    media: [],
-    thumbnails: {},
-  },
   loading: true,
   error: null,
   /**
@@ -71,24 +61,6 @@ export default function mediaReducer(state = initialState, action) {
         loading: false,
       };
     case FETCH_MEDIA_DETAILS_FAILED:
-      return {
-        ...state,
-        error: action.error,
-        loading: false,
-      };
-    case FETCH_ACTOR_DETAILS_REQUESTED:
-      return {
-        ...state,
-        detailedActor: Object.assign(initialState.detailedActor, { id: action.actor.id }),
-        loading: true,
-      };
-    case FETCH_ACTOR_DETAILS_SUCCESS:
-      return {
-        ...state,
-        detailedActor: action.actor,
-        loading: false,
-      };
-    case FETCH_ACTOR_DETAILS_FAILED:
       return {
         ...state,
         error: action.error,

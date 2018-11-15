@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchActorById } from '../modules/media/actions';
+import { fetchActorById } from '../modules/actor/actorActions';
 import ActorInformation from '../components/ActorInformation';
 import CoverDisplay from '../components/CoverDisplay/index';
 import './FilmPage.less';
@@ -50,16 +50,16 @@ export class ActorPage extends React.Component {
       <ActorInformation details={detailedActor}/>
       <div>
         <h2>Known for</h2>
-        <CoverDisplay hasSearched={true} media={detailedActor.media} url='/media/'/>
+        <CoverDisplay onSort={false} hasSearched={true} media={detailedActor.media} url='/media/'/>
       </div>
     </div>;
   }
 }
 
 const mapStateToProps = state => ({
-  detailedActor: state.media.detailedActor,
-  loading: state.media.loading,
-  error: state.media.error,
+  detailedActor: state.actor.detailedActor,
+  loading: state.actor.loading,
+  error: state.actor.error,
 });
 
 const actionsToProps = {

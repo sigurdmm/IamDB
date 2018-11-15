@@ -3,15 +3,12 @@ import {
   FETCH_MEDIA_DETAILS_FAILED,
   FETCH_MEDIA_DETAILS_REQUESTED,
   FETCH_MEDIA_DETAILS_SUCCESS,
-  FETCH_ACTOR_DETAILS_FAILED,
-  FETCH_ACTOR_DETAILS_REQUESTED,
-  FETCH_ACTOR_DETAILS_SUCCESS,
   SEARCH_MEDIA_REQUESTED,
   SEARCH_MEDIA_SUCCESS,
   SEARCH_MEDIA_FAILED,
 } from './constants';
 
-import { fetchMediaById, searchMediaByQuery, fetchActorById } from './api';
+import { fetchMediaById, searchMediaByQuery } from './api';
 
 function* fetchMedia(action) {
   const { id } = action.media;
@@ -36,26 +33,6 @@ function* fetchMedia(action) {
     yield put({ type: FETCH_MEDIA_DETAILS_FAILED, error: e.text || e.message });
   }
 }
-
-function* fetchActor(action) {
-  const { id } = action.actor;
-  try {
-    const actor = yield call(fetchActorById, id);
-    if (actor.error) {
-      yield put({ error: actor.error, type: FETCH_ACTOR_DETAILS_FAILED });
-      return;
-    }
-    if (actor.getActor === null) {
-      yield put({ error: `Cannot find actor with id: ${id}`, type: FETCH_ACTOR_DETAILS_FAILED });
-      return;
-    }
-    yield put({ actor: actor.getActor, type: FETCH_ACTOR_DETAILS_SUCCESS });
-  } catch (e) {
-    yield put({ type: FETCH_ACTOR_DETAILS_FAILED, error: e.message });
-  }
-}
-
-
 function* searchMedia(action) {
   const {
     query,
@@ -91,7 +68,6 @@ function* mediaSaga() {
   // Optionally could we use takeEvery, but we only care about the latest request
   yield takeLatest(FETCH_MEDIA_DETAILS_REQUESTED, fetchMedia);
   yield takeLatest(SEARCH_MEDIA_REQUESTED, searchMedia);
-  yield takeLatest(FETCH_ACTOR_DETAILS_REQUESTED, fetchActor);
 }
 
 export default mediaSaga;
