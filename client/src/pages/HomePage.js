@@ -169,6 +169,7 @@ export class HomePage extends React.Component {
           directionValue={sortDirection}
           onDirectionClick={this.onDirectionClick}
           onSort={this.onSort}
+          visible={this.props.hasSearched}
           sortingMethods={sortOptions}/>
         <CoverDisplay
           media={allMedia}
