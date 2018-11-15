@@ -69,7 +69,6 @@ export class FilmPage extends React.Component {
 
       <section className="filmpage__comments">
         <h2>Comment section</h2>
-
         <CommentList comments={detailedMedia.comments || []} onSubmit={this.addComment}/>
       </section>
     </div>;
