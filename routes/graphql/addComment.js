@@ -30,7 +30,7 @@ async function addComment({ id, comment }) {
     throw new Error(`Comments cannot be less than ${lengthThreshold} characters, your's was: ${comment.length}`);
   }
 
-  const media = await Media.findById(id);
+  const media = await Media.findById(id).populate('actors').exec();
 
   if (media === null) {
     throw new Error(`Cannot find any media with id: ${id}`);

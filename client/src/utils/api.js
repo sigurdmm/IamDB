@@ -62,6 +62,20 @@ export const query = async (queryStr, variables = {}) => {
 };
 
 // Handler for mutations
-// export const mutate = async (queryStr, variables = {}) => {
-//
-// };
+export const mutate = async (queryStr, variables = {}) => fetch(
+  apiHost,
+  {
+    method: 'post',
+    body: JSON.stringify({
+      variables: JSON.stringify(variables),
+      query: queryStr,
+    }),
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+    },
+    credentials: 'same-origin',
+  },
+)
+  .then(errorHandler)
+  .then(successHandler)
+  .then(body => body.data);

@@ -6,9 +6,12 @@ import {
   SEARCH_MEDIA_REQUESTED,
   SEARCH_MEDIA_SUCCESS,
   SEARCH_MEDIA_FAILED,
+  ADD_MEDIA_COMMENT_FAILED,
+  ADD_MEDIA_COMMENT_SUCCESS,
+  ADD_MEDIA_COMMENT_REQUESTED,
 } from './constants';
 
-import { fetchMediaById, searchMediaByQuery } from './api';
+import { addCommentToMedia, fetchMediaById, searchMediaByQuery } from './api';
 
 function* fetchMedia(action) {
   const { id } = action.media;
@@ -65,10 +68,24 @@ function* searchMedia(action) {
   }
 }
 
+function* addComment(action) {
+  const { mediaId, comment } = action;
+
+  try {
+    const media = yield call(addCommentToMedia, mediaId, comment);
+
+    yield put({ media: media.addComment, type: ADD_MEDIA_COMMENT_SUCCESS });
+  } catch (err) {
+    console.error(`Could not add comment to media: ${mediaId}`, err);
+    yield put({ type: ADD_MEDIA_COMMENT_FAILED, error: err.text || err.message });
+  }
+}
+
 function* mediaSaga() {
   // Optionally could we use takeEvery, but we only care about the latest request
   yield takeLatest(FETCH_MEDIA_DETAILS_REQUESTED, fetchMedia);
   yield takeLatest(SEARCH_MEDIA_REQUESTED, searchMedia);
+  yield takeLatest(ADD_MEDIA_COMMENT_REQUESTED, addComment);
 }
 
 export default mediaSaga;
