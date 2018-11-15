@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchMediaById } from '../modules/media/actions';
-import InformationSection from '../components/InformationSection/index';
 import CoverDisplay from '../components/CoverDisplay/index';
 import './FilmPage.less';
+import MediaInformation from '../components/MediaInformation';
 
 
 export class FilmPage extends React.Component {
@@ -54,14 +54,14 @@ export class FilmPage extends React.Component {
     }
 
     return <div className='media__container'>
-      <InformationSection details={detailedMedia}/>
+      <MediaInformation details={detailedMedia}/>
       <div className='description__container'>
         <h2>Description</h2>
         <p>{detailedMedia.description}</p>
       </div>
       <div>
         <h2>Actors</h2>
-        <CoverDisplay hasSearched={true} media={detailedMedia.actors}/>
+        <CoverDisplay hasSearched={true} media={detailedMedia.actors} url='/actor/'/>
       </div>
     </div>;
   }

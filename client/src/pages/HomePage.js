@@ -59,7 +59,9 @@ export class HomePage extends React.Component {
             content: 'TV Show',
           },
         ]}/>
-        <CoverDisplay media={this.props.allMedia} hasSearched={this.props.hasSearched}/>
+        <CoverDisplay media={this.props.allMedia}
+                      hasSearched={this.props.hasSearched}
+                      url='/media/'/>
     </main>
     </>;
   }
