@@ -8,10 +8,12 @@ const Sorting = ({
   onDirectionClick,
   sortingMethods,
   onSort,
+  fieldValue,
 }) => <div className='sortingbar'>
     <SortingSelector
       sortingMethods={sortingMethods}
       onSort={onSort}
+      fieldValue={fieldValue}
     />
     <button
       className='sortingbar__direction'
@@ -26,6 +28,7 @@ const Sorting = ({
 
 Sorting.propTypes = {
   directionValue: PropTypes.number.isRequired,
+  fieldValue: PropTypes.string.isRequired,
   onDirectionClick: PropTypes.func.isRequired,
   onSort: PropTypes.func.isRequired,
   sortingMethods: PropTypes.arrayOf(PropTypes.shape({

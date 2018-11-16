@@ -136,7 +136,7 @@ export class HomePage extends React.Component {
 
   render() {
     const {
-      total, offset, limit, allMedia, sortDirection, error, loading,
+      total, offset, limit, allMedia, sortDirection, sortField, error, loading,
     } = this.props;
 
     return <>
@@ -156,6 +156,7 @@ export class HomePage extends React.Component {
 
         {this.receivedNoError() && <Sorting
           directionValue={sortDirection}
+          fieldValue={sortField}
           onDirectionClick={this.onDirectionClick}
           onSort={this.onSort}
           sortingMethods={sortOptions}/>
