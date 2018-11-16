@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ToggleButtonGroup/> should load properly 1`] = `
+<div
+  className="togglebuttons"
+>
+  <ToggleButton
+    active={true}
+    key="togglebutton-0"
+    onClick={[Function]}
+  >
+    label1
+  </ToggleButton>
+  <ToggleButton
+    active={false}
+    key="togglebutton-1"
+    onClick={[Function]}
+  >
+    label2
+  </ToggleButton>
+  <ToggleButton
+    active={false}
+    key="togglebutton-2"
+    onClick={[Function]}
+  >
+    label3
+  </ToggleButton>
+</div>
+`;

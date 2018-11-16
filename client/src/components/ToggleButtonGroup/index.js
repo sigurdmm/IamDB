@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import './ToggleButtonGroup.less';
+import './index.less';
 import PropTypes from 'prop-types';
 import ToggleButton from './ToggleButton';
 
@@ -20,7 +20,7 @@ export default class ToggleButtonGroup extends PureComponent {
     if (button.value === this.props.toggled) {
       return;
     }
-    this.props.onToggle(button);
+    this.props.onToggle(button.value);
   };
 
   render() {
