@@ -48,5 +48,9 @@ module.exports = {
       lines: 20,
       functions: 25
     }
+    /**
+     * Requires canvas, which makes it difficult to test in Jest
+     * */
+    // 'src/components/WordCloud/index.js': {}
   }
 };
