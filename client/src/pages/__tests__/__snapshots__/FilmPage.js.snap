@@ -44,32 +44,9 @@ exports[`<FilmPage/> should render properly 1`] = `
     <h2>
       Actors
     </h2>
-    <div>
-      <div>
-        <select
-          name="select"
-        >
-          <option
-            value="rating"
-          >
-            Rating
-          </option>
-          <option
-            value="released"
-          >
-            Year
-          </option>
-          <option
-            value="name"
-          >
-            Name
-          </option>
-        </select>
-      </div>
-      <div
-        class="coverdisplay"
-      />
-    </div>
+    <div
+      class="coverdisplay"
+    />
   </section>
   <section
     class="filmpage__comments"

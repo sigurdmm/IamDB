@@ -8,11 +8,19 @@ import SearchBar from '../components/SearchBar/index';
 import CoverDisplay from '../components/CoverDisplay/index';
 import ApplicationAnimationCover from '../components/ApplicationAnimationCover';
 import Paginator from '../components/Paginator';
+import ToggleButtonGroup from '../components/ToggleButtonGroup/index';
+import Sorting from '../components/Sorting';
 
 const toggleButtons = [
   { label: 'All', value: null },
   { label: 'Movies', value: 'movie' },
   { label: 'TV Shows', value: 'series' },
+];
+
+const sortOptions = [
+  { label: 'Rating', value: 'rating' },
+  { label: 'Released', value: 'released' },
+  { label: 'Name', value: 'name' },
 ];
 
 export class HomePage extends React.Component {
@@ -24,7 +32,8 @@ export class HomePage extends React.Component {
     offset: PropTypes.number.isRequired,
     type: PropTypes.string,
     query: PropTypes.string,
-    sort: PropTypes.object,
+    sortField: PropTypes.string,
+    sortDirection: PropTypes.number,
     total: PropTypes.number.isRequired,
 
     allMedia: PropTypes.array,
@@ -52,40 +61,48 @@ export class HomePage extends React.Component {
     hasSearched: PropTypes.bool.isRequired,
   };
 
-  onSearchSubmit = (query) => {
-    const { limit, type } = this.props;
+  onSearchSubmit = (newQuery) => {
+    const {
+      limit, type, sortField, sortDirection,
+    } = this.props;
 
     /**
      * If no media type is toggled (=== null) use the first buttons value for search
      * else use the toggled buttons value
      */
-    // const type = this.state.toggled === null ? toggleButtons[0] : this.state.toggled.value;
 
     // Expect to start with a fresh offset,
     // when submitting a new search query
-    this.props.updateSearchFields({ query, offset: 0 });
-    this.props.searchMedia(query, type, limit, 0);
+    this.props.updateSearchFields({ query: newQuery, offset: 0 });
+    this.props.searchMedia(newQuery, type, limit, 0, sortField, sortDirection);
   };
 
-  onToggle = (button) => {
-    this.props.updateSearchFields({ type: button.value });
-  };
-
-  onSort = (value) => {
+  onToggle = (newType) => {
     const {
-      limit,
-      query,
-      type,
+      limit, query, sortField, sortDirection,
     } = this.props;
 
-    this.props.updateSearchFields({ sort: { field: value, direction: -1 } });
-    this.props.searchMedia(
-      query,
-      type,
-      limit,
-      0,
-      { field: value, direction: -1 },
-    );
+    this.props.updateSearchFields({ type: newType });
+    this.props.searchMedia(query, newType, limit, 0, sortField, sortDirection);
+  };
+
+  onSort = (newSortField) => {
+    const {
+      limit, query, type, sortDirection,
+    } = this.props;
+
+    this.props.updateSearchFields({ sortField: newSortField });
+
+    this.props.searchMedia(query, type, limit, 0, newSortField, sortDirection);
+  };
+
+  onDirectionClick = (newSortDirection) => {
+    const {
+      limit, query, type, sortField,
+    } = this.props;
+
+    this.props.updateSearchFields({ sortDirection: newSortDirection });
+    this.props.searchMedia(query, type, limit, 0, sortField, newSortDirection);
   };
 
   /**
@@ -93,45 +110,43 @@ export class HomePage extends React.Component {
    * */
   doPagination = (newOffset) => {
     const {
-      limit,
-      query,
-      type,
-      sort,
+      limit, query, type, sortField, sortDirection,
     } = this.props;
 
     // Ensure the metadata is updated
     this.props.updateSearchFields({ offset: newOffset });
     // Do the actual search
-    this.props.searchMedia(query, type, limit, newOffset, sort);
+    this.props.searchMedia(query, type, limit, newOffset, sortField, sortDirection);
   };
-
-  componentDidMount() {
-    this.setState({ toggled: toggleButtons[0] });
-  }
 
   render() {
     const {
-      total,
-      offset,
-      limit,
-      allMedia,
-      hasSearched,
+      total, offset, limit, allMedia, hasSearched, sortDirection,
     } = this.props;
 
     return <>
       <ApplicationAnimationCover/>
       <main className="homepage">
-        <SearchBar
-          onSubmit={this.onSearchSubmit}
-          onToggle={this.onToggle}
-          toggled={this.props.type}
-          buttons={toggleButtons}
-        />
+        <div className='filterandsearch'>
+          <ToggleButtonGroup
+            toggled={this.props.type}
+            onToggle={this.onToggle}
+            buttons={toggleButtons}
+          />
+          <SearchBar
+            onSubmit={this.onSearchSubmit}
+          />
+        </div>
+        <Sorting
+          directionValue={sortDirection}
+          onDirectionClick={this.onDirectionClick}
+          onSort={this.onSort}
+          visible={this.props.hasSearched}
+          sortingMethods={sortOptions}/>
         <CoverDisplay
           media={allMedia}
           hasSearched={hasSearched}
           url='/media/'
-          onSort={this.onSort}
           pagination={
             <Paginator
               limit={limit}
@@ -149,7 +164,8 @@ const mapStateToProps = state => ({
   allMedia: state.media.allMedia,
   total: state.media.total,
   query: state.media.query,
-  sort: state.media.sort,
+  sortField: state.media.sortField,
+  sortDirection: state.media.sortDirection,
   type: state.media.type,
   offset: state.media.offset,
   limit: state.media.limit,

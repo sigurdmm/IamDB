@@ -7,17 +7,17 @@ import './CoverImage.less';
 
 const getRating = (rating) => {
   if (typeof rating !== 'undefined') {
-    return <div className='cover__overlay__rating'>{rating}/10</div>;
+    return <em className='cover__overlay__rating'>{rating}/10</em>;
   }
   return (null);
 };
 
 const getTitleAndYear = (title, released) => {
   if (typeof released === 'undefined') {
-    return <div className='cover__overlay__title'>{title}</div>;
+    return <strong className='cover__overlay__title'>{title}</strong>;
   }
   const timestamp = new Date(parseInt(released, 10));
-  return <div className='cover__overlay__title'>{`${title} (${timestamp.getFullYear()})`}</div>;
+  return <strong className='cover__overlay__title'>{`${title} (${timestamp.getFullYear()})`}</strong>;
 };
 
 const CoverImage = ({
@@ -26,14 +26,15 @@ const CoverImage = ({
   rating,
   released,
   url,
-}) => <div className='cover'>
+}) => <div className={`cover ${!thumbnail ? 'cover--inverse' : ''}`}>
   <Link to={url}>
     <img className='cover__thumbnail' src={thumbnail || defaultImage}/>
+
+    <div className='cover__overlay'>
+      {getTitleAndYear(title, released)}
+      {getRating(rating)}
+    </div>
   </Link>
-  <div className='cover__overlay'>
-    {getTitleAndYear(title, released)}
-    {getRating(rating)}
-  </div>
 </div>;
 
 CoverImage.propTypes = {

@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Sorting/> should render properly 1`] = `
+<div
+  className="sortingbar"
+>
+  <SortingSelector
+    onSort={[MockFunction]}
+    sortingMethods={
+      Array [
+        Object {
+          "label": "label",
+          "value": "value",
+        },
+        Object {
+          "label": "label2",
+          "value": "value2",
+        },
+      ]
+    }
+  />
+  <button
+    className="sortingbar__direction"
+    onClick={[Function]}
+    value={1}
+  >
+    ▲
+  </button>
+</div>
+`;

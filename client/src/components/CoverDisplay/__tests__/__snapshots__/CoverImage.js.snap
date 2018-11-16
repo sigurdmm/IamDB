@@ -2,7 +2,7 @@
 
 exports[`<CoverImage/> should render img, when link does not exist 1`] = `
 <div
-  class="cover"
+  class="cover cover--inverse"
 >
   <a
     href="/url"
@@ -11,27 +11,27 @@ exports[`<CoverImage/> should render img, when link does not exist 1`] = `
       class="cover__thumbnail"
       src="no-image-found.jpg"
     />
+    <div
+      class="cover__overlay"
+    >
+      <strong
+        class="cover__overlay__title"
+      >
+        title
+      </strong>
+      <em
+        class="cover__overlay__rating"
+      >
+        3/10
+      </em>
+    </div>
   </a>
-  <div
-    class="cover__overlay"
-  >
-    <div
-      class="cover__overlay__title"
-    >
-      title
-    </div>
-    <div
-      class="cover__overlay__rating"
-    >
-      3/10
-    </div>
-  </div>
 </div>
 `;
 
 exports[`<CoverImage/> should render img, when link exists 1`] = `
 <div
-  class="cover"
+  class="cover "
 >
   <a
     href="/url"
@@ -40,20 +40,20 @@ exports[`<CoverImage/> should render img, when link exists 1`] = `
       class="cover__thumbnail"
       src="https://example.com/test.jpg"
     />
+    <div
+      class="cover__overlay"
+    >
+      <strong
+        class="cover__overlay__title"
+      >
+        title
+      </strong>
+      <em
+        class="cover__overlay__rating"
+      >
+        5/10
+      </em>
+    </div>
   </a>
-  <div
-    class="cover__overlay"
-  >
-    <div
-      class="cover__overlay__title"
-    >
-      title
-    </div>
-    <div
-      class="cover__overlay__rating"
-    >
-      5/10
-    </div>
-  </div>
 </div>
 `;

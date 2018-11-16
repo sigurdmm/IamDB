@@ -5,17 +5,26 @@ import SearchBar from '../index';
 
 describe('<SearchBar/>', () => {
   it('should load properly', () => {
-    const wrapper = shallow(<SearchBar
-      onToggle={jest.fn()}
-      toggled={'2'}
-      buttons={[
-        { label: '1', value: '2' },
-        { label: '3', value: '4' },
-      ]}
-      onSubmit={jest.fn()}/>);
+    const wrapper = shallow(<SearchBar onSubmit={jest.fn()}/>);
 
     expect(wrapper).toMatchSnapshot();
   });
+
+  // it('should call onSubmit on submit', () => {
+  //   const wrapper = mount(<SearchBar onSubmit={jest.fn()}/>);
+  // const input = wrapper.find('input');
+  // input.simulate('change', { target: { value: 'Hello' } });
+  // console.log(wrapper.find('input').value);
+  // wrapper.find('.searchbar__field').at(1).props().formik.)
+  // console.log(wrapper.find('.searchbar__field').at(1).props().formik);
+  // const input = wrapper.find('.searchbar__field').at(1);
+  // const form = wrapper.querySelector('searchbar')
+  // console.log(input);
+  // input.simulate('change', { target: { name: 'search', values: { search: 'abc' } } });
+  // console.log(input.props());
+  //
+  // expect(wrapper).toMatchSnapshot();
+//   });
 });
 
 

@@ -16,11 +16,12 @@ const initialState = {
   /**
    * Object containing the search metadata
    * */
-  limit: 10,
+  limit: 8,
   offset: 0,
   type: null,
   query: null,
-  sort: {},
+  sortDirection: -1,
+  sortField: 'rating',
   total: 0,
   /**
    * Array containing a list of media.
@@ -88,7 +89,8 @@ export default function mediaReducer(state = initialState, action) {
         type: action.query.type || state.type,
         limit: action.query.limit || state.limit,
         offset: action.query.offset || state.offset,
-        sort: action.query.sort || state.sort,
+        sortField: action.query.sortField || state.sortField,
+        sortDirection: action.sortDirection || state.sortDirection,
         hasSearched: true,
         loading: true,
       };

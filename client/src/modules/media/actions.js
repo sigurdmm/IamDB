@@ -11,14 +11,22 @@ export const fetchMediaById = id => dispatch => dispatch({
   type: FETCH_MEDIA_DETAILS_REQUESTED,
 });
 
-export const searchMedia = (query, type, limit = 4, offset = 0, sort = {}) => dispatch => dispatch({
+export const searchMedia = (
+  query,
+  type,
+  limit = 4,
+  offset = 0,
+  sortField,
+  sortDirection,
+) => dispatch => dispatch({
   type: SEARCH_MEDIA_REQUESTED,
   query: {
     query,
     type,
     limit,
     offset,
-    sort,
+    sortField,
+    sortDirection,
   },
 });
 

@@ -38,7 +38,7 @@ export const fetchMediaById = id => query(`
   }
 `, { id });
 
-export const searchMediaByQuery = (queryString, type, limit, offset, sort = {}) => query(`
+export const searchMediaByQuery = (queryString, type, limit, offset, sortField, sortDirection) => query(`
   query($query: String!, $limit: Int = 50, $offset: Int = 0, $sortOn: String = "rating", $sortDirection: Int = 1, $type: String = null) {
     searchMedia(query: $query, limit: $limit, offset: $offset, sortOn: $sortOn, sortDirection: $sortDirection, type: $type) {
       total
@@ -58,8 +58,8 @@ export const searchMediaByQuery = (queryString, type, limit, offset, sort = {}) 
   limit,
   offset,
   query: queryString,
-  sortOn: sort.field || null,
-  sortDirection: sort.direction || 1,
+  sortOn: sortField || null,
+  sortDirection: sortDirection || 1,
 });
 
 export const addCommentToMedia = (id, comment) => mutate(`

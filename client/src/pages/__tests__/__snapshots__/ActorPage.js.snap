@@ -30,32 +30,9 @@ exports[`<ActorPage/> should render properly 1`] = `
     <h2>
       Known for
     </h2>
-    <div>
-      <div>
-        <select
-          name="select"
-        >
-          <option
-            value="rating"
-          >
-            Rating
-          </option>
-          <option
-            value="released"
-          >
-            Year
-          </option>
-          <option
-            value="name"
-          >
-            Name
-          </option>
-        </select>
-      </div>
-      <div
-        class="coverdisplay"
-      />
-    </div>
+    <div
+      class="coverdisplay"
+    />
   </div>
 </div>
 `;
