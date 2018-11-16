@@ -32,7 +32,29 @@ exports[`<ActorPage/> should render properly 1`] = `
     </h2>
     <div
       class="coverdisplay"
-    />
+    >
+      <div
+        class="cover cover--inverse"
+      >
+        <a
+          href="/media/undefined"
+        >
+          <img
+            class="cover__thumbnail"
+            src="no-image-found.jpg"
+          />
+          <div
+            class="cover__overlay"
+          >
+            <strong
+              class="cover__overlay__title"
+            >
+              movie
+            </strong>
+          </div>
+        </a>
+      </div>
+    </div>
   </section>
   <section>
     <h2>
