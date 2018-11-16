@@ -8,7 +8,7 @@ import SearchBar from '../components/SearchBar/index';
 import CoverDisplay from '../components/CoverDisplay/index';
 import ApplicationAnimationCover from '../components/ApplicationAnimationCover';
 import Paginator from '../components/Paginator';
-import ToggleButtonGroup from '../components/SearchBar/ToggleButtonGroup';
+import ToggleButtonGroup from '../components/ToggleButtonGroup/index';
 import Sorting from '../components/Sorting';
 
 const toggleButtons = [
@@ -61,67 +61,48 @@ export class HomePage extends React.Component {
     hasSearched: PropTypes.bool.isRequired,
   };
 
-  onSearchSubmit = (query) => {
+  onSearchSubmit = (newQuery) => {
     const {
-      limit,
-      type,
-      sortField,
-      sortDirection,
+      limit, type, sortField, sortDirection,
     } = this.props;
 
     /**
      * If no media type is toggled (=== null) use the first buttons value for search
      * else use the toggled buttons value
      */
-    // const type = this.state.toggled === null ? toggleButtons[0] : this.state.toggled.value;
 
     // Expect to start with a fresh offset,
     // when submitting a new search query
-    this.props.updateSearchFields({ query, offset: 0 });
-    this.props.searchMedia(query, type, limit, 0, sortField, sortDirection);
+    this.props.updateSearchFields({ query: newQuery, offset: 0 });
+    this.props.searchMedia(newQuery, type, limit, 0, sortField, sortDirection);
   };
 
-  onToggle = (button) => {
-    this.props.updateSearchFields({ type: button.value });
-  };
-
-  onSort = (value) => {
+  onToggle = (newType) => {
     const {
-      limit,
-      query,
-      type,
-      sortDirection,
+      limit, query, sortField, sortDirection,
     } = this.props;
 
-    this.props.updateSearchFields({ sortField: value });
-
-    this.props.searchMedia(
-      query,
-      type,
-      limit,
-      0,
-      value,
-      sortDirection,
-    );
+    this.props.updateSearchFields({ type: newType });
+    this.props.searchMedia(query, newType, limit, 0, sortField, sortDirection);
   };
 
-  onDirectionClick = (sortDirection) => {
+  onSort = (newSortField) => {
     const {
-      limit,
-      query,
-      type,
-      sortField,
+      limit, query, type, sortDirection,
     } = this.props;
 
-    this.props.updateSearchFields({ sortDirection });
-    this.props.searchMedia(
-      query,
-      type,
-      limit,
-      0,
-      sortField,
-      sortDirection,
-    );
+    this.props.updateSearchFields({ sortField: newSortField });
+
+    this.props.searchMedia(query, type, limit, 0, newSortField, sortDirection);
+  };
+
+  onDirectionClick = (newSortDirection) => {
+    const {
+      limit, query, type, sortField,
+    } = this.props;
+
+    this.props.updateSearchFields({ sortDirection: newSortDirection });
+    this.props.searchMedia(query, type, limit, 0, sortField, newSortDirection);
   };
 
   /**
@@ -129,11 +110,7 @@ export class HomePage extends React.Component {
    * */
   doPagination = (newOffset) => {
     const {
-      limit,
-      query,
-      type,
-      sortField,
-      sortDirection,
+      limit, query, type, sortField, sortDirection,
     } = this.props;
 
     // Ensure the metadata is updated
@@ -144,12 +121,7 @@ export class HomePage extends React.Component {
 
   render() {
     const {
-      total,
-      offset,
-      limit,
-      allMedia,
-      hasSearched,
-      sortDirection,
+      total, offset, limit, allMedia, hasSearched, sortDirection,
     } = this.props;
 
     return <>
