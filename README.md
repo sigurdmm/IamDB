@@ -28,18 +28,18 @@ Her er det viktig at du har Docker installert på systemet ditt. Bruker du windo
 
 ### Starte serveren uten docker
 
-Merk at det skal være mulig å bare kjøre serveren ved hjelp av `npm`, da vi hovedsakelig bruker docker-compose til å enkelt koble sammen back-end og databasen. Men dette er lite testet og krever noen manuelle steg fra din side
+Merk at det skal være mulig å bare kjøre serveren ved hjelp av `npm`, da vi hovedsakelig bruker docker-compose til å enkelt koble sammen back-end og databasen. Men dette er lite testet og krever noden manuelle steg fra din side
 
 1. Start mongodb. Se guides for hvordan dette gjøres på ditt OS. MongoDB bør være tilgjengelig på localhost, uten noe form for autentisering.
 2. Påse at du har nodejs versjon som er større eller lik versjon `v8.9.1` (vi brukes `ES6` syntaks og `async/await`). Tidligere versjoner kan fungere, men har ikke blitt testet.
-3. Start serveren ved å kjøre `THEMOVIEDB_API_KEY=86eb3df764e812dc8aba77203bb4a2fc OMDB_API_KEY=63350bd3 node bin/www`. Første kommandoen setter kun miljøvariabelen `OMDB_API_KEY`, som er nødvendig for å importere IMDB data.
-4. Serveren skal nå være tilgjengelig på samme adresse som over.
+3. Start serveren ved å kjøre `THEMOVIEDB_API_KEY=86eb3df764e812dc8aba77203bb4a2fc OMDB_API_KEY=63350bd3 node bin/www`. Første kommandoen sette kun miljøvariabelen `OMDB_API_KEY`, som er nødvendig for å importere IMDB data.
+4. Serveren skal nå vere tilgjengelig på samme adresse som over.
 
 # Prosjektstruktur
 
-Prosjektet skiller seg en del ut i fra de React applikasjonene vi har sett i kurset. Det største skillet er at vi ikke har brukt `create-react-app` for å bootstrappe front-end. I stedet for har vi satt opp manuelle konfigurasjoner i webpack, sammen med Babel 7, for å transpilere React kode til vanlig ECMAScript 5 syntaks.
+Prosjektet skiller seg en del ut i fra de React applikasjonene vi har sett i kurset. Den største skillet er at vi ikke har brukt `create-react-app` for å bootstrappe front-end, men i stedet har vi satt opp manuelle konfigurasjoner i webpack, sammen med Babel 7, for å transpilere React kode til vanlig ECMAScript 5 syntaks. Dette har vi fått bekreftet av studass på sal at er en godkjent løsning.
 
-Det er flere grunner til dette valget akkurat dette valget, men de største grunnene til dette valget er:
+Det er flere grunner til dette valget akkurat dette valget, men de største grunnen til dette valget er:
 
 * Gir oss større kontroll på prosjektet, og gjør oss ikke avhengige av at create-react-app for å oppdatere tredjepartsmoduler.
 * Kan gjøre applikasjonen mindre i størrelse og kompleksitet, ved å eliminere all boiler plate kode som create-react-app legger til i bakgrunnen.
@@ -48,7 +48,7 @@ Det er flere grunner til dette valget akkurat dette valget, men de største grun
 
 ## Mappestruktur
 
-Mappestrukturen vil nok ved første øyekast virke noe omfattende, men den er (forhåpentligvis) ganske logisk strukturert. 
+Mappestrukturen vil nok ved første øyekast virke noe omfattende ut, men den er (forhåpentligvis) ganske logisk strukturert. 
 
 Prosjektet består egentlig av to separate prosjekter: front-end og back-end. All logikk som hører til front-end vil man finne i mappen `client/`. All logikk som ligger på roten av prosjektet hører da til back-end delen av prosjektet.
 
@@ -98,7 +98,7 @@ app.js # Starten på business logikken til applikasjonen
 
 ### client/
 
-Client inneholder all logikk og moduler for front-end applikasjonen, og er egentlig fullstendig uavhengig av back-end. Det eneste punktet der front-end snakker med back-end, utenom ved API kall, er for å laste inn `index.html` og statiske filer.
+Client inneholder all logikk og moduler for front-end applikasjonen, og er egentlig fullstendig uavhengig av back-end. Det eneste punktet der front-end snaker med back-end, utenom ved API kall, er for å laste inn `index.html` og statiske filer.
 
 I filen `app.js` vil du se følgende:
 
@@ -108,7 +108,7 @@ app.all('/*', (req, res) => {
   res.sendFile(path.join(__dirname, 'client/build/index.html'));
 });
 ``` 
-Denne ruten fanger alle forespørsler som ennå ikke har blitt fanget, og sender tilbake filen `index.html`. Dette gjør at du får opp front-end grensesnittet når du besøker `localhost:3000` og de fleste undersidene på dette domenet.
+Denne ruten fanger alle forespørsler, som ennå ikke har blitt fanget, og sender tilbake filen `index.html`. Dette gjør at du får opp front-end grensesnittet når du besøker `localhost:3000` og de fleste undersidene på dette domenet.
 
 Men vi trenger også en rute for å kunne gi oss de nødvendige javascript og css filene. Dette gjør linjen:
 
@@ -130,11 +130,15 @@ Førstnevnte er en måte for applikasjonen å dynamisk bygge datasettet sitt, et
 
 ## Ekstra funksjonalitet: Ordsky
 
-Ordskyen er en måte å visualisere hvilke regissører som en skuespiller har jobbet med, og hvor ofte.
+Ordskyen er en måte å visualisere hvilke regissørrer som en skuespiller har jobbet med, og hvor ofte. For å generere ordskyen bruker vi tredjepartskomponenten [react-d3-cloud](https://github.com/Yoctol/react-d3-cloud#readme). 
 
-> Api-et var dessverre litt begrensende når det gjald å få tilbake skuespillere, da den gav maksimum tre-fire skuespillere per film/tv-serie. Ordskyen ble derfor litt mangelfull, men den hadde likevel fungerende funksjonalitet.
+> Api-et var dessverre litt begrensende når det gjald å få tilbake skuespillere, da den gav maksimum tre-fire skuespillere per film/tv-serie. Ordskyen ble derfor litt mangelful, men den hadde likevell fungerende funksjonalitet.
 
-# GraphQL
+## Formik
+Vi har valgt å bruke tredjepartskomponenten [Formik](https://github.com/jaredpalmer/formik) som inputfelt. Vi bruker Formik både i søkefunksjonaliteten på `HomePage` og som input til kommentarfeltene i `FilmPage`. Det hadde vært mulig å lage vår egen komponent for disse formålene, men vurderte det som bedre å bruke Formik, da denne komponenten er reaktiv og gjør det svært lett å validere input og håndtere form submission. 
+
+
+## GraphQL
 
 På prosjektet bestemte vi oss for å bruke GraphQL til å gjøre spørringer fra front-end til api-et. Dette lot oss enkelt definere konkrete spørringer, hva den aksepterte og hva den kunne returnere. I tillegg snakker GraphQL godt sammen med MongoDB, siden MongoDB i all enkelhet er JSON (egentlig BSON).
 
@@ -142,7 +146,8 @@ Interaktiv versjon av GraphQL kan man finne på `localhost:3000/graphql`, som og
 
 Ruten og business-logikken for spørringen ligger i undermappen `routes/graphql/`.
 
-## Eksempel på spørring
+
+### Eksempel på spørring
 
 Eksempelet under viser hvordan man kan gjenomføre søk etter media (film/tv-serie), basert på en søkestreng.
 
@@ -168,6 +173,21 @@ query($query: String!, $limit: Int = 50, $offset: Int = 0) {
 }
 ```
 
+## Database
+Vi valgte å benytte open-source databasen [MongoDB](https://www.mongodb.com/) i prosjektet. Grunnen til at vi valgte akkurat MongoDB er at det er raskt å implementere og at det passer godt med Javascript og GraphQL. Vi benytter MongoDB sin integrerte søkefunksjonalitet for å utføre tekstsøk. Dette har hatt noen begrensninger, som gjenspeiles i at du ikke nødvendigvis får de beste søkeresultatene, men det er tilstrekkelig for dette prosjektet.
+
+# Arbeidsmetodikk
+
+## Issues
+Vi har brukt Issues sammen med Issue Board for å strukturere og delegere arbeidsoppgaver. Vi har strukturert Issue Board med utgangspunkt i Kanban, med noen ekstra kolonner/labels for bedre synlighet og struktur.
+
+## Brances og pull requests
+På samme måte som i prosjekt 2, er det mye parprogrammering, raske iterasjoner og korte perioder. Vi har opprettet egne branches for de mest omfattende issuene og forsøkt å slette branchene med en gang etter issuene er closed for å ha orden i GitLab. Videre har vi brukt pull requests i kombinasjon med CI-pipelines for å merge branchene til master. 
+
+## Sporing av tid med Toggl
+Toggl ble brukt for å spore tid, hvor hver tidssporing ble linket til *Prosjekt* (Project 4) og *issue nummer* (#24). Med dette kunne vi automatisk generere en pdf-rapport som presenterte hver person sitt bidrag per prosjekt og den totale tiden brukt.
+
+
 # Nettleserstøtte
 
 Vi forventer at nettleserene prosjektet vil kjøres på, støtter generelt ES6 syntaks, samt funksjoner som [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) og [Object.assign](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign).
@@ -180,14 +200,14 @@ Videre er applikasjonen testet på følgende nettlesere:
 
 # Testing
 
-Prosjekt 4 fortsetter rutinene fra foregående prosjekter, ved å:
+Prosjekt 4 fortsetter rutinene fra forrige prosjekter, ved å:
 
 * Kjøre linter (eslint) før hver commit
-* Kreve en viss kodedekning i Jest for å kunne pushe til master.
+* Kreve en viss kodedekning i Jest, for å kunne pushe til master.
 
 ## ESLint
 
-ESLint er satt opp for både front-end og back-end med forskjellige konfigurasjoner, fordi det brukes noe forskjellig syntaks. Gjennom npm modulen `husky` påkrever vi at alle feil som linteren oppdager løses før git fullfører en commit. Dvs. om ESLint finner feil, vil `husky` blokkere commiten som fører til feilen.
+ESLint er satt opp både for front-end og back-end med forskjellige konfigurasjoner, fordi det brukes noe forskjellig syntaks. Gjennom npm modulen `husky` påkrever vi at alle feil som linteren oppdager, er løst før git fullfører en commit. Dvs. om ESLint finner feil, vil `husky` blokkere commiten som fører til feilen.
 
 Linteren kan også kjøres manuelt
 
@@ -204,6 +224,8 @@ npm run lint
 Jest er konfigurert for både front-end og back-end, men vi har kun prioritert front-end i dette prosjektet. Særlig når vi også har Cypress for integrasjonstester.
 
 I stedet for å kjøre før hver push til gitlab, gjennomføres derimot testene automatisk gjennom en CI-pipeline i gitlab (se avsnitt om gitlab lenger nede).
+
+Vi vurdete det som lettere og like gunstig å bruke `cypress` til å teste `Formik`, som å bruke Jest. Filene som implementerer Formik (`CommentForm.js` og `SearchBar/index.js`) vil med `coverage` dermed fremstå som om har lavere kodedekning enn resten av prosjektet. Disse avvikene i kodedekning veies opp for med integrasjonstesting i `cypress`.
 
 Testene kunne også selvsagt kjøres lokalt:
 
@@ -231,7 +253,7 @@ Cypress kan åpnes ved å kalle `npx cypress open` eller `npm run test:integrati
 
 ## CI-pipeline
 
-Ved hver push til gitlab og merge til master, kjøres en automatisk pipeline for å sikre at koden holder en viss "standard".
+Ved hver push til gitlab og merge til master, kjøres en automatisk pipeline for å sikre at koden holder en viss "standard". Vi hadde lenge en for lav kodedekning til å få godkjent CI-Pipeline, men det at vi fikk en failende pipeline som følge av lav kodedekning fikk oss til å strekke oss og jobbe ekstra for et godt testet produkt.
 
 Stegene som gjennomføres er:
 
@@ -244,17 +266,17 @@ Videre konfigurasjon kan en finne i filen `.gitlab-ci.yml`.
 
 # Deployment til produksjon (ekstra)
 
-Applikasjonen på produksjonsserveren ser litt annerledes ut enn det prosjektet etterspør. I stedet for Apache bruker vi heller Nginx, fordi denne er noe enklere å sette opp `reverse proxy` på, samt definere ekstra endepunkt, som `/prosjekt2`. Denne konfigurasjonen finner du på `/etc/nginx/sites-enabled/default`.
+Applikasjonen på produksjonsserveren ser litt annerledes ut, enn hva prosjektet etterspør. I stedet for Apache bruker vi heller Nginx, fordi denne er noe enklere å sette opp `reverse proxy` på, samt definere ekstra endepunkt, som `/prosjekt2`. Denne konfigurasjonen finner du på `/etc/nginx/sites-enabled/default`.
 
-Videre bruker vi også her Docker for å kjøre applikasjonen, slik at oppsettet på utviklingsoppsettet og produksjonoppsettet, var mest mulig "synkroniserte". I tillegg var det vesentlig enklere å starte og stoppe applikasjonen med dette oppsettet.
+Videre bruker vi også her Docker for å kjøre applikasjonen, slik at oppsettet på utviklingsoppsettet og produksjonoppsettet, var mest mulig "synkroniserte". I tillegg var det vesentlig enklere å starte og stoppe applikasjonen med dette oppsettet
 
 ## Installasjon
 
-For å kjøre applikasjonen trengs en del dependencies
+For å køyre applikasjonen trengst ein del dependencies
 
 * `NodeJS` version `>= 8.9`. Trengs for å laste ned dependencies og bygge front-end
 * `docker` med `docker-compose`. Setter opp node server og mongodb database, og kobler disse sammen.
-* `nginx`. Erstatter Apache2 og fungerer som reverse proxy for prosjektene, og særlig prosjekt 4. Brukes fordi den er enklere å konfigurere som reverse-proxy.
+* `nginx`. Erstatter Apache2, og fungerere som reverse proxy for prosjektene, og særlig prosjekt 4. Brukes fordi den er enklere å konfigurere som reverse-proxy.
 
 ### NodeJS
 
@@ -270,7 +292,7 @@ Takk til Digital Ocean for gode guider.
 
 ### Nginx
 
-Digital Ocean har også en god guide for installasjon av Nginx https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-18-04. Hovedpunktene fra guiden er
+Igjen, har Digital Ocean en god guide for installasjon av Nginx https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-18-04. Hovedpunktene fra guiden er
 
 ```bash
 sudo apt update
@@ -278,7 +300,7 @@ sudo apt update
 sudo apt install nginx
 ```
 
-Installeres alt riktig vil nginx kjøre på port 80. Pass på at apache ikke kjører samtidig, da begge bruker samme port.
+Installeres alt riktig vil nginx kjøre på port 80 (pass på at apache ikke kjører samtidig, da begge bruker samme port).
 
 Status for nginx kan sjekkes gjennom `systemctl`.
 
@@ -288,9 +310,9 @@ systemctl status nginx
 
 #### Oppdater sites-enabled
 
-For at reverse proxy skal fungere, samt sikre at prosjekt2 fortsatt er tilgjengelig på `/prosjekt2`, må vi gjøre noen mindre endringer på filen `/etc/nginx/sites-enabled/default`. Pass på at du gjør dette som `sudo`.
+For at reverse proxy skal fungere, samt sikre at prosjekt2 fortsatt er tilgjengelig på `/prosjekt2`, må vi gjøre noen mindre endringer på filen `/etc/nginx/sites-enabled/default` (pass på at du gjør dette som `sudo`).
 
-Denne filen skal se ut som innholdet i `nginx/sites-enabled-default.conf` i repoet. Hovedendringene å hente ut fra denne konfigurasjonen er:
+Denne filen skal se ut som innholdet i `nginx/sites-enabled-default.conf` i repoet. Hovedendringene å hente ut frå denne konfigurasjonen er:
 
 ```
 # Sikrer at prosjekt2 er tilgjengelig på denne adressen
@@ -309,7 +331,7 @@ location / {
 1. Påse at Nginx kjører: `sudo service ngnix status`
 2. `cd /var/www/html/prosjekt4`
 3. Installer moduler:
-  1. `sudo npm install`. Det er mulig denne feiler pga. Cypress - prøv da i stedet å kjøre `sudo npm install --production`.
+  1. `sudo npm install`. Det er mulig denne feiler pga. Cypress, prøv da i stedet å kjøre `sudo npm install --production`.
   2. `cd client && sudo npm install`
 4. Bygg front-end moduler: 
   1. `cd client`
@@ -318,4 +340,4 @@ location / {
 6. Docker vil nå bygge applikasjonen og starte den i bakgrunnen.
 7. Du kan verifisere at denne kjører ved å kalle `sudo docker-compose ps` og hente ut logger ved å kalle `sudo docker-compose logs`.
 
-Applikasjonen vil deretter være tilgjengelig på endepunktet `http://it2810-20.idi.ntnu.no/`. Internt på serveren kan du også pinge applikasjonen på `localhost:3000`. Får du ikke umiddelbar kontakt med nettsiden kan du prøve å kalle `sudo docker-compose restart app`, for å tvinge nginx til å oppdage den interne serveren igjen.
+Applikasjonen vil etter dette være tilgjengelig på endepunktet `http://it2810-20.idi.ntnu.no/`. Internt på serveren kan du også pinge applikasjonen på `localhost:3000`. Får du ikke umiddelbar kontakt med nettsiden, kan du prøve å kalle `sudo docker-compose restart app`, for å tvinge nginx til å oppdage den interne serveren igjen.
