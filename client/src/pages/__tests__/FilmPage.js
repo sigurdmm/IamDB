@@ -4,7 +4,7 @@ import { render, mount } from 'enzyme';
 import { FilmPage } from '../FilmPage';
 
 const mockedDetails = {
-  id: -1,
+  id: 'dljdsrlgkjergljrek',
   name: '',
   description: '',
   director: '',
@@ -48,7 +48,7 @@ describe('<FilmPage/>', () => {
     expect(wrapper).toMatchSnapshot();
   });
   it('should fetch detailed media', () => {
-    const id = 1337;
+    const id = '1';
 
     const spy = jest.fn();
     mount(<FilmPage

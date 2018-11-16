@@ -8,12 +8,14 @@ import './FilmPage.less';
 import MediaInformation from '../components/MediaInformation';
 import CommentList from '../components/CommentList';
 import '../App.less';
+import LoadingSpinner from '../components/LoadingSpinner/LoadingSpinner';
+import AlertBar from '../components/AlertBar';
 
 export class FilmPage extends React.Component {
   static propTypes = {
     match: PropTypes.shape({
       params: PropTypes.shape({
-        id: PropTypes.number.isRequired,
+        id: PropTypes.string.isRequired,
       }),
     }),
     fetchMediaById: PropTypes.func.isRequired,
@@ -37,6 +39,11 @@ export class FilmPage extends React.Component {
     error: PropTypes.string,
   };
 
+  receivedError = () => {
+    const { error, loading } = this.props;
+    return error !== null && !loading;
+  };
+
   componentDidMount() {
     this.props.fetchMediaById(this.props.match.params.id);
   }
@@ -47,24 +54,18 @@ export class FilmPage extends React.Component {
     const { detailedMedia, loading, error } = this.props;
 
     if (loading) {
-      return <div>
-        Laster inn
-      </div>;
-    }
-
-    if (error) {
-      return <div>
-        Kunne ikke finne informasjon
-      </div>;
+      return <LoadingSpinner/>;
     }
 
     return <div className='genericpage'>
+      {this.receivedError() && <AlertBar message={error}/>}
+
       <MediaInformation details={detailedMedia}/>
       <section className='description__container'>
         <h2>Description</h2>
         <p>{detailedMedia.description}</p>
       </section>
-      <section className='elements__container'>
+      <section className='elements'>
         <h2>Actors</h2>
         <CoverDisplay onSort={false} hasSearched={true} media={detailedMedia.actors} url='/actor/'/>
       </section>

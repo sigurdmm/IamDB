@@ -24,12 +24,14 @@ export default function actorReducer(state = initialState, action) {
         ...state,
         detailedActor: Object.assign(initialState.detailedActor, { id: action.actor.id }),
         loading: true,
+        error: null,
       };
     case FETCH_ACTOR_DETAILS_SUCCESS:
       return {
         ...state,
         detailedActor: action.actor,
         loading: false,
+        error: null,
       };
     case FETCH_ACTOR_DETAILS_FAILED:
       return {

@@ -43,7 +43,7 @@ exports[`<FilmPage/> should render properly 1`] = `
     <p />
   </section>
   <section
-    class="elements__container"
+    class="elements"
   >
     <h2>
       Actors
@@ -91,13 +91,110 @@ exports[`<FilmPage/> should render properly 1`] = `
 `;
 
 exports[`<FilmPage/> should render properly when error 1`] = `
-<div>
-  Kunne ikke finne informasjon
+<div
+  class="genericpage"
+>
+  <p
+    class="alertbar__error"
+  >
+    ERROR
+  </p>
+  <div
+    class="information__container"
+  >
+    <div
+      class="mediaimage"
+    >
+      <img
+        class="image__item"
+        src="no-image-found.jpg"
+      />
+    </div>
+    <div
+      class="information"
+    >
+      <div
+        class="title"
+      >
+        <h2 />
+      </div>
+      <h3>
+        ⭐️: 0
+      </h3>
+      <h3>
+        🎥: movie
+      </h3>
+      <h3>
+        🎬: unknown
+      </h3>
+    </div>
+  </div>
+  <section
+    class="description__container"
+  >
+    <h2>
+      Description
+    </h2>
+    <p />
+  </section>
+  <section
+    class="elements"
+  >
+    <h2>
+      Actors
+    </h2>
+    <div
+      class="coverdisplay"
+    />
+  </section>
+  <section
+    class="filmpage__comments"
+  >
+    <h2>
+      Comment section
+    </h2>
+    <div
+      class="commentlist"
+    >
+      <ul
+        class="commentlist__list"
+      />
+      <form
+        class="commentform"
+      >
+        <label
+          class="commentform__label"
+          for="comment"
+        >
+          Comment
+        </label>
+        <textarea
+          class="commentform__comment"
+          id="comment"
+          name="comment"
+          rows="10"
+        />
+        <button
+          type="submit"
+        >
+          Submit comment
+        </button>
+      </form>
+    </div>
+  </section>
 </div>
 `;
 
 exports[`<FilmPage/> should render properly when loading 1`] = `
-<div>
-  Laster inn
+<div
+  class="loadingspinner"
+>
+  <div
+    class="lds-facebook"
+  >
+    <div />
+    <div />
+    <div />
+  </div>
 </div>
 `;

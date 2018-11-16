@@ -12,17 +12,20 @@ function* fetchActor(action) {
   const { id } = action.actor;
   try {
     const actor = yield call(fetchActorById, id);
+
     if (actor.error) {
       yield put({ error: actor.error, type: FETCH_ACTOR_DETAILS_FAILED });
       return;
     }
+
     if (actor.getActor === null) {
       yield put({ error: `Cannot find actor with id: ${id}`, type: FETCH_ACTOR_DETAILS_FAILED });
       return;
     }
+
     yield put({ actor: actor.getActor, type: FETCH_ACTOR_DETAILS_SUCCESS });
   } catch (e) {
-    yield put({ type: FETCH_ACTOR_DETAILS_FAILED, error: e.message });
+    yield put({ type: FETCH_ACTOR_DETAILS_FAILED, error: e.text || e.message });
   }
 }
 

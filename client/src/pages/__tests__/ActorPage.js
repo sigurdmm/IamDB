@@ -10,7 +10,7 @@ const mockedDetails = {
   thumbnails: {},
   media: [{
     name: 'movie',
-    director: 'director',
+    director: null,
   }],
   popularity: 0,
 };
@@ -47,14 +47,14 @@ describe('<ActorPage/>', () => {
     const spy = jest.fn();
     const wrapper = render(<MemoryRouter><ActorPage
       fetchActorById={spy}
-      detailedMedia={mockedDetails}
+      detailedActor={mockedDetails}
       loading={false}
       error={'ERROR'}
     /></MemoryRouter>);
     expect(wrapper).toMatchSnapshot();
   });
   it('should fetch detailedActor', () => {
-    const id = 1337;
+    const id = '1';
     const spy = jest.fn();
     mount(<MemoryRouter><ActorPage
       fetchActorById={spy}

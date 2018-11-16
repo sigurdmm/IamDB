@@ -6,11 +6,8 @@ const apiHost = '/graphql';
  * Builds the literal query in GraphQL,
  * and prints any debuggable values to the user
  * */
-const createGraphQlQuery = (query, variables) => {
-  console.info(`Query: ${query}`);
-  console.info(`Variables: ${JSON.stringify(variables)}`);
-  return qs.stringify({ query, variables: JSON.stringify(variables) });
-};
+const createGraphQlQuery = (query, variables) => qs
+  .stringify({ query, variables: JSON.stringify(variables) });
 
 /**
  * Catches any HTTP errors thrown from the server,
@@ -21,9 +18,24 @@ const errorHandler = async (res) => {
     return res;
   }
 
+  // Attempt to fetch json data
+  // from the response
+  let data = null;
+  try {
+    data = await res.json();
+  } catch (formatErr) {
+    // Do nothing
+  }
+
   const err = new Error(`Request error: ${res.status}`);
   err.status = res.status;
-  err.text = res.statusText;
+
+  // Use the errors from graphql, if they exists
+  if (data && data.errors) {
+    err.text = data.errors.map(error => error.message).join(', ');
+  } else {
+    err.text = res.statusText;
+  }
 
   throw err;
 };
