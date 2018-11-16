@@ -1,37 +1,60 @@
 @import '../../constants';
 
 .cover {
-  max-height: 200px;
-  width: 120px;
-  height: 400px;
+  @posterHeight: 200px;
+  @posterWidth: calc((@posterHeight * 2)/3);
+
+  width: @posterWidth;
+  height: @posterHeight;
   position: relative;
   display: inline-block;
   overflow: hidden;
   margin: 0;
 
+  // Inverses the overlay and image
+  &--inverse &__thumbnail{
+      opacity: 0.3;
+      filter: blur(3px);
+
+    &:hover {
+      opacity: 1;
+      filter: blur(0);
+    }
+  }
+
+  a {
+    display: block;
+
+    height: 100%;
+
+    width: 100%;
+  }
+
   &__thumbnail {
     display: block;
-    max-width: 120px;
     margin-left: auto;
     margin-right: auto;
-    opacity: 0.3;
+    opacity: 1;
 
     position: absolute;
 
     top: 50%;
     left: 50%;
 
-    min-height: 100%;
-    min-width: auto;
+    height: 100%;
+    width: auto;
     transform: translate(-50%, -50%);
   }
 
-  img:hover {
-    opacity: 1.0;
+  &__thumbnail:hover {
+    opacity: 0.3;
+    filter: blur(3px);
   }
 
   &__overlay {
-    padding: 4px;
+    box-sizing: border-box;
+
+    padding: 0.5em;
     font-weight: bold;
     color: @textColor;
     display: flex;
@@ -39,11 +62,11 @@
     justify-content: space-between;
     height: 100%;
 
-    &__title {
+    text-decoration: none;
 
-    }
-
+    &__title,
     &__rating {
+      text-decoration: none;
     }
   }
 }
