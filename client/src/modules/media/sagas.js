@@ -66,7 +66,8 @@ function* searchMedia(action) {
         total: results.searchMedia.total || 0,
       },
       media: results.searchMedia.results,
-      type: SEARCH_MEDIA_SUCCESS,
+      type: results.searchMedia.results.length > 0 ? SEARCH_MEDIA_SUCCESS : SEARCH_MEDIA_FAILED,
+      error: results.searchMedia.results.length > 0 ? null : 'NOTHING FOUND',
     });
   } catch (e) {
     console.error('Search failed on server', e);

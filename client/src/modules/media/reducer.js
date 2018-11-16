@@ -38,7 +38,7 @@ const initialState = {
     actors: [],
     thumbnails: {},
   },
-  loading: true,
+  loading: false,
   error: null,
   /**
    * Denotes if the user has begun searching,

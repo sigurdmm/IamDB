@@ -49,7 +49,7 @@ describe('<ActorPage/>', () => {
       fetchActorById={spy}
       detailedMedia={mockedDetails}
       loading={false}
-      error={true}
+      error={'ERROR'}
     /></MemoryRouter>);
     expect(wrapper).toMatchSnapshot();
   });

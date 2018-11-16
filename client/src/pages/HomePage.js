@@ -10,6 +10,8 @@ import ApplicationAnimationCover from '../components/ApplicationAnimationCover';
 import Paginator from '../components/Paginator';
 import ToggleButtonGroup from '../components/ToggleButtonGroup/index';
 import Sorting from '../components/Sorting';
+import AlertBar from '../components/AlertBar';
+import LoadingSpinner from '../components/LoadingSpinner/LoadingSpinner';
 
 const toggleButtons = [
   { label: 'All', value: null },
@@ -59,6 +61,16 @@ export class HomePage extends React.Component {
     error: PropTypes.string,
 
     hasSearched: PropTypes.bool.isRequired,
+  };
+
+  receivedError = () => {
+    const { error, hasSearched, loading } = this.props;
+    return error !== null && hasSearched && !loading;
+  };
+
+  receivedNoError = () => {
+    const { error, hasSearched, loading } = this.props;
+    return error === null && hasSearched && !loading;
   };
 
   onSearchSubmit = (newQuery) => {
@@ -121,7 +133,7 @@ export class HomePage extends React.Component {
 
   render() {
     const {
-      total, offset, limit, allMedia, hasSearched, sortDirection, error, loading,
+      total, offset, limit, allMedia, sortDirection, error, loading,
     } = this.props;
 
     return <>
@@ -137,26 +149,27 @@ export class HomePage extends React.Component {
             onSubmit={this.onSearchSubmit}
           />
         </div>
-        <Sorting
+        {this.receivedError() && <AlertBar message={error}/>}
+
+        {this.receivedNoError() && <Sorting
           directionValue={sortDirection}
           onDirectionClick={this.onDirectionClick}
           onSort={this.onSort}
-          visible={this.props.hasSearched}
           sortingMethods={sortOptions}/>
-        <CoverDisplay
-          media={allMedia}
-          hasSearched={hasSearched}
-          url='/media/'
-          error={error}
-          loading={loading}
-          pagination={
-            <Paginator
-              limit={limit}
-              offset={offset}
-              total={total}
-              onPagination={this.doPagination}
-            />}
-        />
+        }
+        {loading && <LoadingSpinner/>}
+        {this.receivedNoError() && <CoverDisplay
+            media={allMedia}
+            url='/media/'
+            pagination={
+              <Paginator
+                limit={limit}
+                offset={offset}
+                total={total}
+                onPagination={this.doPagination}
+              />}
+          />
+        }
       </main>
     </>;
   }

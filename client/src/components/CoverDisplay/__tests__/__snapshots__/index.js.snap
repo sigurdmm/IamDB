@@ -1,5 +1,77 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<CoverDisplay/> should render error message properly 1`] = `null`;
+exports[`<CoverDisplay/> should render error message properly 1`] = `
+<div
+  class="coverdisplay"
+/>
+`;
 
-exports[`<CoverDisplay/> should render list properly 1`] = `null`;
+exports[`<CoverDisplay/> should render list properly 1`] = `
+<div
+  class="coverdisplay"
+>
+  <div
+    class="cover "
+  >
+    <a
+      href="/undefined1"
+    >
+      <img
+        class="cover__thumbnail"
+        src="https://example.com/test.jpg"
+      />
+      <div
+        class="cover__overlay"
+      >
+        <strong
+          class="cover__overlay__title"
+        >
+          title1
+        </strong>
+      </div>
+    </a>
+  </div>
+  <div
+    class="cover "
+  >
+    <a
+      href="/undefined2"
+    >
+      <img
+        class="cover__thumbnail"
+        src="https://example.com/test2.png"
+      />
+      <div
+        class="cover__overlay"
+      >
+        <strong
+          class="cover__overlay__title"
+        >
+          name3
+        </strong>
+      </div>
+    </a>
+  </div>
+  <div
+    class="cover cover--inverse"
+  >
+    <a
+      href="/undefined3"
+    >
+      <img
+        class="cover__thumbnail"
+        src="no-image-found.jpg"
+      />
+      <div
+        class="cover__overlay"
+      >
+        <strong
+          class="cover__overlay__title"
+        >
+          title3
+        </strong>
+      </div>
+    </a>
+  </div>
+</div>
+`;
