@@ -176,6 +176,23 @@ query($query: String!, $limit: Int = 50, $offset: Int = 0) {
 ## Database
 Vi valgte å benytte open-source databasen [MongoDB](https://www.mongodb.com/) i prosjektet. Grunnen til at vi valgte akkurat MongoDB er at det er raskt å implementere og at det passer godt med Javascript og GraphQL. Vi benytter MongoDB sin integrerte søkefunksjonalitet for å utføre tekstsøk. Dette har hatt noen begrensninger, som gjenspeiles i at du ikke nødvendigvis får de beste søkeresultatene, men det er tilstrekkelig for dette prosjektet.
 
+# Valg av eksterne API
+
+For prosjektet har vi nyttet to forskjellige API til å importere filmer/tv-serier og skuespillere. Denne importeringen gjøres automatisk når du søker etter filmer eller tv-serier, som ikke allerede ligger i databasen. API-ene vi bruker er:
+
+* The Movie Database (TMDB)
+* OMDB (Uoffisielt api for IMDB)
+
+Implementasjon til disse kan man finne i `utils/imdbApi.js`, `utils/tmdbApi.js` og `routes/graphql/searchMedia.js` (Inneholder hovedelementene av business logikken).
+
+## TMDB
+
+Brukes for å hente mer detaljert om skuespillere, som popularitet og profilbilde. Denne har en request limit på `50 forespørsler` innen 10 sekunder, og egnes derfor kun til begrensede formål.
+
+## OMDB
+
+Brukes for å søke etter filmer og tv-serier, ut ifra navn. Samt hente ut mer detaljert informasjon, på de filmene og tv-seriene vi finner.
+
 # Arbeidsmetodikk
 
 ## Issues
