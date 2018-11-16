@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
   browser: true,
-  verbose: true,
+  verbose: false,
 
   /**
    * Defines how each file-types should be transformed,
@@ -18,7 +18,7 @@ module.exports = {
     // Some of nav's modules aren't pre-bundled as
     // they are used live in other projects.
     // This would break our tests, because jest cannot read .less or .sass syntax.
-    'node_modules/(?!nav*)'
+    'node_modules/(?!nav*)',
   ],
 
   setupTestFrameworkScriptFile: path.resolve(__dirname + '/src/testSetup.js'),
@@ -30,13 +30,13 @@ module.exports = {
       branches: 60,
       functions: 60,
       lines: 65,
-      statements: -40,
+      statements: -40
     },
     'src/pages/**/*.js': {
       branches: 50,
       functions: 50,
       lines: 50,
-      statements: -50,
+      statements: -50
     },
 
     /**
@@ -46,14 +46,14 @@ module.exports = {
       statements: -80,
       branches: 0,
       lines: 20,
-      functions: 25,
+      functions: 25
     },
 
     'src/components/SearchBar/index.js': {
       statements: -80,
       branches: 0,
       lines: 20,
-      functions: 25,
+      functions: 25
     },
   },
 };
