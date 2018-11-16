@@ -1,10 +1,13 @@
 import mediaReducer, { initialState } from '../reducer';
 import {
+  ADD_MEDIA_COMMENT_FAILED,
+  ADD_MEDIA_COMMENT_REQUESTED,
+  ADD_MEDIA_COMMENT_SUCCESS,
   FETCH_MEDIA_DETAILS_FAILED,
   FETCH_MEDIA_DETAILS_REQUESTED,
   FETCH_MEDIA_DETAILS_SUCCESS,
-  SEARCH_MEDIA_FAILED,
-  SEARCH_MEDIA_SUCCESS,
+  SEARCH_MEDIA_FAILED, SEARCH_MEDIA_REQUESTED,
+  SEARCH_MEDIA_SUCCESS, UPDATE_SEARCH_FIELDS,
 } from '../constants';
 
 describe('mediaReducer', () => {
@@ -16,6 +19,18 @@ describe('mediaReducer', () => {
 });
 
 describe('mediaReducer: search', () => {
+  it('should set loading to true on search', () => {
+    const newState = mediaReducer(
+      initialState,
+      {
+        type: SEARCH_MEDIA_REQUESTED,
+        query: {},
+      },
+    );
+
+    expect(newState.loading).toBe(true);
+  });
+
   it('should set loading to false on search success', () => {
     const newState = mediaReducer(
       Object.assign(initialState, { loading: true }),
@@ -94,5 +109,74 @@ describe('mediaRecuer: get media', () => {
 
     expect(newState.loading).toBe(false);
     expect(newState.error).toBe('some error');
+  });
+});
+
+describe('mediaReducer: add comment', () => {
+  it('should refresh detailedMedia on success', () => {
+    const media = {
+      name: 'hello world',
+    };
+
+    const newState = mediaReducer(
+      initialState,
+      {
+        media,
+        type: ADD_MEDIA_COMMENT_SUCCESS,
+      },
+    );
+
+    expect(newState.detailedMedia).toEqual(media);
+  });
+
+  it('should set loading to true on post', () => {
+    const newState = mediaReducer(
+      initialState,
+      {
+        type: ADD_MEDIA_COMMENT_REQUESTED,
+      },
+    );
+
+    expect(newState.loading).toBe(true);
+  });
+
+  it('should clear error on success', () => {
+    const newState = mediaReducer(
+      Object.assign(initialState, { error: 'some error', loading: true }),
+      {
+        type: ADD_MEDIA_COMMENT_SUCCESS,
+        media: {},
+      },
+    );
+
+    expect(newState.loading).toBe(false);
+    expect(newState.error).toBe(null);
+  });
+
+  it('should store error in redux on error', () => {
+    const newState = mediaReducer(
+      Object.assign(initialState, { loading: true }),
+      {
+        type: ADD_MEDIA_COMMENT_FAILED,
+        error: 'some error',
+      },
+    );
+
+    expect(newState.loading).toBe(false);
+    expect(newState.error).toBe('some error');
+  });
+});
+
+describe('mediaReducer: update search fields', () => {
+  it('should update the given field in the redux store', () => {
+    const newState = mediaReducer(
+      initialState,
+      {
+        type: UPDATE_SEARCH_FIELDS,
+        fields: { type: 'test' },
+      },
+    );
+
+    expect(newState.type).toBe('test');
   });
 });
