@@ -48,12 +48,15 @@ module.exports = {
       lines: 20,
       functions: 25,
     },
-
     'src/components/SearchBar/index.js': {
       statements: -80,
       branches: 0,
       lines: 20,
       functions: 25,
-    },
-  },
+    }
+    /**
+     * Requires canvas, which makes it difficult to test in Jest
+     * */
+    // 'src/components/WordCloud/index.js': {}
+  }
 };
