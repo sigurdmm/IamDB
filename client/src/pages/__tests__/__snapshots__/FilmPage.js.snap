@@ -2,7 +2,7 @@
 
 exports[`<FilmPage/> should render properly 1`] = `
 <div
-  class="media__container"
+  class="genericpage"
 >
   <div
     class="information__container"
@@ -15,9 +15,11 @@ exports[`<FilmPage/> should render properly 1`] = `
         src="no-image-found.jpg"
       />
     </div>
-    <div>
+    <div
+      class="information"
+    >
       <div
-        class="title__container"
+        class="title"
       >
         <h2 />
       </div>
@@ -40,7 +42,9 @@ exports[`<FilmPage/> should render properly 1`] = `
     </h2>
     <p />
   </section>
-  <section>
+  <section
+    class="elements__container"
+  >
     <h2>
       Actors
     </h2>
@@ -87,9 +91,7 @@ exports[`<FilmPage/> should render properly 1`] = `
 `;
 
 exports[`<FilmPage/> should render properly when error 1`] = `
-<div
-  class="error__container"
->
+<div>
   Kunne ikke finne informasjon
 </div>
 `;

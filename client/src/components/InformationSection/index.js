@@ -8,7 +8,7 @@ import ImdbRating from './ImdbRating';
 const InformationSection = ({ details, children = '' }) => (
   <div className='information__container'>
     <MediaImage image={details.thumbnails ? details.thumbnails.small : null}/>
-    <div>
+    <div className='information'>
       <Title title={details.name}/>
       <ImdbRating rating={details.rating || details.popularity}/>
       {children}
