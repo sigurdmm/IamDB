@@ -117,6 +117,23 @@ Men vi trenger også en rute for å kunne gi oss de nødvendige javascript og cs
 app.use('/static', express.static(path.join(__dirname, 'client/build/static')));
 ```
 
+# Implementasjonsvalg
+
+## Persistent lagring
+
+Data lagres persistent i databasen ved to tilfeller:
+
+* Når brukeren søker etter en film/tv-serie som ikke finnes i databasen fra før av, men IMDB har den.
+* Når brukere legger inn en kommentar på en film/tv-serie.
+
+Førstnevnte er en måte for applikasjonen å dynamisk bygge datasettet sitt, etterhvert som brukere tar applikasjonen i bruk.
+
+## Ekstra funksjonalitet: Ordsky
+
+Ordskyen er en måte å visualisere hvilke regissørrer som en skuespiller har jobbet med, og hvor ofte.
+
+> Api-et var dessverre litt begrensende når det gjald å få tilbake skuespillere, da den gav maksimum tre-fire skuespillere per film/tv-serie. Ordskyen ble derfor litt mangelful, men den hadde likevell fungerende funksjonalitet.
+
 # GraphQL
 
 På prosjektet bestemte vi oss for å bruke GraphQL til å gjøre spørringer fra front-end til api-et. Dette lot oss enkelt definere konkrete spørringer, hva den aksepterte og hva den kunne returnere. I tillegg snakker GraphQL godt sammen med MongoDB, siden MongoDB i all enkelhet er JSON (egentlig BSON).
