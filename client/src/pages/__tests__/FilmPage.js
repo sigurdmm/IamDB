@@ -43,7 +43,7 @@ describe('<FilmPage/>', () => {
       addComment={() => null}
       detailedMedia={mockedDetails}
       loading={false}
-      error={true}
+      error={'ERROR'}
     />);
     expect(wrapper).toMatchSnapshot();
   });

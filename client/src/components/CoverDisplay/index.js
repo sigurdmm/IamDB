@@ -7,7 +7,6 @@ export default class CoverDisplay extends PureComponent {
   static propTypes = {
     media: PropTypes.array,
     pagination: PropTypes.element,
-    hasSearched: PropTypes.bool.isRequired,
     url: PropTypes.string,
   };
 
@@ -16,15 +15,6 @@ export default class CoverDisplay extends PureComponent {
       media,
       pagination,
     } = this.props;
-    // Don't render the CoverDisplay if users hasn't searched yet.
-    if (!this.props.hasSearched) {
-      return null;
-    }
-    // Render error message instead of an empty CoverDisplay
-    // when search returns nothing
-    if (media === null) {
-      return <p className='coverdisplay__error'>NOTHING FOUND</p>;
-    }
 
     return <>
       <div className='coverdisplay'>

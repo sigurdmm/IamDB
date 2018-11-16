@@ -8,8 +8,7 @@ const Sorting = ({
   onDirectionClick,
   sortingMethods,
   onSort,
-  visible,
-}) => <div className={visible ? 'sortingbar' : 'sortingbar__hidden'}>
+}) => <div className='sortingbar'>
     <SortingSelector
       sortingMethods={sortingMethods}
       onSort={onSort}
@@ -29,7 +28,6 @@ Sorting.propTypes = {
   directionValue: PropTypes.number.isRequired,
   onDirectionClick: PropTypes.func.isRequired,
   onSort: PropTypes.func.isRequired,
-  visible: PropTypes.bool.isRequired,
   sortingMethods: PropTypes.arrayOf(PropTypes.shape({
     label: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired,

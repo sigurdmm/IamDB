@@ -13,7 +13,7 @@ export class FilmPage extends React.Component {
   static propTypes = {
     match: PropTypes.shape({
       params: PropTypes.shape({
-        id: PropTypes.string.isRequired,
+        id: PropTypes.number.isRequired,
       }),
     }),
     fetchMediaById: PropTypes.func.isRequired,
