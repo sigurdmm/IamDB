@@ -13,18 +13,28 @@ import Sorting from '../components/Sorting';
 import AlertBar from '../components/AlertBar';
 import LoadingSpinner from '../components/LoadingSpinner/LoadingSpinner';
 
+/**
+ * list of selectable media types to filter on
+ */
 const toggleButtons = [
   { label: 'All', value: null },
   { label: 'Movies', value: 'movie' },
   { label: 'TV Shows', value: 'series' },
 ];
 
+/**
+ * list of the different fields you can sort with
+ */
 const sortOptions = [
   { label: 'Rating', value: 'rating' },
   { label: 'Released', value: 'released' },
   { label: 'Name', value: 'name' },
 ];
 
+/**
+ * Responsible for rendering search view and search results.
+ * It's the landing page for the application.
+ */
 export class HomePage extends React.Component {
   static propTypes = {
     searchMedia: PropTypes.func.isRequired,
@@ -63,12 +73,16 @@ export class HomePage extends React.Component {
     hasSearched: PropTypes.bool.isRequired,
   };
 
+  /**
+   * Checks parameters if there has occured an error after
+   * a search is submitted and the loading is completed.
+   */
   receivedError = () => {
     const { error, hasSearched, loading } = this.props;
     return error !== null && hasSearched && !loading;
   };
 
-  receivedNoError = () => {
+  hasLoadedSuccessfully = () => {
     const { error, hasSearched, loading } = this.props;
     return error === null && hasSearched && !loading;
   };
@@ -89,6 +103,9 @@ export class HomePage extends React.Component {
     this.props.searchMedia(newQuery, type, limit, 0, sortField, sortDirection);
   };
 
+  /**
+   * Update redux state and submit a search with a new type parameter
+   */
   onToggle = (newType) => {
     const {
       limit, query, sortField, sortDirection,
@@ -101,6 +118,9 @@ export class HomePage extends React.Component {
     }
   };
 
+  /**
+   * Update redux state and submit a search with a new sortField parameters
+   */
   onSort = (newSortField) => {
     const {
       limit, query, type, sortDirection,
@@ -111,6 +131,9 @@ export class HomePage extends React.Component {
     this.props.searchMedia(query, type, limit, 0, newSortField, sortDirection);
   };
 
+  /**
+   * Update redux state and submit a search with a new sortDirection parameter
+   */
   onDirectionClick = (newSortDirection) => {
     const {
       limit, query, type, sortField,
@@ -121,7 +144,7 @@ export class HomePage extends React.Component {
   };
 
   /**
-   * Updates the search fields with a new offset value
+   * Update redux state and submit a search with a new offset parameter
    * */
   doPagination = (newOffset) => {
     const {
@@ -164,7 +187,7 @@ export class HomePage extends React.Component {
         </div>
         {this.receivedError() && <AlertBar message={error}/>}
 
-        {this.receivedNoError() && <Sorting
+        {this.hasLoadedSuccessfully() && <Sorting
           directionValue={sortDirection}
           fieldValue={sortField}
           onDirectionClick={this.onDirectionClick}
@@ -172,7 +195,7 @@ export class HomePage extends React.Component {
           sortingMethods={sortOptions}/>
         }
         {loading && <LoadingSpinner/>}
-        {this.receivedNoError() && <CoverDisplay
+        {this.hasLoadedSuccessfully() && <CoverDisplay
             media={allMedia}
             url='/media/'
             pagination={

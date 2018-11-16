@@ -3,6 +3,10 @@ import PropTypes from 'prop-types';
 import SortingSelector from './SortingSelector';
 import './index.less';
 
+/**
+ * A sorting component for both search direction (ASC vs DESC)
+ * and what you want to sort on (release year, rating, name)
+ */
 const Sorting = ({
   directionValue,
   onDirectionClick,

@@ -1,6 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
+/**
+ * Component to select sorting method (i.e: rating, year, name)
+ */
 const SortingSelector = ({
   sortingMethods,
   onSort,

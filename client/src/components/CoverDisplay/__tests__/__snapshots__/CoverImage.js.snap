@@ -22,7 +22,7 @@ exports[`<CoverImage/> should render img, when link does not exist 1`] = `
       <em
         class="cover__overlay__rating"
       >
-        3/10
+        ⭐️: 3/10
       </em>
     </div>
   </a>
@@ -51,7 +51,7 @@ exports[`<CoverImage/> should render img, when link exists 1`] = `
       <em
         class="cover__overlay__rating"
       >
-        5/10
+        ⭐️: 5/10
       </em>
     </div>
   </a>

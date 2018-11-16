@@ -9,6 +9,10 @@ import './index.less';
 import PropTypes from 'prop-types';
 import icon from './search.svg';
 
+/**
+ * Renders a Formik input field
+ * https://github.com/jaredpalmer/formik
+ */
 const SearchBar = ({
   onSubmit,
   initialValue = '',
