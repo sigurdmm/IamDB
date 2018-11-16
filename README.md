@@ -32,7 +32,7 @@ Merk at det skal være mulig å bare kjøre serveren ved hjelp av `npm`, da vi h
 
 1. Start mongodb. Se guides for hvordan dette gjøres på ditt OS. MongoDB bør være tilgjengelig på localhost, uten noe form for autentisering.
 2. Påse at du har nodejs versjon som er større eller lik versjon `v8.9.1` (vi brukes `ES6` syntaks og `async/await`). Tidligere versjoner kan fungere, men har ikke blitt testet.
-3. Start serveren ved å kjøre `OMDB_API_KEY=a7b507e7 node bin/www`. Første kommandoen sette kun miljøvariabelen `OMDB_API_KEY`, som er nødvendig for å importere IMDB data.
+3. Start serveren ved å kjøre `THEMOVIEDB_API_KEY=86eb3df764e812dc8aba77203bb4a2fc OMDB_API_KEY=63350bd3 node bin/www`. Første kommandoen sette kun miljøvariabelen `OMDB_API_KEY`, som er nødvendig for å importere IMDB data.
 4. Serveren skal nå vere tilgjengelig på samme adresse som over.
 
 # Prosjektstruktur
