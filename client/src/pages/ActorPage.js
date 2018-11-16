@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { fetchActorById } from '../modules/actor/actorActions';
 import ActorInformation from '../components/ActorInformation';
 import CoverDisplay from '../components/CoverDisplay/index';
-import './FilmPage.less';
 import WordCloud from '../components/WordCloud';
+import '../App.less';
 
 export class ActorPage extends React.Component {
   static propTypes = {
@@ -42,14 +42,14 @@ export class ActorPage extends React.Component {
     }
 
     if (error) {
-      return <div className='error__container'>
+      return <div>
         Kunne ikke finne informasjon
       </div>;
     }
 
-    return <div className='media__container'>
+    return <div className='genericpage'>
       <ActorInformation details={detailedActor}/>
-      <section>
+      <section className='elements'>
         <h2>Known for</h2>
         <CoverDisplay onSort={false} hasSearched={true} media={detailedActor.media} url='/media/'/>
       </section>

@@ -4,6 +4,12 @@ const { searchPerson, getImageUrl } = require('../../utils/tmdbApi');
 const { searchByName, getById } = require('../../utils/imdbApi');
 const { buildRelaseDate, extractListOrStringAsList } = require('../../utils/valueHelpers');
 
+/***
+ * Fetches the missing details about some media,
+ * by it's imdb-id. Includes fields like actor and thumbnails
+ * @param {object} imdbMedia A media row, from the search results
+ * @return {object|null}
+ */
 const fetchMediaDetails = async (imdbMedia) => {
   try {
     return await getById(imdbMedia.imdbid);
@@ -36,6 +42,7 @@ const mapImdbToMedia = (imdbMedia) => {
 
   const media = new Media();
 
+  // Manually paste in the values we want
   media.name = title;
   media.released = buildRelaseDate(year, released);
   media.description = !!plot && plot !== 'N/A' ? plot : null;

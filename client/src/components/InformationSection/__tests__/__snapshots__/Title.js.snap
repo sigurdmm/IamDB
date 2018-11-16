@@ -2,7 +2,7 @@
 
 exports[`<Title/> should render title 1`] = `
 <div
-  class="title__container"
+  class="title"
 >
   <h2>
     media title

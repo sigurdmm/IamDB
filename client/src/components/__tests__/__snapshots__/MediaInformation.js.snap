@@ -12,9 +12,11 @@ exports[`<MediaInformation/> should render properly 1`] = `
       src="image"
     />
   </div>
-  <div>
+  <div
+    class="information"
+  >
     <div
-      class="title__container"
+      class="title"
     >
       <h2>
         title
