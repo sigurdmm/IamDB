@@ -7,6 +7,7 @@ import CoverDisplay from '../components/CoverDisplay/index';
 import './FilmPage.less';
 import MediaInformation from '../components/MediaInformation';
 import CommentList from '../components/CommentList';
+import '../App.less';
 
 export class FilmPage extends React.Component {
   static propTypes = {
@@ -52,18 +53,18 @@ export class FilmPage extends React.Component {
     }
 
     if (error) {
-      return <div className='error__container'>
+      return <div>
         Kunne ikke finne informasjon
       </div>;
     }
 
-    return <div className='media__container'>
+    return <div className='genericpage'>
       <MediaInformation details={detailedMedia}/>
       <section className='description__container'>
         <h2>Description</h2>
         <p>{detailedMedia.description}</p>
       </section>
-      <section>
+      <section className='elements__container'>
         <h2>Actors</h2>
         <CoverDisplay onSort={false} hasSearched={true} media={detailedMedia.actors} url='/actor/'/>
       </section>
