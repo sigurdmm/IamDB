@@ -5,7 +5,18 @@
   background-color: @white;
   grid-gap: 1em;
   grid-template-columns: repeat(auto-fill, minmax(8em, 1fr));
-  flex-direction: row;
-  flex-wrap: wrap;
   padding: 1em;
 }
+.coverdisplay > cover {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media only screen and (max-width: 340px) {
+  .coverdisplay {
+    grid-template-columns: none;
+    justify-content: center;
+  }
+}
+
+
