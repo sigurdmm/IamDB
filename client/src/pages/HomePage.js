@@ -136,7 +136,16 @@ export class HomePage extends React.Component {
 
   render() {
     const {
-      total, offset, limit, allMedia, sortDirection, sortField, error, loading,
+      total,
+      offset,
+      limit,
+      allMedia,
+      sortDirection,
+      sortField,
+      error,
+      loading,
+      query,
+      type,
     } = this.props;
 
     return <>
@@ -144,11 +153,12 @@ export class HomePage extends React.Component {
       <main className="homepage">
         <div className='filterandsearch'>
           <ToggleButtonGroup
-            toggled={this.props.type}
+            toggled={type}
             onToggle={this.onToggle}
             buttons={toggleButtons}
           />
           <SearchBar
+            initialValue={query}
             onSubmit={this.onSearchSubmit}
           />
         </div>

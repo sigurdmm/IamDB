@@ -11,8 +11,9 @@ import icon from './search.svg';
 
 const SearchBar = ({
   onSubmit,
+  initialValue = '',
 }) => <Formik
-    initialValues={{ search: '' }}
+    initialValues={{ search: initialValue || '' }}
     validate={(values) => {
       const errors = {};
       if (!values.search) {
@@ -41,6 +42,7 @@ const SearchBar = ({
 
 SearchBar.propTypes = {
   onSubmit: PropTypes.func.isRequired,
+  initialValue: PropTypes.string,
 };
 
 export default SearchBar;
