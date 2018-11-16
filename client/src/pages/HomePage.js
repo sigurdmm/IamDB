@@ -95,7 +95,10 @@ export class HomePage extends React.Component {
     } = this.props;
 
     this.props.updateSearchFields({ type: newType });
-    this.props.searchMedia(query, newType, limit, 0, sortField, sortDirection);
+
+    if (query != null) {
+      this.props.searchMedia(query, newType, limit, 0, sortField, sortDirection);
+    }
   };
 
   onSort = (newSortField) => {
