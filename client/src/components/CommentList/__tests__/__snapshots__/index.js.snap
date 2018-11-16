@@ -16,7 +16,7 @@ exports[`<CommentList/> should render list of comments 1`] = `
         >
           Published: 
           <em>
-            15/10/2018
+            15/11/2018
           </em>
         </strong>
         <p
@@ -35,7 +35,7 @@ exports[`<CommentList/> should render list of comments 1`] = `
         >
           Published: 
           <em>
-            15/10/2018
+            15/11/2018
           </em>
         </strong>
         <p
