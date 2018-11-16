@@ -17,5 +17,10 @@ exports[`<Router/> renders properly 1`] = `
     exact={true}
     path="/actor/:id"
   />
+  <Redirect
+    exact={true}
+    push={false}
+    to="/"
+  />
 </Switch>
 `;
