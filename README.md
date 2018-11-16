@@ -316,7 +316,6 @@ location / {
   2. `sudo npm run build:prod`
 5. Start server og database `sudo docker-compose -f docker-compose.production.yml up -d`. Pass på at du ikke er i undermappen `client/` når du kjører dette
 6. Docker vil nå bygge applikasjonen og starte den i bakgrunnen.
-7. Du kan verifisere at denne kjører ved å kalle `sudo docker-compose ps` og hente ut logger ved å kalle `sudo docker-compose logs`
+7. Du kan verifisere at denne kjører ved å kalle `sudo docker-compose ps` og hente ut logger ved å kalle `sudo docker-compose logs`.
 
-Applikasjonen vil etter dette være tilgjengelig på endepunktet `http://it2810-20.idi.ntnu.no/`. Internt på serveren kan du også pinge applikasjonen på `localhost:3000`.
-
+Applikasjonen vil etter dette være tilgjengelig på endepunktet `http://it2810-20.idi.ntnu.no/`. Internt på serveren kan du også pinge applikasjonen på `localhost:3000`. Får du ikke umiddelbar kontakt med nettsiden, kan du prøve å kalle `sudo docker-compose restart app`, for å tvinge nginx til å oppdage den interne serveren igjen.
