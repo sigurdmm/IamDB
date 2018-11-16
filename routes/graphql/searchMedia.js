@@ -2,7 +2,7 @@ const Media = require('../../models/media');
 const Actor = require('../../models/actor');
 const { searchPerson, getImageUrl } = require('../../utils/tmdbApi');
 const { searchByName, getById } = require('../../utils/imdbApi');
-const { buildRelaseDate, extractListOrStringAsList } = require('../../utils/valueHelpers');
+const { buildReleaseDate, extractListOrStringAsList } = require('../../utils/valueHelpers');
 
 /***
  * Fetches the missing details about some media,
@@ -44,7 +44,7 @@ const mapImdbToMedia = (imdbMedia) => {
 
   // Manually paste in the values we want
   media.name = title;
-  media.released = buildRelaseDate(year, released);
+  media.released = buildReleaseDate(year, released);
   media.description = !!plot && plot !== 'N/A' ? plot : null;
   media.director = !!director && director !== 'N/A' ? director : null;
   // Identify the actors, and map it into the Actor model
