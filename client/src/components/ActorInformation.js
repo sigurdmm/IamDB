@@ -4,6 +4,9 @@ import './InformationSection/index.less';
 
 import InformationSection from './InformationSection';
 
+/**
+ * component to render information about actor
+ */
 const ActorInformation = ({ details }) => <InformationSection details={details}/>;
 
 ActorInformation.propTypes = {

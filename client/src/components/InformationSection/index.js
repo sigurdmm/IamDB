@@ -5,6 +5,10 @@ import Title from './Title';
 import MediaImage from './MediaImage';
 import ImdbRating from './ImdbRating';
 
+/**
+ * renders general information section for actor or media.
+ * children props specify information specific to actor or media.
+ */
 const InformationSection = ({ details, children = '' }) => (
   <div className='information__container'>
     <MediaImage image={details.thumbnails ? details.thumbnails.small : null}/>

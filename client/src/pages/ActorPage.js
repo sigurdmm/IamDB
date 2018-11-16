@@ -9,6 +9,9 @@ import '../App.less';
 import AlertBar from '../components/AlertBar';
 import LoadingSpinner from '../components/LoadingSpinner/LoadingSpinner';
 
+/**
+ * Fetches an actors, and presents relevant information
+ * */
 export class ActorPage extends React.Component {
   static propTypes = {
     match: PropTypes.shape({

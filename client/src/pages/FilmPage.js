@@ -11,6 +11,9 @@ import '../App.less';
 import LoadingSpinner from '../components/LoadingSpinner/LoadingSpinner';
 import AlertBar from '../components/AlertBar';
 
+/**
+ * Fetches some media by the url, and displays relevant content
+ */
 export class FilmPage extends React.Component {
   static propTypes = {
     match: PropTypes.shape({

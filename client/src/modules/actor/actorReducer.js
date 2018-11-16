@@ -7,6 +7,9 @@ import {
 } from './constants';
 
 const initialState = {
+  /**
+   * Object containing a specific actor
+   * */
   detailedActor: {
     id: -1,
     name: '',

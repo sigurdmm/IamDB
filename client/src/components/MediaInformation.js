@@ -6,6 +6,9 @@ import MediaDirector from './InformationSection/MediaDirector';
 
 import InformationSection from './InformationSection';
 
+/**
+ * Presents metadata about some media, such as image, type and director
+ */
 const MediaInformation = ({ details }) => <InformationSection details={details}>
   <MediaType type={details.type}/>
   <MediaDirector director={details.director}/>
