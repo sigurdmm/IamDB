@@ -1,4 +1,4 @@
-import { render } from 'enzyme';
+import { mount, render } from 'enzyme';
 
 // Note we're not using the default exported version
 import { ActorPage } from '../ActorPage';
@@ -22,5 +22,40 @@ describe('<ActorPage/>', () => {
     />);
 
     expect(wrapper).toMatchSnapshot();
+  });
+  it('should render properly when loading', () => {
+    const spy = jest.fn();
+    const wrapper = render(<ActorPage
+      fetchActorById={spy}
+      detailedActor={mockedDetails}
+      loading={true}
+      error={null}
+    />);
+    expect(wrapper).toMatchSnapshot();
+  });
+  it('should render properly when error', () => {
+    const spy = jest.fn();
+    const wrapper = render(<ActorPage
+      fetchActorById={spy}
+      detailedMedia={mockedDetails}
+      loading={false}
+      error={true}
+    />);
+    expect(wrapper).toMatchSnapshot();
+  });
+  it('should fetch detailedActor', () => {
+    const id = 1337;
+    const spy = jest.fn();
+    mount(<ActorPage
+      fetchActorById={spy}
+      match={{
+        params: { id },
+      }}
+      detailedActor={mockedDetails}
+      loading={false}
+      error={null}
+    />);
+    expect(spy).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalledWith(id);
   });
 });

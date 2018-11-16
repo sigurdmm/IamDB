@@ -31,29 +31,45 @@ exports[`<ActorPage/> should render properly 1`] = `
       Known for
     </h2>
     <div>
-      <select
-        name="select"
-      >
-        <option
-          value="Rating"
+      <div>
+        <select
+          name="select"
         >
-          Rating
-        </option>
-        <option
-          value="Year"
-        >
-          Year
-        </option>
-        <option
-          value="Alphabetical"
-        >
-          Alphabetical
-        </option>
-      </select>
+          <option
+            value="rating"
+          >
+            Rating
+          </option>
+          <option
+            value="released"
+          >
+            Year
+          </option>
+          <option
+            value="name"
+          >
+            Name
+          </option>
+        </select>
+      </div>
       <div
         class="coverdisplay"
       />
     </div>
   </div>
+</div>
+`;
+
+exports[`<ActorPage/> should render properly when error 1`] = `
+<div
+  class="error__container"
+>
+  Kunne ikke finne informasjon
+</div>
+`;
+
+exports[`<ActorPage/> should render properly when loading 1`] = `
+<div>
+  Laster inn
 </div>
 `;

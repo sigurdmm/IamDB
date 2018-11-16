@@ -45,6 +45,27 @@ exports[`<FilmPage/> should render properly 1`] = `
       Actors
     </h2>
     <div>
+      <div>
+        <select
+          name="select"
+        >
+          <option
+            value="rating"
+          >
+            Rating
+          </option>
+          <option
+            value="released"
+          >
+            Year
+          </option>
+          <option
+            value="name"
+          >
+            Name
+          </option>
+        </select>
+      </div>
       <div
         class="coverdisplay"
       />
@@ -85,5 +106,19 @@ exports[`<FilmPage/> should render properly 1`] = `
       </form>
     </div>
   </section>
+</div>
+`;
+
+exports[`<FilmPage/> should render properly when error 1`] = `
+<div
+  class="error__container"
+>
+  Kunne ikke finne informasjon
+</div>
+`;
+
+exports[`<FilmPage/> should render properly when loading 1`] = `
+<div>
+  Laster inn
 </div>
 `;
