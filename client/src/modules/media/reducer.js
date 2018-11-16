@@ -65,6 +65,7 @@ export default function mediaReducer(state = initialState, action) {
         ...state,
         detailedMedia: action.media,
         loading: false,
+        error: null,
       };
     case FETCH_MEDIA_DETAILS_FAILED:
       return {
@@ -78,6 +79,7 @@ export default function mediaReducer(state = initialState, action) {
         allMedia: action.media,
         total: action.metadata.total,
         loading: false,
+        error: null,
       };
     case SEARCH_MEDIA_FAILED:
       return {
