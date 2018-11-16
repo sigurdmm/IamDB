@@ -1,6 +1,6 @@
 import { render } from 'enzyme';
 
-import InformationSection from '../index';
+import MediaInformation from '../MediaInformation';
 
 const mockedDetails = {
   thumbnails: {
@@ -8,11 +8,13 @@ const mockedDetails = {
   },
   name: 'title',
   rating: 8.8,
+  director: 'director',
+  type: 'movie',
 };
 
-describe('<InformationSection/>', () => {
+describe('<MediaInformation/>', () => {
   it('should render properly', () => {
-    const wrapper = render(<InformationSection details={mockedDetails}/>);
+    const wrapper = render(<MediaInformation details={mockedDetails}/>);
 
     expect(wrapper).toMatchSnapshot();
   });

@@ -1,18 +1,18 @@
 import { render } from 'enzyme';
 
-import InformationSection from '../index';
+import ActorInformation from '../ActorInformation';
 
 const mockedDetails = {
   thumbnails: {
     small: 'image',
   },
   name: 'title',
-  rating: 8.8,
+  popularity: 8.8,
 };
 
-describe('<InformationSection/>', () => {
+describe('<ActorInformation/>', () => {
   it('should render properly', () => {
-    const wrapper = render(<InformationSection details={mockedDetails}/>);
+    const wrapper = render(<ActorInformation details={mockedDetails}/>);
 
     expect(wrapper).toMatchSnapshot();
   });

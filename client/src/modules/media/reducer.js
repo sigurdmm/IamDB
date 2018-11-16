@@ -4,10 +4,12 @@ import {
   FETCH_MEDIA_DETAILS_FAILED,
   FETCH_MEDIA_DETAILS_REQUESTED,
   FETCH_MEDIA_DETAILS_SUCCESS,
+
   SEARCH_MEDIA_FAILED,
   SEARCH_MEDIA_REQUESTED,
   SEARCH_MEDIA_SUCCESS,
   UPDATE_SEARCH_FIELDS,
+
 } from './constants';
 
 const initialState = {
@@ -36,11 +38,6 @@ const initialState = {
     actors: [],
     thumbnails: {},
   },
-  /**
-   * Denotes whether search is ongoing.
-   * Defaults to true, to let the system
-   * known that no information can be expected to be found in allMedia or detailedMedia.
-   * */
   loading: true,
   error: null,
   /**

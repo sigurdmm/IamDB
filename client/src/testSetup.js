@@ -2,6 +2,9 @@ import { configure } from 'enzyme'; // eslint-disable-line import/no-extraneous-
 import Adapter from 'enzyme-adapter-react-16'; // eslint-disable-line import/no-extraneous-dependencies
 import React from 'react';
 
+// eslint-disable-next-line import/no-extraneous-dependencies
+import 'jest-canvas-mock';
+
 /**
  * Tells Enzyme to use React 16's adapter,
  * when rendering components

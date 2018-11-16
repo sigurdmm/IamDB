@@ -1,0 +1,93 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ActorPage/> should render properly 1`] = `
+<div
+  class="media__container"
+>
+  <div
+    class="information__container"
+  >
+    <div
+      class="mediaimage"
+    >
+      <img
+        class="image__item"
+        src="no-image-found.jpg"
+      />
+    </div>
+    <div>
+      <div
+        class="title__container"
+      >
+        <h2 />
+      </div>
+      <h3>
+        ⭐️: 0
+      </h3>
+    </div>
+  </div>
+  <section>
+    <h2>
+      Known for
+    </h2>
+    <div
+      class="coverdisplay"
+    >
+      <div
+        class="cover cover--inverse"
+      >
+        <a
+          href="/media/undefined"
+        >
+          <img
+            class="cover__thumbnail"
+            src="no-image-found.jpg"
+          />
+          <div
+            class="cover__overlay"
+          >
+            <strong
+              class="cover__overlay__title"
+            >
+              movie
+            </strong>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+  <section>
+    <h2>
+      Directors  has worked with
+    </h2>
+    <div
+      class="wordcloud"
+    >
+      <div>
+        <svg
+          height="250"
+          width="400"
+        >
+          <g
+            transform="translate(200,125)"
+          />
+        </svg>
+      </div>
+    </div>
+  </section>
+</div>
+`;
+
+exports[`<ActorPage/> should render properly when error 1`] = `
+<div
+  class="error__container"
+>
+  Kunne ikke finne informasjon
+</div>
+`;
+
+exports[`<ActorPage/> should render properly when loading 1`] = `
+<div>
+  Laster inn
+</div>
+`;

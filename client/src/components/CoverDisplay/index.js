@@ -8,6 +8,7 @@ export default class CoverDisplay extends PureComponent {
     media: PropTypes.array,
     pagination: PropTypes.element,
     hasSearched: PropTypes.bool.isRequired,
+    url: PropTypes.string,
   };
 
   render() {
@@ -31,10 +32,9 @@ export default class CoverDisplay extends PureComponent {
           thumbnail={cover.thumbnails ? cover.thumbnails.small : null}
           title={cover.name}
           rating={cover.rating}
-          released={cover.released}
-          id={cover.id}
-          key={`cover-${i}`}/>)
-        }
+          key={`cover-${i}`}
+          url={`${this.props.url}${cover.id}`}
+          released={cover.released}/>)}
       </div>
     { media.length > 0 && pagination }
     </>;

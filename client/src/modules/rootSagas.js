@@ -5,6 +5,7 @@
  * runSaga is used by ./store.js, to connect our saga to the store
  * */
 import mediaSaga from './media/sagas';
+import actorSaga from './actor/actorSagas';
 
 /**
  * Setup function for which to attach our sagas to a SagaMiddleware,
@@ -14,4 +15,5 @@ import mediaSaga from './media/sagas';
  * */
 export default function runSagas(sagaMiddleware) {
   sagaMiddleware.run(mediaSaga);
+  sagaMiddleware.run(actorSaga);
 }

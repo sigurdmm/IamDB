@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+
 import { fetchMediaById, addComment } from '../modules/media/actions';
-import InformationSection from '../components/InformationSection/index';
 import CoverDisplay from '../components/CoverDisplay/index';
 import './FilmPage.less';
+import MediaInformation from '../components/MediaInformation';
 import CommentList from '../components/CommentList';
 
 export class FilmPage extends React.Component {
@@ -57,16 +58,15 @@ export class FilmPage extends React.Component {
     }
 
     return <div className='media__container'>
-      <InformationSection details={detailedMedia}/>
+      <MediaInformation details={detailedMedia}/>
       <section className='description__container'>
         <h2>Description</h2>
         <p>{detailedMedia.description}</p>
       </section>
       <section>
         <h2>Actors</h2>
-        <CoverDisplay onSort={false} hasSearched={true} media={detailedMedia.actors}/>
+        <CoverDisplay onSort={false} hasSearched={true} media={detailedMedia.actors} url='/actor/'/>
       </section>
-
       <section className="filmpage__comments">
         <h2>Comment section</h2>
         <CommentList comments={detailedMedia.comments || []} onSubmit={this.addComment}/>

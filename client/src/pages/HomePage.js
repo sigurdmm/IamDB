@@ -146,6 +146,7 @@ export class HomePage extends React.Component {
         <CoverDisplay
           media={allMedia}
           hasSearched={hasSearched}
+          url='/media/'
           pagination={
             <Paginator
               limit={limit}

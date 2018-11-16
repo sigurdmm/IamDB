@@ -36,7 +36,6 @@ function* fetchMedia(action) {
     yield put({ type: FETCH_MEDIA_DETAILS_FAILED, error: e.text || e.message });
   }
 }
-
 function* searchMedia(action) {
   const {
     query,

@@ -25,9 +25,9 @@ const CoverImage = ({
   title,
   rating,
   released,
-  id,
+  url,
 }) => <div className={`cover ${!thumbnail ? 'cover--inverse' : ''}`}>
-  <Link to={`/media/${id}`}>
+  <Link to={url}>
     <img className='cover__thumbnail' src={thumbnail || defaultImage}/>
 
     <div className='cover__overlay'>
@@ -40,12 +40,9 @@ const CoverImage = ({
 CoverImage.propTypes = {
   thumbnail: PropTypes.string,
   title: PropTypes.string.isRequired,
-  rating: PropTypes.oneOfType([
-    PropTypes.bool,
-    PropTypes.number,
-  ]),
+  rating: PropTypes.number,
+  url: PropTypes.string,
   released: PropTypes.any,
-  id: PropTypes.string,
 };
 
 export default CoverImage;
