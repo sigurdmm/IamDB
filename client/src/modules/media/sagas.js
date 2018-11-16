@@ -67,7 +67,7 @@ function* searchMedia(action) {
       },
       media: results.searchMedia.results,
       type: results.searchMedia.results.length > 0 ? SEARCH_MEDIA_SUCCESS : SEARCH_MEDIA_FAILED,
-      error: results.searchMedia.results.length > 0 ? null : 'NOTHING FOUND',
+      error: results.searchMedia.results.length > 0 ? null : 'Cannot find media',
     });
   } catch (e) {
     console.error('Search failed on server', e);
