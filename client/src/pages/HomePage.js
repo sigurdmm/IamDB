@@ -121,7 +121,7 @@ export class HomePage extends React.Component {
 
   render() {
     const {
-      total, offset, limit, allMedia, hasSearched, sortDirection,
+      total, offset, limit, allMedia, hasSearched, sortDirection, error, loading,
     } = this.props;
 
     return <>
@@ -147,6 +147,8 @@ export class HomePage extends React.Component {
           media={allMedia}
           hasSearched={hasSearched}
           url='/media/'
+          error={error}
+          loading={loading}
           pagination={
             <Paginator
               limit={limit}

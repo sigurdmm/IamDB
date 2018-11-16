@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import './index.less';
 import CoverImage from './CoverImage';
+import LoadingSpinner from './LoadingSpinner';
 
 export default class CoverDisplay extends PureComponent {
   static propTypes = {
@@ -9,12 +10,16 @@ export default class CoverDisplay extends PureComponent {
     pagination: PropTypes.element,
     hasSearched: PropTypes.bool.isRequired,
     url: PropTypes.string,
+    error: PropTypes.string,
+    loading: PropTypes.bool.isRequired,
   };
 
   render() {
     const {
       media,
       pagination,
+      error,
+      loading,
     } = this.props;
     // Don't render the CoverDisplay if users hasn't searched yet.
     if (!this.props.hasSearched) {
@@ -22,8 +27,14 @@ export default class CoverDisplay extends PureComponent {
     }
     // Render error message instead of an empty CoverDisplay
     // when search returns nothing
-    if (media === null) {
-      return <p className='coverdisplay__error'>NOTHING FOUND</p>;
+    if (error !== null) {
+      return <p className='coverdisplay__error'>{error}</p>;
+    }
+    if (media.length === 0 && !loading) {
+      return <p className='coverdisplay__error'>Nothing Found</p>;
+    }
+    if (loading) {
+      return <LoadingSpinner/>;
     }
 
     return <>
