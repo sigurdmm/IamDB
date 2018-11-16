@@ -8,7 +8,7 @@
 export const dateToHuman = (date) => {
   const year = date.getFullYear();
 
-  let month = date.getMonth();
+  let month = date.getMonth() + 1;
 
   if (date.getMonth() < 10) {
     month = `0${month}`;

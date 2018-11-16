@@ -3,7 +3,7 @@
  * Jest configuration
  */
 module.exports = {
-  verbose: true,
+  verbose: false,
   testEnvironment: 'node',
   rootDir: './',
   modulePathIgnorePatterns: [
