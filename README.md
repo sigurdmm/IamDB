@@ -37,7 +37,7 @@ Merk at det skal være mulig å bare kjøre serveren ved hjelp av `npm`, da vi h
 
 # Prosjektstruktur
 
-Prosjektet skiller seg en del ut i fra de React applikasjonene vi har sett i kurset. Den største sepparatoren er at vi ikke har brukt `create-react-app` for å bootstrappe front-end, men i stedet har vi satt opp manuelle konfigurasjoner i webpack, sammen med Babel 7, for å transpilere React kode til vanlig ECMAScript 5 syntaks.
+Prosjektet skiller seg en del ut i fra de React applikasjonene vi har sett i kurset. Den største skillet er at vi ikke har brukt `create-react-app` for å bootstrappe front-end, men i stedet har vi satt opp manuelle konfigurasjoner i webpack, sammen med Babel 7, for å transpilere React kode til vanlig ECMAScript 5 syntaks.
 
 Det er flere grunner til dette valget akkurat dette valget, men de største grunnen til dette valget er:
 
