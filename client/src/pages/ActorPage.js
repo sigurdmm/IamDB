@@ -5,6 +5,7 @@ import { fetchActorById } from '../modules/actor/actorActions';
 import ActorInformation from '../components/ActorInformation';
 import CoverDisplay from '../components/CoverDisplay/index';
 import './FilmPage.less';
+import WordCloud from '../components/WordCloud';
 
 export class ActorPage extends React.Component {
   static propTypes = {
@@ -48,10 +49,14 @@ export class ActorPage extends React.Component {
 
     return <div className='media__container'>
       <ActorInformation details={detailedActor}/>
-      <div>
+      <section>
         <h2>Known for</h2>
         <CoverDisplay onSort={false} hasSearched={true} media={detailedActor.media} url='/media/'/>
-      </div>
+      </section>
+      <section>
+        <h2>Directors {detailedActor.name} has worked with</h2>
+        <WordCloud words={detailedActor.media.map(m => m.director).filter(name => !!name)}/>
+      </section>
     </div>;
   }
 }

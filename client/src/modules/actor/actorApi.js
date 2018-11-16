@@ -9,6 +9,7 @@ export const fetchActorById = id => query(`
       media {
         id
         name
+        director
         thumbnails {
           small
         }

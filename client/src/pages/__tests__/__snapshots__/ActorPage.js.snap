@@ -26,14 +26,33 @@ exports[`<ActorPage/> should render properly 1`] = `
       </h3>
     </div>
   </div>
-  <div>
+  <section>
     <h2>
       Known for
     </h2>
     <div
       class="coverdisplay"
     />
-  </div>
+  </section>
+  <section>
+    <h2>
+      Directors  has worked with
+    </h2>
+    <div
+      class="wordcloud"
+    >
+      <div>
+        <svg
+          height="250"
+          width="400"
+        >
+          <g
+            transform="translate(200,125)"
+          />
+        </svg>
+      </div>
+    </div>
+  </section>
 </div>
 `;
 
