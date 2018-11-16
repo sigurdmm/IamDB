@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AlertBar/> should render properly 1`] = `
+<p
+  className="alertbar__error"
+/>
+`;

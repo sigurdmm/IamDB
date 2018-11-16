@@ -9,6 +9,7 @@ describe('<Sorting/>', () => {
       directionValue={1}
       onSort={jest.fn()}
       onDirectionClick={jest.fn()}
+      fieldValue={''}
       sortingMethods={ [{ label: 'label', value: 'value' }, { label: 'label2', value: 'value2' }] }
       visible={true}
     />);
@@ -23,6 +24,7 @@ describe('<Sorting/>', () => {
         directionValue={1}
         onSort={jest.fn()}
         onDirectionClick={spy}
+        fieldValue={''}
         sortingMethods={ [{ label: 'label', value: 'value' }] }
         visible={true}
       />);

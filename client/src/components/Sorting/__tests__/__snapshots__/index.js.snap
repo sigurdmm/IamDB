@@ -5,6 +5,7 @@ exports[`<Sorting/> should render properly 1`] = `
   className="sortingbar"
 >
   <SortingSelector
+    fieldValue=""
     onSort={[MockFunction]}
     sortingMethods={
       Array [

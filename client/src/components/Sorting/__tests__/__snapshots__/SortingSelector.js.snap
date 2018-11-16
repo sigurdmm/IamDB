@@ -6,6 +6,7 @@ exports[`<SortingSelector/> should render properly 1`] = `
     className="sortingbar__type"
     name="select"
     onChange={[Function]}
+    value=""
   >
     <option
       key="0"

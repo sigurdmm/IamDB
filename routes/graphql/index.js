@@ -5,6 +5,10 @@ const getMedia = require('./getMedia');
 const getActor = require('./getActor');
 const addComment = require('./addComment');
 
+/**
+ * Builds the necessary Queryies, Mutations and Types
+ * for the GraphQL application
+ * */
 const schema = buildSchema(`
   type Query {
     searchMedia(query: String!, offset: Int, limit: Int, sortOn: String, sortDirection: Int , type: String): SearchMetadata
@@ -65,7 +69,8 @@ const schema = buildSchema(`
   }
 `);
 
-
+// Setup relation to Queries and Mutations,
+// with the implemented functions
 const rootValue = {
   searchMedia,
   addComment,

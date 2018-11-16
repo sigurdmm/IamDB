@@ -1,6 +1,10 @@
 const Media = require('../../models/media');
 const Actor = require('../../models/actor');
 
+/**
+ * Fetches some details about an actor,
+ * including the media he/she is affiliated with.
+ * */
 async function getActor({ id }) {
   const actor = await Actor.findById(id).exec();
 

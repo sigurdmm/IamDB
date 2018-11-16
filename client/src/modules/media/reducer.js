@@ -12,7 +12,7 @@ import {
 
 } from './constants';
 
-const initialState = {
+export const initialState = {
   /**
    * Object containing the search metadata
    * */

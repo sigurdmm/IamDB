@@ -58,22 +58,38 @@ const successHandler = async (res) => {
   return data;
 };
 
-export const callGet = (url) => {
-  console.info(`GET: ${url}`);
+/**
+ * Calls get using fetch,
+ * and dispatches the response to
+ * errorHandler and/or successHandler
+ * @param {string} url Fully built request url
+ * @return {Promise}
+ * */
+export const callGet = url => fetch(url, { credentials: 'same-origin' })
+  .then(errorHandler)
+  .then(successHandler)
+  .then(body => body.data);
 
-  return fetch(url, { credentials: 'same-origin' })
-    .then(errorHandler)
-    .then(successHandler)
-    .then(body => body.data);
-};
-
+/**
+ * Handler for query requests.
+ * Calls graphql using HTTP GET,
+ * which is better suited for non-sensitive requests
+ * @param {string} queryStr graphql query as a string
+ * @param {object} variables Collection of variables for the query
+ */
 export const query = async (queryStr, variables = {}) => {
   const graphqlQuery = createGraphQlQuery(queryStr, variables);
 
   return callGet(`${apiHost}?${graphqlQuery}`);
 };
 
-// Handler for mutations
+/**
+ * Handler for mutation requests.
+ * Calls graphql using HTTP POST
+ * @param {string} queryStr Graphql mutation as a string
+ * @param {object} variables Collection of variables for the mutation
+ * @return {Promise}
+ * */
 export const mutate = async (queryStr, variables = {}) => fetch(
   apiHost,
   {
